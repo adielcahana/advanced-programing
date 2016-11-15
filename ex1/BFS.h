@@ -14,12 +14,12 @@ using namespace std;
 
 class Node {
 private:
-    Node &father;
+    Node* father;
 public:
     virtual bool operator ==(Node other);
     virtual int hash();
-    void setFather(Node &father);
-    Node getFather();
+    void setFather(Node *father);
+    Node* getFather();
 };
 
 class Graph{
@@ -31,8 +31,8 @@ class BFS {
 private:
     vector <Node> markedNodes;
 public:
-    stack <Node> find_shortest_route(Graph graph, Node start, Node end);
-    stack <Node> createRoute(Node end ,Node start);
+    stack <Node> find_shortest_route(Graph* graph, Node& start, Node& end);
+    stack <Node> createRoute(Node& end ,Node& start);
 };
 
 
