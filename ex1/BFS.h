@@ -5,6 +5,7 @@
 #ifndef ASS1_BFS_H
 #define ASS1_BFS_H
 
+#include <stdio.h>
 #include <vector>
 #include <queue>
 
@@ -13,11 +14,11 @@ using namespace std;
 
 class Node {
 private:
-    Node father;
+    Node &father;
 public:
-    Node(const Node &father);
     virtual bool operator ==(Node other);
     virtual int hash();
+    void setFather(Node &father);
     Node getFather();
 };
 
@@ -30,7 +31,8 @@ class BFS {
 private:
     vector <Node> markedNodes;
 public:
-    queue <Node> find_shortest_route(Graph graph, Node start, Node end);
+    stack <Node> find_shortest_route(Graph graph, Node start, Node end);
+    stack <Node> createRoute(Node end ,Node start);
 };
 
 
