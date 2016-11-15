@@ -1,34 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <vector>
-#include <queue>
-#include <iostream>
-
-using namespace std;
-class Point{
-	private:
-		int x;
-		int y;
-	public:		
-		int getX();
-		int getY();
-		bool operator ==(Point other);
-		int distance(Point other);
-		friend ostream &operator<<( ostream &output, Point p);
-};
-
-class Grid{
-	private:
-		int length;
-		int width;
-		vector<Point> obstacels;
-		queue<Point> get_adjacent(Point coordinate);		
-	public:		
-		queue<Point> get_route(Point start, Point end);
-		friend ostream &operator<<( ostream &output, Grid g);
-};
-
-
+#include  "grid.h"
 
 //check what assgining obst does
 Grid::Grid(int length, int width, vector<Point> obstacels): length(length), width(width), obstacels(obstacels){};
@@ -82,9 +52,15 @@ int Point::distance(Point other){
 	return abs(this.getX() - other.getX()) + abs(this.getY() - other.getY());
 }
 
-bool Point:: operator ==(Point other){
+bool Point::operator ==(Point other){
 	if((this.getX() == this.getY) && (this.getY() == other.getY())) return 1;
 	return 0;	
+}
+
+bool Point::hash(){
+	int x = this.getX();
+	int y = this.getY();
+	return ((x + y) * (x +_y + 1)) / 2 + n;	
 }
 
 friend ostream &operator<<( ostream &output, Point p ) { 
