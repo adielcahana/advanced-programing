@@ -8,14 +8,13 @@ Node Node::getFather() {
     return this->father;
 }
 
-template <class T>
-Node <T>::Node<T> (T info, Node father) : info(info), father(NULL) {}
+Node::Node(Node father) : father(NULL) {}
 
-queue <Node> findNeighbours(Node){
+queue <Node> get_adjacent(Node){
 
 }
 
-queue <Node> BFS:: findShortestWay(Graph graph, Node start, Node end){
+queue <Node> BFS::find_shortest_route(Graph graph, Node start, Node end){
     Node current = start;
     queue <Node> nodes;
     nodes.push(current);
@@ -30,7 +29,7 @@ queue <Node> BFS:: findShortestWay(Graph graph, Node start, Node end){
             }
         }
         else {
-            queue <Node> temp = graph.findNeighbours(current);
+            queue <Node> temp = graph.get_adjacent(current);
             while(!temp.empty()) {
                 // check if visited
                 for(int i = 0; i < this->markedNodes.size(); i++) {

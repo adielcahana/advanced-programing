@@ -10,31 +10,27 @@
 
 using namespace std;
 
-template <class T>
+
 class Node {
 private:
     Node father;
 public:
-
     Node(const Node &father);
-
-    virtual bool operator == (Node other);
+    virtual bool operator ==(Node other);
     virtual int hash();
     Node getFather();
 };
 
 class Graph{
-private:
-
 public:
-    queue <Node> findNeighbours(Node);
+    virtual queue <Node> get_adjacent(Node);
 };
 
 class BFS {
 private:
     vector <Node> markedNodes;
 public:
-    queue <Node> findShortestWay(Graph graph, Node start, Node end);
+    queue <Node> find_shortest_route(Graph graph, Node start, Node end);
 };
 
 

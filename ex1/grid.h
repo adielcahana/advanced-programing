@@ -3,10 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include "bfs.h"
 
 using namespace std;
 
-class Point{
+
+class Point: private Node{
 	private:
 		int x;
 		int y;
@@ -15,11 +17,11 @@ class Point{
 		int getY();
 		bool operator ==(Point other);
 		int distance(Point other);
+		bool Point::hash();
 		friend ostream &operator<<( ostream &output, Point p);
-		bool Point::hash()
 };
 
-class Grid{
+class Grid: private Graph{
 	private:
 		int length;
 		int width;
