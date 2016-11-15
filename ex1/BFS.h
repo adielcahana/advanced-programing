@@ -10,15 +10,17 @@
 
 using namespace std;
 
-template <Node T>
-class Node <T> {
+template <class T>
+class Node {
 private:
-    void* info;
     Node father;
 public:
+
+    Node(const Node &father);
+
     virtual bool operator == (Node other);
     virtual int hash();
-    virtual Node getFather();
+    Node getFather();
 };
 
 class Graph{

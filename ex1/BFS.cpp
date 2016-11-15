@@ -2,14 +2,14 @@
 // Created by ori on 14/11/16.
 //
 
-#include <queue>
 #include "BFS.h"
-
-using namespace std;
 
 Node Node::getFather() {
     return this->father;
 }
+
+template <class T>
+Node <T>::Node<T> (T info, Node father) : info(info), father(NULL) {}
 
 queue <Node> findNeighbours(Node){
 
