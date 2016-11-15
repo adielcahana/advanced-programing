@@ -7,10 +7,6 @@
 
 using namespace std;
 
-void Node::markVisited() {
-    this->visited = true;
-}
-
 Node Node::getFather() {
     return this->father;
 }
@@ -19,10 +15,10 @@ queue <Node> findNeighbours(Node){
 
 }
 
-queue <Node> findShortestWay(Graph graph, Node start, Node end){
+queue <Node> BFS:: findShortestWay(Graph graph, Node start, Node end){
     Node current = start;
-    start.markVisited();
     queue <Node> nodes;
+    nodes.push(current);
     while (!nodes.empty()) {
         if(&current == &end){
             while (!nodes.empty()){
@@ -36,12 +32,16 @@ queue <Node> findShortestWay(Graph graph, Node start, Node end){
         else {
             queue <Node> temp = graph.findNeighbours(current);
             while(!temp.empty()) {
+                // check if visited
+                for(int i = 0; i < this->markedNodes.size(); i++) {
+                    if (temp.front() == markedNodes.at(i));
+                    temp.pop();
+                }
                 nodes.push(temp.front());
                 temp.pop();
             }
             current = nodes.front();
             nodes.pop();
-            current.markVisited();
         }
     }
 return nodes;

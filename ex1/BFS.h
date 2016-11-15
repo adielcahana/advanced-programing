@@ -5,18 +5,20 @@
 #ifndef ASS1_BFS_H
 #define ASS1_BFS_H
 
+#include <vector>
 #include <queue>
 
 using namespace std;
 
-class Node {
+template <Node T>
+class Node <T> {
 private:
     void* info;
-    bool visited = false;
     Node father;
 public:
-    Node getFather();
-    void markVisited();
+    virtual bool operator == (Node other);
+    virtual int hash();
+    virtual Node getFather();
 };
 
 class Graph{
@@ -27,6 +29,8 @@ public:
 };
 
 class BFS {
+private:
+    vector <Node> markedNodes;
 public:
     queue <Node> findShortestWay(Graph graph, Node start, Node end);
 };
