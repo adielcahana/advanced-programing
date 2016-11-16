@@ -14,6 +14,7 @@ using namespace std;
 
 class Node {
 private:
+	//friend BFS;
     Node* father;
 public:
     virtual bool operator ==(Node other);

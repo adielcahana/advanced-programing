@@ -1,4 +1,5 @@
 #include  "grid.h"
+using namespace std;
 
 queue<Point> Grid::get_adjacent(Point coordinate){
 	queue<Point> que;
@@ -12,27 +13,27 @@ queue<Point> Grid::get_adjacent(Point coordinate){
 	return que;
 }
 
-stack<Point> Grid::get_route(Point start, Point end){
+stack<Node> Grid::get_route(Point start, Point end){
 	BFS bfs;
 	return bfs.find_shortest_route(this, start, end);
 }
 
-ostream& Grid::operator<<( ostream &output, Grid& g) { 
-	output << " ";
-	for (int i = 0; i <= g.length; i++) output << i;
-	output << endl << endl;		
-	for (int i = 0; i < g.length; i++){
-		output << i << " ";
-		for (int j = 0; j < g.width; j++){
-			/* if (new Point(i,j) in g.obstacles) {
-				output << "x";			
-				}*/
-			output << "-" << p.x << "," << p.y << ")";	
-		}
-		output << endl;		
-	}
-	return output;            
-}
+// ostream& operator<<(ostream &output, Grid g) { 
+// 	output << " ";
+// 	for (int i = 0; i <= g.length; i++) output << i;
+// 	output << endl << endl;		
+// 	for (int i = 0; i < g.length; i++){
+// 		output << i << " ";
+// 		for (int j = 0; j < g.width; j++){
+// 			/* if (new Point(i,j) in g.obstacles) {
+// 				output << "x";			
+// 				}*/
+// 			output << "-";
+// 		}
+// 		output << endl;		
+// 	}
+// 	return output;            
+// }
 
 
 int Point::getX(){
@@ -58,7 +59,8 @@ int Point::hash(){
 	return ((x + y) * (x +y + 1)) / 2 + x;	
 }
 
-ostream& Point::operator<<( ostream& output, Point& p ) { 
-		output << "(" << p.x << "," << p.y << ")";
-		return output;            
-}
+// ostream& operator<<( ostream& output, Point p) { 
+// 		output << "(" << p.x << "," << p.y << ")";
+// 		return output;  
+// }          
+
