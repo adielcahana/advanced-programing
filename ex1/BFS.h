@@ -17,23 +17,23 @@ private:
 	//friend BFS;
     Node* father;
 public:
-    virtual bool operator ==(Node other);
-    virtual int hash();
-    void setFather(Node *father);
+    virtual bool operator ==(Node* other)=0;
+    virtual int hash()=0;
+    void setFather(Node* ather);
     Node* getFather();
 };
 
 class Graph{
 public:
-    virtual queue <Node> get_adjacent(Node);
+  virtual queue <Node*> get_adjacent(Node)=0;
 };
 
 class BFS {
 private:
-    vector <Node> markedNodes;
+    vector <Node*> markedNodes;
 public:
-    stack <Node> find_shortest_route(Graph* graph, Node& start, Node& end);
-    stack <Node> createRoute(Node& end ,Node& start);
+    stack <Node*> find_shortest_route(Graph* graph, Node* start, Node* end);
+    stack <Node*> createRoute(Node* end ,Node* start);
 };
 
 

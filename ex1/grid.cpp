@@ -1,19 +1,19 @@
 #include  "grid.h"
 using namespace std;
 
-queue<Point> Grid::get_adjacent(Point coordinate){
-	queue<Point> que;
+queue<Point*>* Grid::get_adjacent(Point& coordinate){
+        queue<Point*>* que = new queue<Point>*();
 	int x = coordinate.getX();
 	int y = coordinate.getY();
 	//if (x,y) not in obstacels
-	if (x - 1 > 0) que.push(Point(x - 1, y)); 
-	if (x + 1 < width) que.push(Point(x +1, y));
-	if (y + 1 < length) que.push(Point(x , y + 1));
-	if (y - 1 > length) que.push(Point(x , y + 1));
+	if (x - 1 > 0) que->push(new Point(x - 1, y)); 
+	if (x + 1 < width) que->push(new Point(x +1, y));
+	if (y + 1 < length) que->push(new Point(x , y + 1));
+	if (y - 1 > length) que->push(new Point(x , y + 1));
 	return que;
 }
 
-stack<Node> Grid::get_route(Point start, Point end){
+stack<Node> Grid::get_route(Point* start, Point* end){
 	BFS bfs;
 	return bfs.find_shortest_route(this, start, end);
 }
@@ -44,12 +44,12 @@ int Point::getY(){
 	return this->y;
 }
 
-int Point::distance(Point other){
+int Point::distance(Point* other){
 	return abs(this->getX() - other.getX()) + abs(this->getY() - other.getY());
 }
 
-bool Point::operator ==(Point other){
-	if((this->getX() == other.getX()) && (this->getY() == other.getY())) return true;
+bool Point::operator ==(Point* other){
+	if((this->getX() == other->getX()) && (this->getY() == other->getY())) return true;
 	return false;	
 }
 

@@ -17,7 +17,7 @@ class Point: public Node{
 		Point(int x, int y): x(x), y(y) {};	
 		int getX();
 		int getY();
-		bool operator ==(Point other);
+		bool operator ==(Point* other);
 		int distance(Point other);
 		int hash();
 		friend ostream& operator<<( ostream& output, Point p) { 
@@ -32,7 +32,7 @@ class Grid: public Graph{
 		int length;
 		int width;
 		vector<Point> obstacels;
-		queue<Point> get_adjacent(Point coordinate);		
+		queue<Point*>* get_adjacent(Point& coordinate);		
 	public:	
 		Grid(int length, int width, vector<Point> obstacels): length(length), width(width), obstacels(obstacels){};
 		stack<Node> get_route(Point start, Point end);
