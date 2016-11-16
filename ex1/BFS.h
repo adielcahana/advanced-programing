@@ -11,21 +11,24 @@
 
 using namespace std;
 
-
 class Node {
 private:
 	//friend BFS;
     Node* father;
 public:
-    virtual bool operator ==(Node* other)=0;
-    virtual int hash()=0;
-    void setFather(Node* ather);
+	Node(): father(NULL){};
+	~Node() {if (father != NULL) delete father;}
+    template <typename T>
+    virtual bool operator ==(T* other)= 0;
+    virtual int hash()= 0;
+    void setFather(Node* father);
     Node* getFather();
 };
 
 class Graph{
 public:
-  virtual queue <Node*> get_adjacent(Node)=0;
+	~Graph(){};
+  	virtual queue<Node*>* get_adjacent(Node* node)= 0;
 };
 
 class BFS {

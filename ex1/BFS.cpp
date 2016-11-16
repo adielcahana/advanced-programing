@@ -48,10 +48,10 @@ return stack;
 
 stack <Node*> createRoute(Node* start ,Node* end){
     Node* temp = end;
-    stack <Node> stack;
+    stack <Node*> stack;
     while (!(*temp == *start)){
         stack.push(temp);
-        temp = temp.getFather();
+        temp = temp->getFather();
     }
     return stack;
 }
