@@ -1,8 +1,8 @@
-#include  "grid.h"
+#include "../header/grid.h"
 using namespace std;
 
-queue<Node *> *Grid::get_adjacent(Node *node) {
-	queue<Node*>* que = new queue<Node*>();
+queue<Point*>*Grid::get_adjacent(Point *node) {
+	queue<Point*>* que = new queue<Point*>();
 	int x = node->getX();
 	int y = node->getY();
 	//if (x,y) not in obstacels
@@ -13,9 +13,11 @@ queue<Node *> *Grid::get_adjacent(Node *node) {
 	return que;
 }
 
-stack<Node*> Grid::get_route(Point* start, Point* end){
-	BFS bfs;
-	return bfs.find_shortest_route(this, start, end);
+stack <Point*, vector<Point*> >* Grid::get_route(Point* start, Point* end){
+	BFS<Point> bfs;
+    Graph<Grid> graph(this);
+    stack <Point*, vector<Point*> >* route = bfs.find_shortest_route( graph, new Edge<Point>(start), new Edge<Point>(end));
+    return  route;
 }
 
 Grid::~Grid(){
@@ -40,8 +42,8 @@ int Point::hash(){
 	return ((x + y) * (x +y + 1)) / 2 + x;	
 }
 
-bool Point::operator==(Node *other) {
-    return ((this->getX() == other->getX() && (this->getY() == other->getY()));
+bool Point::operator==(Point *other) {
+    return (this->getX() == other->getX() && this->getY() == other->getY());
 }
 
 // ostream& operator<<( ostream& output, Point p) { 

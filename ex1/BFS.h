@@ -8,35 +8,43 @@
 #include <stdio.h>
 #include <vector>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
-class Node {
+template <class T>
+class Edge {
 private:
-	//friend BFS;
-    Node* father;
+    T* data;
+    Edge* father;
+
 public:
-	Node(): father(NULL){};
-	~Node() {if (father != NULL) delete father;}
-    template <typename T>
-    virtual bool operator ==(T* other)= 0;
-    virtual int hash()= 0;
-    void setFather(Node* father);
-    Node* getFather();
+	Edge(T* data): data(data),father(NULL){};
+	~Edge<T>();
+    void setFather(Edge* father);
+    Edge* getFather();
+    T* getData();
+    bool operator==(Edge<T> other);
 };
 
+template <class T>
 class Graph{
+    T* data;
 public:
-	~Graph(){};
-  	virtual queue<Node*>* get_adjacent(Node* node)= 0;
+    Graph(T* data): data(data){};
+    template <typename E>
+    queue <Edge<E>*>* get_adjacent(Edge<E>* edge);
+    ~Graph(){};
 };
 
+template <class E>
 class BFS {
 private:
-    vector <Node*> markedNodes;
+    vector <Edge<E>*> visited;
 public:
-    stack <Node*> find_shortest_route(Graph* graph, Node* start, Node* end);
-    stack <Node*> createRoute(Node* end ,Node* start);
+    template <typename T>
+    stack <E*, vector<E*> >* find_shortest_route(Graph<T>& graph, Edge<E>* start,Edge<E>* end);
+    stack <E*, vector<E*> >* createRoute(Edge<E>* start,Edge<E>* end);
 };
 
 
