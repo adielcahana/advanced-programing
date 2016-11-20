@@ -1,23 +1,37 @@
-import java.util.Stack;
-
 public class BT {
-	Node root;
+	int data;
+	BT left = null;
+	BT right = null;
+	static int number = 1;
 
-	public BT(Node node) {
-		this.root = node;
+	public BT(int data) {
+		this.data = data;
 	}
 
-	void DFSscan(Stack<Node> stack, Node node){
-		stack.push(node);
-		while(!(stack.isEmpty())){
-			System.out.println(node.data.PrintPoint());
-			stack.pop();
-			if (node.left != null) {
-				this.DFSscan(stack, node.left);
-			} 
-			if (node.right != null){
-				this.DFSscan(stack, node.right);
-			}
+	public void createBT(int leaves){
+		int height = (int) (Math.log(leaves) / Math.log(2));
+		createFullTree(height);
+	}
+
+	private void createFullTree(int height) {
+		this.data = number;
+		number++;
+		if (height == 0){
+			return;
+		}
+		this.left = new BT(0);
+		this.left.createFullTree(height - 1);
+		this.right = new BT(0);
+		this.right.createFullTree(height - 1);
+	}
+
+	public void DFSscan(){
+		System.out.println(this.data);
+		if(this.left != null){
+			this.left.DFSscan();
+		}
+		if (this.right != null){
+			this.right.DFSscan();
 		}
 	}
 }
