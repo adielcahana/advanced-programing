@@ -30,39 +30,41 @@ int Edge<T>::hash(){
 }
 
 template <class T>
-bool Edge<T>:: operator==(Edge<T> other){
-    return *(this->data) == *(other.data);
+bool Edge<T>::operator==(const Edge<T> &rhs) const {
+    return *data == *rhs.data;
 }
 
+template <class T>
+bool Edge<T>::operator!=(const Edge<T> &rhs) const {
+    return !(rhs == *this);
+}
 
+template <class E,class T>
+BFS<E,T>::BFS(E max_data) {
+    visited.resize(max_data.hash());
+}
 
 template <class E,class T>
 stack <E*, vector<E*> >* BFS<E,T>::findShortestRoute(Graph<T>& graph, Edge<E>* start,Edge<E>* end){
-    int x = 0 ,y = 0;
-    std::bitset<10000> visited;
     Edge<E>* current = start;
     queue <Edge<E>*> edges;
     stack <E*, vector<E*> >* route = NULL;
+    visited[start->hash()] = 1;
     edges.push(current);
     while (!edges.empty()) {
-        cout << x++ << endl;
         if(*end == *current){
             route = this->createRoute(start, current);
+            // realese all the alloceted memory (not good)
             while (!edges.empty()){
                 delete edges.front();
                 edges.pop();
             }
-            delete end;
         }
         else {
-	        cout << "inside else" << endl;
             queue <Edge<E>*>* adjacents = graph.get_adjacent(current);
             //pop current from edges
             edges.pop();
-            visited.set(current->hash());
-            for(int i =0; i < adjacents->size(); i++) {
-	                cout << "inside 2nd while" << endl;
-                    cout << "     " << y++ << endl;
+            for(int i =0; i <= adjacents->size(); i++) {
                     Edge<E> *temp = adjacents->front();
                     adjacents->pop();
                     // check if visited
@@ -70,15 +72,16 @@ stack <E*, vector<E*> >* BFS<E,T>::findShortestRoute(Graph<T>& graph, Edge<E>* s
                         delete temp;
                         continue;
                     }
+//                    cout << *temp->getData() << endl;
+                    visited[temp->hash()] = 1;
                     temp->setFather(current);
                     edges.push(temp);
                 }
-            y = 0;
             delete adjacents;
         }
             current = edges.front();
         }
-    cout << "done" << endl;
+    delete end;
     return route;
     }
 
@@ -87,15 +90,15 @@ stack <E*, vector<E*> >* BFS<E,T>::findShortestRoute(Graph<T>& graph, Edge<E>* s
 template <class T>
 template <class E>
 queue<Edge<E>*>* Graph<T>:: get_adjacent(Edge<E>* edge){
-    queue <E*>* que = this->data->get_adjacent(edge->getData());
+    stack <E*, std::vector<E*> >* stck = this->data->get_adjacent(edge->getData());
     queue <Edge<E>*>* adjacents = new queue <Edge<E>*>();
     Edge<E>* temp = NULL;
-    while(!que->empty()){
-        temp = new Edge<E>(que->front());
-        que->pop();
+    while(!stck->empty()){
+        temp = new Edge<E>(stck->top());
+        stck->pop();
         adjacents->push(temp);
     }
-    delete que;
+    delete stck;
     return adjacents;
 }
 
@@ -108,6 +111,7 @@ stack <T*, vector<T*> >* BFS<T, E>::createRoute(Edge<T>* start ,Edge<T>* end){
         stck->push(new Point(*temp->getData()));
         temp = temp->getFather();
     }
+    stck->push(new Point(*start->getData()));
     return stck;
 }
 

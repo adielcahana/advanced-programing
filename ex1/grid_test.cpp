@@ -9,7 +9,7 @@ int main(){
 	Grid* g = new Grid(6, 7, v);
 	cout << *g << endl;
     Point* p1 = new Point(0,0);
-    Point* p2 = new Point(2,4);
+    Point* p2 = new Point(2,2);
     stack <Point*, vector<Point*> >* route = g->get_route(p1,p2);
     while(!route->empty()){
         cout << *route->top() << endl;

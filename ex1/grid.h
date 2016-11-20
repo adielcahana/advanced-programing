@@ -43,12 +43,10 @@ private:
     int width;
     std::vector<Point *> obstacels;
 public:
-    Grid(int
-         length, int
-         width, std::vector<Point *> obstacels):length(length), width(width), obstacels(obstacels) {};
+    Grid(int length, int width, std::vector<Point *> obstacels):length(length), width(width), obstacels(obstacels) {};
     ~Grid();
     std::stack<Point *, std::vector<Point *> > *get_route(Point *start, Point *end);
-    std::queue<Point *> *get_adjacent(Point *coordinate);
+    std::stack <Point*, std::vector<Point*> >* get_adjacent(Point *coordinate);
     friend std::ostream &operator<<(std::ostream &output, const Grid &g) {
         output << "  ";
         for (int i = 0; i <= g.length; i++) output << i;

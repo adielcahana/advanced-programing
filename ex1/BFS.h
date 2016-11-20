@@ -25,7 +25,8 @@ public:
     Edge* getFather();
     T* getData();
     int hash();
-    bool operator==(Edge<T> other);
+    bool operator==(const Edge<T> &rhs) const;
+    bool operator!=(const Edge<T> &rhs) const;
 };
 
 template <class T>
@@ -40,9 +41,11 @@ public:
 
 template <class E, class T>
 class BFS {
-//private:
-//    std::bitset<2000> visited;
+private:
+    std::vector<bool> visited;
+//    std::bitset<200> visited;
 public:
+    BFS(E max_data);
     std::stack <E*, std::vector<E*> >* findShortestRoute(Graph<T>& graph, Edge<E>* start,Edge<E>* end);
     std::stack <E*, std::vector<E*> >* createRoute(Edge<E>* start,Edge<E>* end);
 };
