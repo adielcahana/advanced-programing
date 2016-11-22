@@ -5,9 +5,10 @@
 #ifndef ASS1_BFS_H
 #define ASS1_BFS_H
 
-#include <stdio.h>
+#include <iostream>
 #include <vector>
 #include <queue>
+#include <algorithm>
 
 using namespace std;
 
@@ -15,27 +16,35 @@ class Node {
 private:
 	//friend BFS;
     Node* father;
+    bool inRoute;
 public:
-	Node(): father(NULL){};
+	Node(): father(NULL), inRoute(false){};
     virtual int hash()= 0;
     void setFather(Node* father);
+    void setInRoute();
+    bool isInRoute();
     Node* getFather();
-    virtual bool operator==(const Node &rhs) const = 0;
-    virtual bool operator!=(const Node &rhs) const = 0;
+};
+
+class NodeComparator {
+    public:
+        virtual bool equals(const Node* n1, const Node* n2) const = 0;
 };
 
 class Graph{
 public:
 	~Graph(){};
-  	virtual queue<Node*>* get_adjacent(Node* node)= 0;
+  	virtual queue<Node*>* get_adjacent(const Node* node)= 0;
 };
+
 
 class BFS {
 private:
     std::vector<bool> visited;
+    vector<Node*>* createRoute(Node* end ,Node* start, NodeComparator* comparator);
 public:
-    vector<Node*>* find_shortest_route(Graph* graph, Node* start, Node* end);
-    vector<Node*>* createRoute(Node* end ,Node* start);
+    BFS(Node* maxNode);
+    vector<Node*>* find_shortest_route(Graph* graph, Node* start, Node* end, NodeComparator* comparator);
 };
 
 #endif //ASS1_BFS_H

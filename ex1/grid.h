@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <cstring>
 #include "BFS.h"
 
 using namespace std;
@@ -19,44 +20,44 @@ class Point: public Node{
 		int getY();
 
 		int hash();
-		friend ostream& operator<<( ostream& output,const Point& p) { 
-			output << "(" << p.x << "," << p.y << ")";
-			return output; 
-		}
-//        bool operator==(const Point &other) const;
-//        bool operator!=(const Point &other) const;
+        bool operator==(const Point &rhs) const;
+        bool operator!=(const Point &rhs) const;
+        static Point* deserialize(char* s)
+        friend ostream& operator<<( ostream& output,const Point& p) {
+            output << "(" << p.x << "," << p.y << ")";
+            return output;
+    }
+};
 
-
-        virtual bool operator!=(const Node &rhs) const;
-        virtual bool operator==(const Node &rhs) const;
-//      ostream &operator<<(ostream &output, const Point& p);
+class PointComparator: public NodeComparator{
+public:
+    virtual bool equals(const Node *n1, const Node *n2) const;
 };
 
 class Grid: public Graph{
 	private:
 		int length;
 		int width;
-		vector<Point*> obstacels;
-	public:	
-		Grid(int length, int width, vector<Point*> obstacels):length(length), width(width), obstacels(obstacels){};
-		~Grid();
-		stack<Node*> get_route(Point* start, Point* end);
-		queue<Point*>* get_adjacent(Point& point);
-		friend ostream& operator<<(ostream &output, const Grid& g) { 
-			output << " ";
-			for (int i = 0; i <= g.length; i++) output << i;
-			output << endl << endl;		
-			for (int i = 0; i < g.length; i++){
+        bool isInGrid(Point* p);
+	public:
+		Grid(int width, int length): length(length), width(width) {};
+		vector<Point*>* get_route(Point* start, Point* end);
+		queue<Node*>* get_adjacent(const Node* point);
+        static Grid* deserialize(char* s);
+		friend ostream& operator<<(ostream &output, const Grid& g) {
+			for (int i = g.length - 1; i >= 0; i--){
 				output << i << " ";
 				for (int j = 0; j < g.width; j++){
 					/* if (new Point(i,j) in g.obstacles) {
-						output << "x";			
+						output << "x";
 						}*/
 					output << "-";
 				}
-				output << endl;		
+				output << endl;
 			}
-			return output;            
+            output << "  ";
+            for (int i = 0; i < g.width; i++) output << i;
+			return output;
+
 		}
-//ostream &operator<<(ostream &output, const Grid& g);
 };
