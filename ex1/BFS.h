@@ -17,12 +17,11 @@ private:
     Node* father;
 public:
 	Node(): father(NULL){};
-	~Node() {if (father != NULL) delete father;}
-    template <typename T>
-    virtual bool operator ==(T* other)= 0;
     virtual int hash()= 0;
     void setFather(Node* father);
     Node* getFather();
+    virtual bool operator==(const Node &rhs) const = 0;
+    virtual bool operator!=(const Node &rhs) const = 0;
 };
 
 class Graph{
@@ -33,11 +32,10 @@ public:
 
 class BFS {
 private:
-    vector <Node*> markedNodes;
+    std::vector<bool> visited;
 public:
-    stack <Node*> find_shortest_route(Graph* graph, Node* start, Node* end);
-    stack <Node*> createRoute(Node* end ,Node* start);
+    vector<Node*>* find_shortest_route(Graph* graph, Node* start, Node* end);
+    vector<Node*>* createRoute(Node* end ,Node* start);
 };
-
 
 #endif //ASS1_BFS_H

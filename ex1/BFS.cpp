@@ -13,45 +13,47 @@ void Node:: setFather(Node *father){
     this->father = father;
 }
 
-stack <Node*> BFS::find_shortest_route(Graph* graph, Node* start, Node* end){
+vector <Node*>* BFS::find_shortest_route(Graph* graph, Node* start, Node* end){
     Node* current = start;
     queue <Node*> nodes;
-    stack <Node*> stack;
+    vector <Node*>* route;
+    queue <Node*>* adjacents = NULL;
+    Node* temp = NULL;
     nodes.push(current);
     while (!nodes.empty()) {
         if(*current == *end){
             while (!nodes.empty()){
                 nodes.pop();
             }
-            stack = this->createRoute(start, end);
+            route = this->createRoute(start, end);
         }
         else {
-            queue <Node*> temp = graph->get_adjacent(current);
-            while(!temp.empty()) {
+            adjacents = graph->get_adjacent(current);
+            while(!adjacents->empty()) {
                 // check if visited
-                for(int i = 0; i < this->markedNodes.size(); i++) {
-                    if (*temp.front() == *markedNodes.at(i));
-		    delete temp.front();
-                    temp.pop();
+                temp = adjacents->front();
+                if (visited[temp->hash()] == 1) {
+                    delete adjacents->front();
+                    adjacents->pop();
+                    continue;
                 }
-                nodes.push(temp.front());
-                markedNodes.push_back(current);
-		delete temp.front();
-                temp.pop();
+                visited[temp->hash()] = 1;
+                nodes.push(temp);
+                adjacents->pop();
             }
             current = nodes.front();
             nodes.pop();
         }
     }
-return stack;
+    return route;
 }
 
-stack <Node*> createRoute(Node* start ,Node* end){
+vector <Node*>* BFS::createRoute(Node* start ,Node* end){
     Node* temp = end;
-    stack <Node*> stack;
+    vector <Node*>* route = new vector<Node*>()   ;
     while (!(*temp == *start)){
-        stack.push(temp);
+        route->push_back(temp);
         temp = temp->getFather();
     }
-    return stack;
+    return route;
 }

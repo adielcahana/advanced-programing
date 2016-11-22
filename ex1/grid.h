@@ -17,13 +17,18 @@ class Point: public Node{
 		Point(int x, int y): x(x), y(y) {};	
 		int getX();
 		int getY();
-		int distance(Point* other);
 
 		int hash();
 		friend ostream& operator<<( ostream& output,const Point& p) { 
 			output << "(" << p.x << "," << p.y << ")";
 			return output; 
 		}
+//        bool operator==(const Point &other) const;
+//        bool operator!=(const Point &other) const;
+
+
+        virtual bool operator!=(const Node &rhs) const;
+        virtual bool operator==(const Node &rhs) const;
 //      ostream &operator<<(ostream &output, const Point& p);
 };
 
@@ -36,7 +41,7 @@ class Grid: public Graph{
 		Grid(int length, int width, vector<Point*> obstacels):length(length), width(width), obstacels(obstacels){};
 		~Grid();
 		stack<Node*> get_route(Point* start, Point* end);
-		queue<Point*>* get_adjacent(Point *coordinate);
+		queue<Point*>* get_adjacent(Point& point);
 		friend ostream& operator<<(ostream &output, const Grid& g) { 
 			output << " ";
 			for (int i = 0; i <= g.length; i++) output << i;
