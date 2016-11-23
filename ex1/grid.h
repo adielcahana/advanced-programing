@@ -18,11 +18,10 @@ class Point: public Node{
 		Point(int x, int y): x(x), y(y) {};	
 		int getX();
 		int getY();
-
 		int hash();
         bool operator==(const Point &rhs) const;
         bool operator!=(const Point &rhs) const;
-        static Point* deserialize(char* s)
+        static Point* deserialize(char* s);
         friend ostream& operator<<( ostream& output,const Point& p) {
             output << "(" << p.x << "," << p.y << ")";
             return output;

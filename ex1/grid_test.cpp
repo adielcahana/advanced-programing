@@ -6,12 +6,14 @@ using namespace std;
 
 
 int main(){
-    strin input[50];
+    char input[50];
     cin >> input;
-    Grid* g = Grid::deserialize(substr());
+    char* x = strtok(input,",");
+    cout << input << endl;
+    Grid* g = Grid::deserialize(x);
     PointComparator comparator;
     cout << *g << endl;
-    Point* p1 = new Point(0,10);
+    Point* p1 = new Point(0,0);
     Point* p2 = new Point(2,2);
     try {
         vector<Point *> *route = g->get_route(p1, p2);

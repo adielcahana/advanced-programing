@@ -28,8 +28,8 @@ bool Grid::isInGrid(Point* p){
     return x >= 0 && x < width && y >= 0 && y < length;
 }
 
-static Grid* Grid::deserialize(char* s){
-    Point* maxPoint = Point.deserialize(s);
+Grid* Grid::deserialize(char* s){
+    Point* maxPoint = Point::deserialize(s);
     Grid* g = new Grid(maxPoint->getX(),maxPoint->getY());
     delete maxPoint;
     return g;
@@ -57,19 +57,11 @@ bool Point::operator!=(const Point &other) const {
     return !(other == *this);
 }
 
-static Point* Point::deserialize(char* s){
+Point* Point::deserialize(char* s){
     char* x = strtok(s,"_");
     char* y = strtok(NULL, "_");
     return new Point(atoi(x), atoi(y));
 }
-
-//bool Point::operator==(const Point& other) const {
-//    return x == other.x && y == other.y;
-//}
-//
-//bool Point::operator!=(const Point& other) const {
-//    return !(other == *this);
-//}
 
 bool PointComparator::equals(const Node *n1, const Node *n2) const {
     return   *(Point*) n1 == *(Point*) n2;
