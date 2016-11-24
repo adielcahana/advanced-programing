@@ -33,6 +33,7 @@ vector <Node*>* BFS::find_shortest_route(Graph* graph, Node* start, Node* end, N
     Node* temp = NULL;
     nodes.push(current);
     while (!nodes.empty()) {
+        nodes.pop();
         if(comparator->equals(current,end)){
             route = this->createRoute(start, current, comparator);
             while (!nodes.empty()){
@@ -60,7 +61,6 @@ vector <Node*>* BFS::find_shortest_route(Graph* graph, Node* start, Node* end, N
             delete adjacents;
             garbage.push_back(current);
             current = nodes.front();
-            nodes.pop();
         }
     }
     //realse unusable data
