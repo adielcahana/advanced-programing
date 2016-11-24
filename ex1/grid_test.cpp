@@ -9,12 +9,13 @@ int main(){
     char input[50];
     cin >> input;
     char* x = strtok(input,",");
+    char* y = strtok(NULL, ",");
+    char* z = strtok(NULL, ",");
     cout << input << endl;
     Grid* g = Grid::deserialize(x);
-    PointComparator comparator;
     cout << *g << endl;
-    Point* p1 = new Point(0,0);
-    Point* p2 = new Point(2,2);
+    Point* p1 = Point::deserialize(y);
+    Point* p2 = Point::deserialize(z);
     try {
         vector<Point *> *route = g->get_route(p1, p2);
         int i = route->size() - 1;
