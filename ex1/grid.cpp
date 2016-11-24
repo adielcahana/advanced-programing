@@ -2,20 +2,22 @@
 using namespace std;
 
 queue<Node*>* Grid::get_adjacent(const Node* point) {
-	queue<Node*>* que = new queue<Node*>();
+	queue<Node*>* adjacents = new queue<Node*>();
 	int x = ((Point*) point)->getX();
 	int y = ((Point*) point)->getY();
-	//if (x,y) not in obstacels
-	if (x - 1 >= 0) que->push(new Point(x - 1, y));
-    if (y + 1 < length) que->push(new Point(x , y + 1));
-	if (x + 1 < width) que->push(new Point(x + 1, y));
-	if (y - 1 >= 0) que->push(new Point(x , y - 1));
-	return que;
+	//verify which are Point's neighbors and add them to adjacents
+	if (x - 1 >= 0) adjacents->push(new Point(x - 1, y));
+	if (y + 1 < length) adjacents->push(new Point(x , y + 1));
+	if (x + 1 < width) adjacents->push(new Point(x + 1, y));
+	if (y - 1 >= 0) adjacents->push(new Point(x , y - 1));
+	return adjacents;
 }
 
 vector<Point*>* Grid::get_route(Point* start, Point* end){
     if (!isInGrid(start) || !isInGrid(end)) throw "get_route args are out of bounds!";
+	//create max point availble in the grid, which has the highest hash value
     Node* maxPoint= new Point(width, length);
+	//send max point to bfs, in order to allocate a large enough hash table
 	BFS bfs(maxPoint);
     delete maxPoint;
     PointComparator comparator;
@@ -25,6 +27,7 @@ vector<Point*>* Grid::get_route(Point* start, Point* end){
 bool Grid::isInGrid(Point* p){
     int x = p->getX();
     int y = p->getY();
+	//verify that x and y are between valid values of grid 
     return x >= 0 && x < width && y >= 0 && y < length;
 }
 
@@ -46,6 +49,7 @@ int Point::getY(){
 int Point::hash(){
 	int x = this->getX();
 	int y = this->getY();
+	//map (x,y) to an integer number
 	return ((x + y) * (x +y + 1)) / 2 + x;	
 }
 
@@ -64,5 +68,6 @@ Point* Point::deserialize(char* s){
 }
 
 bool PointComparator::equals(const Node *n1, const Node *n2) const {
+// downcast to Point, in order to use Point '==' operator
     return   *(Point*) n1 == *(Point*) n2;
 }
