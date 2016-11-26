@@ -1,8 +1,6 @@
 compile:
-	javac -d bin src/*.java
+	javac *.java
 main:
-	java -cp bin main 16
-zip:
-	zip ex1 -r src bin makefile
+	java main 16777216
 clean:
-    rm -f *.class
+	rm -f *.class
