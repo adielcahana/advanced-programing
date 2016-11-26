@@ -1,6 +1,3 @@
-//
-// Created by ori on 14/11/16.
-//
 
 #ifndef ASS1_BFS_H
 #define ASS1_BFS_H
@@ -12,9 +9,12 @@
 
 using namespace std;
 
+/******************************************************************************
+* Node: an interface, that represnt a location on the map. implemented by
+*  objects in order to be usable by the Bfs algorithm.
+******************************************************************************/
 class Node {
 private:
-	//friend Bfs;
     Node* father;
     bool inRoute;
 public:
@@ -26,18 +26,33 @@ public:
     Node* getFather();
 };
 
+/******************************************************************************
+* NodeComparator: Abstract Class.
+* provide a clean way to downcast Node to the objects that implement node.
+* This class give the option to compare between the objects of the class
+ * that implement node.
+******************************************************************************/
 class NodeComparator {
     public:
         virtual bool equals(const Node* n1, const Node* n2) const = 0;
 };
 
+/******************************************************************************
+* Graph: an interface.
+* defines a map, with a logic of finding adjacent nodes.
+* implemented by objects that represented some map in order to
+* be usable by the Bfs algorithm.
+******************************************************************************/
 class Graph{
 public:
 	~Graph(){};
   	virtual queue<Node*>* getAdjacent(const Node *node)= 0;
 };
 
-
+/******************************************************************************
+* Bfs: an algorithm of scanning the map. get a start node and end node
+ * on a map and find the shortest way between them.
+******************************************************************************/
 class Bfs {
 private:
     std::vector<bool> visited;
