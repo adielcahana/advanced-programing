@@ -1,7 +1,6 @@
 #include <iostream>
 #include <ctime>
 #include "Binary_tree.h"
-#include <stdlib.h>
 
 using namespace std;
 

@@ -6,7 +6,11 @@
 #define EX1_DFS_BINARY_TREE_H
 
 #include <iostream>
-
+/******************************************************************************
+* Binary_Tree: A binary tree node, with a funcionality of building a full binary
+* tree, where each node has the value 1,2,3,..
+* the function dfs provides a dfs traversal
+******************************************************************************/
 class Binary_tree {
 private:
     int data;
