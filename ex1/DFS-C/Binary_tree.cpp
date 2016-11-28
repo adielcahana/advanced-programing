@@ -40,7 +40,6 @@ void Binary_tree::full_tree(int height){
 * The Function Operation: go through the tree in the dfs way
 ******************************************************************************/
 void Binary_tree::dfs(){
-    cout << this->data << endl;
     //go through the left branch
     if (left != NULL) left->dfs();
     delete left;
