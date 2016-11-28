@@ -1,14 +1,14 @@
-a.out: grid_test.o BFS.o grid.o
-	g++ -g -Werror -o a.out grid_test.o BFS.o grid.o
+a.out: main.o Bfs.o Map.o
+	g++ -g -Werror -o a.out main.o Bfs.o Map.o
 
-grid_test.o: grid_test.cpp grid.h
-	g++ -g -Werror -c -o grid_test.o grid_test.cpp
+main.o: main.cpp Map.h
+	g++ -g -Werror -c -o main.o main.cpp
 
-grid.o: grid.cpp grid.h
-	g++ -g -Werror -c -o grid.o grid.cpp	
+Map.o: Map.cpp Map.h
+	g++ -g -Werror -c -o Map.o Map.cpp	
 
-BFS.o: BFS.cpp BFS.h
-	g++ -g -Werror -c -o BFS.o BFS.cpp	
+Bfs.o: Bfs.cpp Bfs.h
+	g++ -g -Werror -c -o Bfs.o Bfs.cpp	
 
 clean:
 	rm -f *.o a.out
