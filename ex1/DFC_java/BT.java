@@ -38,7 +38,6 @@ public class BT {
 	}
 // Scan the tree with DFS algorithm.
 	public void DFSscan(){
-		System.out.println(this.data);
 		if(this.left != null){
 			this.left.DFSscan();
 		}
