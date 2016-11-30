@@ -26,6 +26,7 @@ private:
     void addPassCount(int passengers);
     void setTaxi(Taxi taxi);
 public:
+
     void setAge(int age);
     void setStatus(Status status);
     void setExp(int exp);

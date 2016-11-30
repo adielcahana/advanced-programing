@@ -1,8 +1,7 @@
-//
-// Created by ori on 28/11/16.
-//
 
 #include "Taxi.h"
+
+
 
 void addKm(float km){}
 
@@ -20,4 +19,6 @@ Point getLocation(){
     return NULL;
 }
 
-void timePassed(){}
+float getKm(){
+    return 0;
+}
