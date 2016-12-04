@@ -1,6 +1,6 @@
 project(tests)
 
-set(SOURCE_FILES firstTest.cpp)
+set(SOURCE_FILES TaxiTest.cpp DriverTest.cpp TripTest.cpp LuxTaxiTest.cpp DriverInfoTest.cpp TaxiCenterTest.cpp SpriteCollectionTest.cpp SpriteCollectionTest.h)
 
 add_executable(runTest ${SOURCE_FILES})
 
