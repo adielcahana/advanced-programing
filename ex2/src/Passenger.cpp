@@ -4,6 +4,6 @@
 
 #include "Passenger.h"
 
-int satisfacation(){
+int Passenger::satisfacation(){
     return 0;
 }

@@ -16,7 +16,7 @@ private:
     Trip trip;
     void setLocation(Point location);
 public:
-    DriverInfo(Driver driver, Taxi taxi, Point location, Trip trip)
+    DriverInfo(Driver driver, Taxi taxi, Point location, Trip trip);
     Point getLocation();
 };
 

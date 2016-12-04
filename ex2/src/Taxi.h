@@ -11,7 +11,7 @@
 enum Type {HONDA, SUBARO, TESLA, FIAT};
 enum Color {RED, BLUE, GREEN, PINK, WHITE};
 
-class Taxi : public Sprite{
+class Taxi{
 private:
     int id;
     float totalKm;
@@ -23,10 +23,10 @@ private:
     void addKm(float km);
 public:
     Taxi(int id, Type type, Color color, float tariff, Point location);
-    void setTariff(float tariff);
+    virtual void setTariff(float tariff);
     float getKm();
     float getTariff();
-    void moveOneStep(Point);
+    virtual void moveOneStep(Point next);
     void updateLocation(Point location);
     Point getLocation();
 };

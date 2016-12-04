@@ -4,10 +4,10 @@
 
 #include "Trip.h"
 
-void addMeter(){}
+void Trip::addMeter(){}
 
-Point getNextPoint(){
+Point Trip::getNextPoint(){
     return NULL;
 }
 
-void setPrice(float price){}
+void Trip::setPrice(float price){}

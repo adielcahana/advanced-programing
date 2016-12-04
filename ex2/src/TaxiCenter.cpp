@@ -4,19 +4,19 @@
 
 #include "TaxiCenter.h"
 
-DriverInfo findClosestDriver(){
+DriverInfo TaxiCenter::findClosestDriver(){
     return NULL;
 }
 
-void answerCalls(){}
+void TaxiCenter::answerCalls(){}
 
-void notifyNewTrip(Trip trip){}
+void TaxiCenter::notifyNewTrip(Trip trip){}
 
-Trip createNewTrip(){
+Trip TaxiCenter::createNewTrip(){
     return NULL;
 
 }
 
-void start(){}
+void TaxiCenter::start(){}
 
-void timePassed(){}
+void TaxiCenter::timePassed(){}

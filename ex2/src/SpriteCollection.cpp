@@ -4,8 +4,8 @@
 
 #include "SpriteCollection.h"
 
-void addSprite(Sprite* sprite){}
+void SpriteCollection::addSprite(Sprite* sprite){}
 
-void removeSprite(Sprite* sprite){}
+void SpriteCollection::removeSprite(Sprite* sprite){}
 
-void notifyAllTimePassed(){}
+void SpriteCollection::notifyAllTimePassed(){}

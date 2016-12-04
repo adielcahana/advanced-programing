@@ -17,10 +17,9 @@ private:
     vector <Sprite> collection;
 public:
     SpriteCollection();
-    void addSprite(Sprite sprite);
-    void removeSprite(Sprite sprite);
+    void addSprite(Sprite* sprite);
+    void removeSprite(Sprite* sprite);
     void notifyAllTimePassed();
 };
-
 
 #endif //ASS2_SPRITECOLLECTION_H

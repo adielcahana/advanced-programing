@@ -1,3 +1,6 @@
+#ifndef ASS2_MAP_H
+#define ASS2_MAP_H
+
 #include <vector>
 #include <queue>
 #include <stack>
@@ -78,3 +81,5 @@ class Map: public Graph{
 
 		}
 };
+
+#endif //ASS2_MAP_H

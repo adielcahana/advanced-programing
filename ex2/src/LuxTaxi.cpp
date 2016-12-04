@@ -4,5 +4,5 @@
 
 #include "LuxTaxi.h"
 
-void setTariff(float tariff){}
-void moveOneStep(Point location){}
+void LuxTaxi::setTariff(float tariff){}
+void LuxTaxi::moveOneStep(Point location){}

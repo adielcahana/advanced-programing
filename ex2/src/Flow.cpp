@@ -4,8 +4,8 @@
 
 #include "Flow.h"
 
-void initilize(){}
+void Flow::initilize(){}
 
-void run(){}
+void Flow::run(){}
 
-void notifyTimePassed(){}
+void Flow::notifyTimePassed(){}

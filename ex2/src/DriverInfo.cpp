@@ -4,8 +4,8 @@
 
 #include "DriverInfo.h"
 
-void setLocation(Point location){}
+void DriverInfo::setLocation(Point location){}
 
-Point getLocation(){
+Point DriverInfo::getLocation(){
     return NULL;
 }

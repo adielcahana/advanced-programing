@@ -1,24 +1,22 @@
 
 #include "Taxi.h"
 
+void Taxi::addKm(float km){}
 
+void Taxi::setTariff(float tariff){}
 
-void addKm(float km){}
-
-void setTariff(float tariff){}
-
-float getTariff(){
+float Taxi::getTariff(){
     return NULL;
 }
 
-void moveOneStep(Point){}
+void Taxi::moveOneStep(Point next){}
 
-void updateLocation(){}
+void Taxi::updateLocation(Point location){}
 
-Point getLocation(){
+Point Taxi::getLocation(){
     return NULL;
 }
 
-float getKm(){
+float Taxi::getKm(){
     return 0;
 }

@@ -37,7 +37,7 @@ Driver(int id, int age, Status status, int exp, Taxi taxi, Map map);
     void timePassed();
     void moveOneStep();
     float getPayment();
-    bool isAvalible();
+    bool isAvaliable();
 };
 
 #endif //ASS2_DRIVER_H

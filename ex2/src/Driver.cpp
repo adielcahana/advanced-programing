@@ -1,30 +1,32 @@
 
 #include "Driver.h"
 
-void calcAvg(int average){}
+void Driver::calcAvg(int average){}
 
-void addPassCount(int passengers){}
+void Driver::addPassCount(int passengers){}
 
-void setTaxi(Taxi taxi){}
+void Driver::setTaxi(Taxi taxi){}
 
-void setAge(int age){}
+void Driver::setAge(int age){}
 
-void setStatus(Status status){}
+void Driver::setStatus(Status status){}
 
-Status getStatus(){
+Status Driver::getStatus(){
     return NULL;
 }
 
-void setExp(int exp){}
+void Driver::setExp(int exp){}
 
-void newTrip(Trip trip){}
+void Driver::newTrip(Trip trip){}
 
-void timePassed(){}
+void Driver::timePassed(){}
 
-void moveOneStep(){}
+void Driver::moveOneStep(){}
 
-void getPayment(){}
+float Driver::getPayment(){
+    return 0;
+}
 
-bool isAvalible(){
+bool Driver::isAvaliable(){
     return true;
 }
