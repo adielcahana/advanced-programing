@@ -9,7 +9,7 @@
 
 class LuxTaxi: public Taxi {
 public:
-    LuxTaxi(int id, Type type, Color color, float tariff, Point location);
+    LuxTaxi(int id, Type type, Color color, float tariff, Point location): Taxi(id,type,color,tariff,location){}
     void setTariff(float tariff);
     void moveOneStep(Point location);
 };

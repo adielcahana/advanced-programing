@@ -12,11 +12,12 @@ class DriverInfo {
 private:
     Driver driver;
     Taxi cab;
-    Point Location;
+    Point location;
     Trip trip;
     void setLocation(Point location);
 public:
-    DriverInfo(Driver driver, Taxi taxi, Point location, Trip trip);
+    DriverInfo(Driver driver, Taxi taxi, Point location, Trip trip):
+            driver(driver), cab(taxi), location(location), trip(trip) {}
     Point getLocation();
 };
 

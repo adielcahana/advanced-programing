@@ -22,7 +22,8 @@ private:
     int velocity;
     void addKm(float km);
 public:
-    Taxi(int id, Type type, Color color, float tariff, Point location);
+    Taxi(int id, Type type, Color color, float tariff, Point location):
+            id(id), manufacturer(type), color(color), tariff(tariff), location(location){};
     virtual void setTariff(float tariff);
     float getKm();
     float getTariff();

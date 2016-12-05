@@ -4,6 +4,7 @@
 
 #include "TaxiCenter.h"
 
+
 DriverInfo TaxiCenter::findClosestDriver(){
     vector <Point*> route;
     Trip trip = Trip(5, Point(0,0), Point(1,1), 3, route);
@@ -27,3 +28,8 @@ Trip TaxiCenter::createNewTrip(){
 void TaxiCenter::start(){}
 
 void TaxiCenter::timePassed(){}
+
+TaxiCenter::TaxiCenter(Map* map, vector<DriverInfo> employees) {
+    this->map = map;
+    this->employees = employees;
+}

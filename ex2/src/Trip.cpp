@@ -11,3 +11,7 @@ Point Trip::getNextPoint(){
 }
 
 void Trip::setPrice(float price){}
+
+float Trip::getPrice() {
+    return 0;
+}

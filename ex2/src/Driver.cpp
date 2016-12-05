@@ -30,3 +30,11 @@ float Driver::getPayment(){
 bool Driver::isAvaliable(){
     return true;
 }
+
+int Driver::getAge() {
+    return 0;
+}
+
+Taxi Driver::getTaxi() {
+    return this->taxi;
+}

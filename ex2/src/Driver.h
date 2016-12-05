@@ -21,12 +21,13 @@ private:
     int passCount;
     Taxi taxi;
     Map map;
-    Trip trip;
+    Trip* trip;
     void calcAvg(int average);
     void addPassCount(int passengers);
     void setTaxi(Taxi taxi);
 public:
-Driver(int id, int age, Status status, int exp, Taxi taxi, Map map);
+    Driver(int id, int age, Status status, int exp, Taxi taxi, Map map):
+            id(id), age(age),maritalStat(status), exp(exp), taxi(taxi), map(map), trip(NULL){};
     void setAge(int age);
     int getAge();
     Taxi getTaxi();

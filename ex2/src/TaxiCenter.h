@@ -7,13 +7,13 @@
 class TaxiCenter: public Sprite {
 private:
     vector <DriverInfo> employees;
-    Map map;
+    Map* map;
     DriverInfo findClosestDriver();
     void answerCalls();
     void notifyNewTrip(Trip trip);
     Trip createNewTrip();
 public:
-    TaxiCenter(Map map, vector <DriverInfo> employees);
+    TaxiCenter(Map* map, vector <DriverInfo> employees);
     void start();
     void timePassed();
 };
