@@ -9,7 +9,7 @@
 
 class Flow {
 private:
-    vector <Sprite> spriteCollection;
+    vector <Sprite*> spriteCollection;
 public:
     void initilize();
     void run();

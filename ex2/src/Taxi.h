@@ -29,6 +29,8 @@ public:
     virtual void moveOneStep(Point next);
     void updateLocation(Point location);
     Point getLocation();
+    bool operator==(const Taxi &rhs) const;
+    bool operator!=(const Taxi &rhs) const;
 };
 
 

@@ -54,6 +54,7 @@ public:
 * and control the drivers
 ******************************************************************************/
 class Map: public Graph{
+	friend class MapTest;
 	private:
 		int length;
 		int width;

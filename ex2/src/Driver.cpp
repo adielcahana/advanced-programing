@@ -12,7 +12,7 @@ void Driver::setAge(int age){}
 void Driver::setStatus(Status status){}
 
 Status Driver::getStatus(){
-    return NULL;
+    return SINGLE;
 }
 
 void Driver::setExp(int exp){}

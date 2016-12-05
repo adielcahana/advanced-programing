@@ -7,5 +7,5 @@
 void DriverInfo::setLocation(Point location){}
 
 Point DriverInfo::getLocation(){
-    return NULL;
+    return Point(0,0);
 }

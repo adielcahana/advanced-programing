@@ -7,14 +7,12 @@
 
 #include "Sprite.h"
 #include <vector>
-#include "../test/SpriteCollectionTest.h"
 
 using namespace std;
 
 class SpriteCollection {
-    friend class SpriteCollectionTest;
 private:
-    vector <Sprite> collection;
+    vector <Sprite*> collection;
 public:
     SpriteCollection();
     void addSprite(Sprite* sprite);

@@ -7,7 +7,7 @@
 void Trip::addMeter(){}
 
 Point Trip::getNextPoint(){
-    return NULL;
+    return Point(0,0);
 }
 
 void Trip::setPrice(float price){}
