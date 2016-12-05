@@ -1,4 +1,4 @@
-#include "SpriteCollectionTest.h"
+/*#include "SpriteCollectionTest.h"
 
 TEST_F(SpriteCollectionTest, addSpriteClass){
     Sprite sprite;
@@ -6,4 +6,4 @@ TEST_F(SpriteCollectionTest, addSpriteClass){
     sp.addSprite(sprite);
     collection.addSprite(sprite);
     EXPECT_EQ(sprite, sp.at(0));
-}
+}*/

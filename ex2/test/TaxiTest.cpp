@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/Taxi.h"
+#include "../Taxi.h"
 
 TEST(Taxi, getTariffTest){
     float tariff;
@@ -48,7 +48,7 @@ TEST(Taxi, moveOneStepTest){
     //try to move more then 1 cell
     nextLocation= Point(location.getX() + 2, location.getY() + 2);
     EXPECT_THROW(taxi.moveOneStep(nextLocation), exception);
-    //test for out of map next location in driver test
+    //tests for out of map next location in driver tests
 }
 
 TEST(Taxi, getKmTest){

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../src/Map.h"
+#include "../Map.h"
 
 //
 // Created by adi on 04/12/16.
@@ -51,7 +51,7 @@ TEST(MapTest, MapAdjacentTest){
         queue<Node*>* adjacents = map.getAdjacent(p);
         while (!adjacents->empty()){
             neighbor = (Point*) adjacents->front();
-            EXPECT_EQ(isAdjacent(p, neighbor), 1);
+            EXPECT_TRUE(isAdjacent(p, neighbor));
             delete neighbor;
             adjacents->pop();
         }

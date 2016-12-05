@@ -1,8 +1,8 @@
 #ifndef ASS2_SPRITECOLLECTIONTEST_H
 #define ASS2_SPRITECOLLECTIONTEST_H
-
+/*
 #include "gtest/gtest.h"
-#include "../src/SpriteCollection.h"
+#include "../SpriteCollection.h"
 
 class SpriteCollectionTest: public ::testing::Test {
 protected:
@@ -14,3 +14,4 @@ public:
 };
 
 #endif //ASS2_SPRITECOLLECTIONTEST_H
+*/

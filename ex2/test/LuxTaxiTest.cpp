@@ -1,6 +1,6 @@
 
 #include "gtest/gtest.h"
-#include "../src/LuxTaxi.h"
+#include "../LuxTaxi.h"
 
 TEST(LuxTaxi, setTariffTest) {
     float tariff = 0;
@@ -26,5 +26,5 @@ TEST(LuxTaxi, moveOneStepTest){
     //try to move more then 2 cell
     nextLocation = Point(location.getX() + 2, location.getY() + 2);
     EXPECT_THROW(luxTaxi.moveOneStep(nextLocation), exception);
-    //test for out of map next location in driver test
+    //tests for out of map next location in driver tests
 }

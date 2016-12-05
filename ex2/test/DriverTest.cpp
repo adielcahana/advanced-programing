@@ -1,6 +1,6 @@
 
-#include "gtest/gtest.h"
-#include "../src/Driver.h"
+#include <gtest/gtest.h>
+#include "../Driver.h"
 
 TEST(Driver, getAgeTest) {
     Taxi taxi = Taxi(1, HONDA, RED, 1, Point(0, 0));
@@ -11,7 +11,7 @@ TEST(Driver, getAgeTest) {
     }
 }
 
-    TEST(Driver, setAgeTest){
+TEST(Driver, setAgeTest){
     Taxi taxi = Taxi(1, HONDA, RED, 1, Point(0,0));
     int age = 20;
     Driver driver = Driver(5, age, SINGLE, 5, taxi, Map(10, 10));
@@ -52,30 +52,30 @@ TEST(Driver, isAvaliableTest){
     Taxi taxi = Taxi(1, HONDA, RED, 1, Point(0, 0));
     Driver driver = Driver(5, 20, SINGLE, 5, taxi, Map(10, 10));
     // driver start with trip = null
-    EXPECT_TRUE(driver.isAvalible());
-    vector<Point> route;
+    EXPECT_TRUE(driver.isAvaliable());
+    vector<Point*> route;
     Trip trip = Trip(1, Point(0,0), Point(1,1), 4, route);
     driver.newTrip(trip);
-    EXPECT_FALSE(driver.isAvalible());
+    EXPECT_FALSE(driver.isAvaliable());
 }
 
 TEST(Driver, newTripTest){
-    vector<Point> route;
+    vector<Point*> route;
     Trip trip = Trip(1, Point(0,0), Point(1,1), 4, route);
     Taxi taxi = Taxi(1, HONDA, RED, 1, Point(0, 0));
     Driver driver = Driver(5, 20, SINGLE, 5, taxi, Map(10, 10));
     driver.newTrip(trip);
-    EXPECT_FALSE(driver.isAvalible());
+    EXPECT_FALSE(driver.isAvaliable());
 }
 
 TEST(Driver, getPaymentTest){
     float price;
-    vector<Point> route;
+    vector<Point*> route;
     for(int i = 0; i < 5; i++){
-        route.push_back(Point(0,i));
+        route.push_back(new Point(0,i));
     }
     for(int i = 0; i < 5; i++){
-        route.push_back(Point(i,5));
+        route.push_back(new Point(i,5));
     }
     Trip trip = Trip(1, Point(0,0), Point(5,5), 4, route);
     Taxi taxi = Taxi(1, HONDA, RED, 1, Point(0, 0));
@@ -89,23 +89,29 @@ TEST(Driver, getPaymentTest){
 }
 
 TEST(Driver, moveOneStepTest) {
-    vector<Point> route;
+    vector<Point*> route;
+    PointComparator cmp;
     for (int i = 0; i < 5; i++) {
-        route.push_back(Point(0, i));
+        route.push_back(new Point(0, i));
     }
     for (int i = 0; i < 5; i++) {
-        route.push_back(Point(i, 4));
+        route.push_back(new Point(i, 4));
     }
     Trip trip = Trip(1, Point(0, 0), Point(1, 1), 4, route);
     Taxi taxi = Taxi(1, HONDA, RED, 1, Point(0, 0));
     Driver driver = Driver(5, 20, SINGLE, 5, taxi, Map(5, 5));
     for (int i = 0; i < 10; i++) {
-        EXPECT_FALSE(driver.isAvalible());
+        EXPECT_FALSE(driver.isAvaliable());
         driver.moveOneStep();
-        EXPECT_EQ(driver.getTaxi().getLocation(), route.at(i));
+        Point p = driver.getTaxi().getLocation();
+        EXPECT_TRUE(cmp.equals(&p, route.at(i)));
         EXPECT_EQ(driver.getPayment(), driver.getTaxi().getTariff() * i);
     }
     // move after the trip over
-    EXPECT_TRUE(driver.isAvalible());
+    EXPECT_TRUE(driver.isAvaliable());
     EXPECT_THROW(driver.moveOneStep(), exception);
+    for(int i = 0; i < 10; i++){
+        delete route.at(i);
+    }
+    route.clear();
 }

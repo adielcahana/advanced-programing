@@ -2,6 +2,7 @@
 // Created by adi on 04/12/16.
 //
 #include "BfsTest.h"
+
 void BfsTest::SetUp() {
     int width = 10;
     int length = 10;
@@ -18,7 +19,7 @@ void BfsTest::TearDown() {
 TEST_F(BfsTest, ShortestRouteTest){
     Point* src = new Point(0,0);
     Point* dest = new Point(10,10);
-    PointComparator* cmp = new PointComparator()
+    PointComparator* cmp = new PointComparator();
     vector<Node*>* route = bfs.find_shortest_route(map, src, dest, cmp);
     vector<Node*>* shortestRoute = new vector<Node*>();
     for(int i= 0; i < 10; i++){

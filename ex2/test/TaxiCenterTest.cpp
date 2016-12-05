@@ -1,6 +1,6 @@
 
 #include "gtest/gtest.h"
-#include "../src/TaxiCenter.h"
+#include "../TaxiCenter.h"
 
 TEST(TaxiCenter, startTest){
 
