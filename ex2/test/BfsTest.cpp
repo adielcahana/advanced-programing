@@ -1,6 +1,3 @@
-//
-// Created by adi on 04/12/16.
-//
 #include "BfsTest.h"
 
 void BfsTest::SetUp() {

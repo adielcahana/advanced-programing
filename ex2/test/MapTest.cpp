@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "Map.h"
+#include "../Map.h"
 using namespace std;
 //
 // Created by adi on 04/12/16.

@@ -6,7 +6,7 @@
 #define EX2_POINTTEST_H
 
 #include <gtest/gtest.h>
-#include "Map.h"
+#include "../Map.h"
 
 TEST(PointTest, getterTest){
     Point p(0,0);

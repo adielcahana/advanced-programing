@@ -29,7 +29,7 @@ TEST(SpriteCollectionTest, notifyAllTimePassedTest) {
     for (int i = 0; i < 2; i++) {
         route.push_back(new Point(0, i));
     }
-    Trip trip = Trip(1, Point(0, 0), Point(2, 2), 4, route, pass);
+    Trip trip = Trip(1, Point(0, 0), Point(2, 2), 4, route, pass, 0);
     Taxi taxi = Taxi(1, HONDA, RED, 1, Point(0, 0));
     Driver *driver = new Driver(5, 20, SINGLE, 5, taxi, Map(10, 10));
     driver->newTrip(trip);
