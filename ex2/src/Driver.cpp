@@ -21,7 +21,15 @@ void Driver::newTrip(Trip trip){}
 
 void Driver::timePassed(){}
 
+float Driver::getSatisfacation(){
+    return 0;
+}
+
 void Driver::moveOneStep(){}
+
+Point Driver::getLocation(){
+    Point(0,0);
+}
 
 float Driver::getPayment(){
     return 0;

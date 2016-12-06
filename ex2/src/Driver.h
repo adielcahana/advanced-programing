@@ -1,7 +1,3 @@
-//
-// Created by ori on 28/11/16.
-//
-
 #ifndef ASS2_DRIVER_H
 #define ASS2_DRIVER_H
 
@@ -27,8 +23,10 @@ private:
     void setTaxi(Taxi taxi);
 public:
     Driver(int id, int age, Status status, int exp, Taxi taxi, Map map):
-            id(id), age(age),maritalStat(status), exp(exp), taxi(taxi), map(map), trip(NULL){};
+            id(id), age(0),maritalStat(status), exp(exp), taxi(taxi), map(map), trip(NULL){};
     void setAge(int age);
+    Point getLocation();
+    float getSatisfacation();
     int getAge();
     Taxi getTaxi();
     void setStatus(Status status);

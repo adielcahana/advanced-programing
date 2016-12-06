@@ -1,7 +1,3 @@
-//
-// Created by ori on 28/11/16.
-//
-
 #ifndef ASS2_SPRITECOLLECTION_H
 #define ASS2_SPRITECOLLECTION_H
 
@@ -14,7 +10,7 @@ class SpriteCollection {
 private:
     vector <Sprite*> collection;
 public:
-    SpriteCollection();
+    SpriteCollection():collection(collection){};
     void addSprite(Sprite* sprite);
     void removeSprite(Sprite* sprite);
     void notifyAllTimePassed();

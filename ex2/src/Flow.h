@@ -9,12 +9,12 @@
 
 class Flow {
 private:
-    vector <Sprite*> spriteCollection;
+    SpriteCollection spriteCollection;
 public:
+    Flow(SpriteCollection sp): spriteCollection(sp){};
     void initilize();
     void run();
     void notifyTimePassed();
 };
-
 
 #endif //ASS2_FLOW_H

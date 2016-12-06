@@ -12,6 +12,7 @@ private:
     Point src;
     Point dest;
 public:
+    Passenger(Point src, Point dest): src(src), dest(dest){};
     int satisfacation();
 };
 

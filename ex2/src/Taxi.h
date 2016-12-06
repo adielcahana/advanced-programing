@@ -6,7 +6,6 @@
 #define ASS2_TAXI_H
 
 #include "Map.h"
-#include "Sprite.h"
 
 enum Type {HONDA, SUBARO, TESLA, FIAT};
 enum Color {RED, BLUE, GREEN, PINK, WHITE};

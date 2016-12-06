@@ -1,7 +1,3 @@
-//
-// Created by ori on 28/11/16.
-//
-
 #ifndef ASS2_DRIVERINFO_H
 #define ASS2_DRIVERINFO_H
 
@@ -20,6 +16,5 @@ public:
             driver(driver), cab(taxi), location(location), trip(trip) {}
     Point getLocation();
 };
-
 
 #endif //ASS2_DRIVERINFO_H
