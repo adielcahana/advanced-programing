@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "Map.h"
 using namespace std;
 /******************************************************************************
@@ -93,7 +94,6 @@ bool Point::operator!=(const Point &other) const {
 Point* Point::deserialize(char* s){
     char* x = strtok(s,"_");
     char* y = strtok(NULL, "_");
-    printf("%s %s %s\n", s, x, y);
     return new Point(atoi(x), atoi(y));
 }
 /******************************************************************************

@@ -1,7 +1,3 @@
-//
-// Created by ori on 28/11/16.
-//
-
 #ifndef ASS2_TAXI_H
 #define ASS2_TAXI_H
 

@@ -13,7 +13,8 @@ private:
     void setLocation(Point location);
 public:
     DriverInfo(Driver driver, Taxi taxi, Point location, Trip trip):
-            driver(driver), cab(taxi), location(location), trip(trip) {}
+            driver(driver), cab(taxi), location(location),
+            trip(trip) {}
     Point getLocation();
 };
 

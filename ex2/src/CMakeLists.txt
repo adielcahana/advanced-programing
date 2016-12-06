@@ -15,7 +15,8 @@ include_directories(lib/googletest-master/googlemock/include)
 
 set(TEST_FILES tests/TaxiTest.cpp tests/DriverTest.cpp tests/TripTest.cpp tests/LuxTaxiTest.cpp
         tests/DriverInfoTest.cpp tests/TaxiCenterTest.cpp tests/SpriteCollectionTest.cpp
-        tests/BfsTest.cpp tests/BfsTest.h tests/MapTest.cpp tests/FlowTest.cpp tests/PassengerTest.cpp)
+        tests/BfsTest.cpp tests/BfsTest.h tests/MapTest.cpp
+        tests/FlowTest.cpp tests/PassengerTest.cpp tests/PointTest.cpp)
 
 add_executable(ex2 ${SOURCE_FILES} ${TEST_FILES})
 
