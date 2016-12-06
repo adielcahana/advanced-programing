@@ -6,8 +6,8 @@
 #define EX2_BFSTEST_H
 
 #include <gtest/gtest.h>
-#include "../Bfs.h"
-#include "../Map.h"
+#include "Bfs.h"
+#include "Map.h"
 
 class BfsTest : public ::testing::Test{
 protected:

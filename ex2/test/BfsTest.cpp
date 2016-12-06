@@ -27,14 +27,14 @@ TEST_F(BfsTest, ShortestRouteTest){
     PointComparator* cmp = new PointComparator();
     vector<Node*>* route = bfs->find_shortest_route(map, src, dest, cmp);
     vector<Node*>* shortestRoute = new vector<Node*>();
-    for(int i= 0; i < 10; i++){
+    for(int i = 0; i < 10; i++){
         shortestRoute->push_back(new Point(0,i));
     }
     for(int i= 1; i < 10; i++){
         shortestRoute->push_back(new Point(i,9));
     }
     while(shortestRoute->size() != 0){
-        ASSERT_EQ(shortestRoute->back(), route->back());
+        ASSERT_TRUE(cmp->equals(shortestRoute->back(), route->back()));
         delete shortestRoute->back();
         shortestRoute->pop_back();
         delete route->back();
@@ -47,13 +47,13 @@ TEST_F(BfsTest, ShortestRouteTest){
     dest = new Point(0,0);
     route = bfs->find_shortest_route(map, src, dest, cmp);
     for(int i= 9; i >= 0; i--){
-        shortestRoute->push_back(new Point(9,i));
+        shortestRoute->push_back(new Point(i,9));
     }
-    for(int i= 9; i >= 0; i--){
-        shortestRoute->push_back(new Point(i,0));
+    for(int i= 8; i >= 0; i--){
+        shortestRoute->push_back(new Point(0,i));
     }
     while(shortestRoute->size() != 0){
-        ASSERT_EQ(shortestRoute->back(), route->back());
+        ASSERT_TRUE(cmp->equals(shortestRoute->back(), route->back()));
         delete shortestRoute->back();
         shortestRoute->pop_back();
         delete route->back();
@@ -68,11 +68,11 @@ TEST_F(BfsTest, ShortestRouteTest){
     for(int i= 0; i < 10; i++){
         shortestRoute->push_back(new Point(i,9));
     }
-    for(int i= 9; i >= 0; i--){
+    for(int i= 8; i >= 0; i--){
         shortestRoute->push_back(new Point(9,i));
     }
     while(shortestRoute->size() != 0){
-        ASSERT_EQ(shortestRoute->back(), route->back());
+        ASSERT_TRUE(cmp->equals(shortestRoute->back(), route->back()));
         delete shortestRoute->back();
         shortestRoute->pop_back();
         delete route->back();
@@ -87,11 +87,11 @@ TEST_F(BfsTest, ShortestRouteTest){
     for(int i= 9; i >= 0; i--){
         shortestRoute->push_back(new Point(i,0));
     }
-    for(int i= 0; i < 10; i++){
+    for(int i= 1; i < 10; i++){
         shortestRoute->push_back(new Point(0,i));
     }
     while(shortestRoute->size() != 0){
-        ASSERT_EQ(shortestRoute->back(), route->back());
+        ASSERT_TRUE(cmp->equals(shortestRoute->back(), route->back()));
         delete shortestRoute->back();
         shortestRoute->pop_back();
         delete route->back();
