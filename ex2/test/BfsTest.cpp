@@ -4,28 +4,33 @@
 #include "BfsTest.h"
 
 void BfsTest::SetUp() {
-    int width = 10;
-    int length = 10;
-    map = new Map(width, length);
-    Point* maxPoint = new Point(width,length);
-    bfs = Bfs(maxPoint);
-    delete maxPoint;
+
 }
 
 void BfsTest::TearDown() {
     delete map;
+    delete bfs;
+}
+
+BfsTest::BfsTest() {
+    int width = 10;
+    int length = 10;
+    map = new Map(width, length);
+    Point* maxPoint = new Point(width,length);
+    bfs = new Bfs(maxPoint);
+    delete maxPoint;
 }
 
 TEST_F(BfsTest, ShortestRouteTest){
     Point* src = new Point(0,0);
-    Point* dest = new Point(10,10);
+    Point* dest = new Point(9,9);
     PointComparator* cmp = new PointComparator();
-    vector<Node*>* route = bfs.find_shortest_route(map, src, dest, cmp);
+    vector<Node*>* route = bfs->find_shortest_route(map, src, dest, cmp);
     vector<Node*>* shortestRoute = new vector<Node*>();
     for(int i= 0; i < 10; i++){
         shortestRoute->push_back(new Point(0,i));
     }
-    for(int i= 0; i < 10; i++){
+    for(int i= 1; i < 10; i++){
         shortestRoute->push_back(new Point(i,9));
     }
     while(shortestRoute->size() != 0){
@@ -40,7 +45,7 @@ TEST_F(BfsTest, ShortestRouteTest){
 
     src = new Point(9,9);
     dest = new Point(0,0);
-    route = bfs.find_shortest_route(map, src, dest, cmp);
+    route = bfs->find_shortest_route(map, src, dest, cmp);
     for(int i= 9; i >= 0; i--){
         shortestRoute->push_back(new Point(9,i));
     }
@@ -59,7 +64,7 @@ TEST_F(BfsTest, ShortestRouteTest){
 
     src = new Point(0,9);
     dest = new Point(9,0);
-    route = bfs.find_shortest_route(map, src, dest, cmp);
+    route = bfs->find_shortest_route(map, src, dest, cmp);
     for(int i= 0; i < 10; i++){
         shortestRoute->push_back(new Point(i,9));
     }
@@ -78,7 +83,7 @@ TEST_F(BfsTest, ShortestRouteTest){
 
     src = new Point(9,0);
     dest = new Point(0,9);
-    route = bfs.find_shortest_route(map, src, dest, cmp);
+    route = bfs->find_shortest_route(map, src, dest, cmp);
     for(int i= 9; i >= 0; i--){
         shortestRoute->push_back(new Point(i,0));
     }

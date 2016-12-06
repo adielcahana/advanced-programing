@@ -11,7 +11,7 @@
 
 class BfsTest : public ::testing::Test{
 protected:
-    Bfs bfs;
+    Bfs* bfs;
     Map* map;
     virtual void SetUp();
     virtual void TearDown();

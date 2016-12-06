@@ -39,20 +39,21 @@ TEST(Taxi, updateLocationTest) {
     }
 }
 
+TEST(Taxi, getKmTest){
+    Taxi taxi(1, HONDA, RED, 1, Point(0,0));
+    float km = taxi.getKm();
+    EXPECT_EQ(0, km);
+}
+
 TEST(Taxi, moveOneStepTest){
     Taxi taxi(1, HONDA, RED, 1, Point(0,0));
     Point location = taxi.getLocation();
     Point nextLocation(location.getX(), location.getY() + 1);
     taxi.moveOneStep(nextLocation);
+    EXPECT_FLOAT_EQ(taxi.getKm(), 0.001);
     EXPECT_EQ(taxi.getLocation(), nextLocation);
     //try to move more then 1 cell
     nextLocation= Point(location.getX() + 2, location.getY() + 2);
     EXPECT_THROW(taxi.moveOneStep(nextLocation), exception);
     //tests for out of map next location in driver tests
-}
-
-TEST(Taxi, getKmTest){
-    Taxi taxi(1, HONDA, RED, 1, Point(0,0));
-    float km = taxi.getKm();
-    EXPECT_EQ(0, km);
 }
