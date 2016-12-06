@@ -1,9 +1,15 @@
+//
+// Created by adi on 06/12/16.
+//
+
 #ifndef EX2_POINTTEST_H
 #define EX2_POINTTEST_H
 
 #include <gtest/gtest.h>
 #include "../Map.h"
-
+/******************************************************************************
+* The Function Operation: allocte random point and test its getters
+******************************************************************************/
 TEST(PointTest, getterTest){
     Point p(0,0);
     int x,y;
@@ -15,7 +21,9 @@ TEST(PointTest, getterTest){
         EXPECT_EQ(p.getY(), y);
     }
 }
-
+/******************************************************************************
+* The Function Operation: test the output of point hash function
+******************************************************************************/
 TEST(PointTest, hashTest){
     Point arr[10];
     arr[0] = Point(83,86);
@@ -39,7 +47,9 @@ TEST(PointTest, hashTest){
     EXPECT_EQ(arr[8].hash(), 2251);
     EXPECT_EQ(arr[9].hash(), 5958);
 }
-
+/******************************************************************************
+* The Function Operation: test the equal and not equal operator
+******************************************************************************/
 TEST(PointTest, equalityOperatorsTest) {
     Point point(0,0);
     Point other(0,0);
@@ -56,21 +66,42 @@ TEST(PointTest, equalityOperatorsTest) {
     }
 }
 
+/******************************************************************************
+* The Function Operation: test the serialization process of point
+******************************************************************************/
 TEST(PointTest, PointDeserializationTest){
+    const int asciiOfZero = 48;
     Point *p = NULL;
     int x,y;
     for(int i = 0; i < 10; i++){
         char str[] = "00_00";
         x = rand() % 100;
         y = rand() % 100;
-        str[0] =  48 +  x / 10;
-        str[1] =  48 +  x % 10;
-        str[3] = 48 + y / 10 ;
-        str[4] =  48 + y % 10 ;
+        //assgin the random coordinate as a string
+        str[0] = asciiOfZero +  x / 10;
+        str[1] = asciiOfZero +  x % 10;
+        str[3] = asciiOfZero + y / 10 ;
+        str[4] = asciiOfZero + y % 10 ;
         p = Point::deserialize(str);
         EXPECT_EQ(*p, Point(x,y));
-        delete p;
     }
 }
 
+TEST(PointTest, PointComparatorTest){
+    PointComparator cmp;
+    Point *p1 = NULL;
+    Point *p2 = NULL;
+    Point *p3 = NULL;
+    int x,y;
+    for(int i = 0; i < 10; i++){
+        x = rand() % 100;
+        y = rand() % 100;
+        p1 = new Point(x,y);
+        p2 = new Point(x,y);
+        p3 = new Point(y + 1,x + 1);
+        //assgin the random coordinate as a string
+        EXPECT_TRUE(cmp.equals((Node*) p1, (Node*) p2));
+        EXPECT_FALSE(cmp.equals((Node*) p1, (Node*) p3));
+    }
+}
 #endif //EX2_POINTTEST_H

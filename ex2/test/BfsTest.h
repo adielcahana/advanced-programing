@@ -8,12 +8,13 @@
 #include <gtest/gtest.h>
 #include "../Bfs.h"
 #include "../Map.h"
-
+/******************************************************************************
+* BfsTest: Test class to test Bfs logic and private functions
+******************************************************************************/
 class BfsTest : public ::testing::Test{
 protected:
     Bfs* bfs;
     Map* map;
-    virtual void SetUp();
     virtual void TearDown();
 public:
     BfsTest();
