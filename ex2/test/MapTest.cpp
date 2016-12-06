@@ -54,11 +54,12 @@ TEST(MapTest, MapAdjacentTest){
             EXPECT_TRUE(isAdjacent(p, neighbor));
             delete neighbor;
             adjacents->pop();
+            delete p;
         }
         delete adjacents;
-        delete p;
     }
 }
+
 //todo: more tests
 TEST(MapTest, MapRouteTest){
     PointComparator cmp;
@@ -68,7 +69,6 @@ TEST(MapTest, MapRouteTest){
     vector<Point*>* route = NULL;
     Point *src, *dest, *temp, *outOfBound;
     Map* map = NULL;
-
     for(int i = 0; i < 10; i++){
         width = rand() % 100;
         length = rand() % 100;
@@ -93,14 +93,15 @@ TEST(MapTest, MapRouteTest){
         }
         EXPECT_TRUE(cmp.equals((Node*) src, (Node*) dest));
         delete dest;
-        for(int i = 1; i < route->size(); i++){
+        /*for(int i = 1; i < route->size(); i++){
             delete route->at(i);
-        }
+        }*/
         route->clear();
         delete route;
         delete map;
     }
 };
+
 TEST(MapTest, MapDeserializationTest){
     int width;
     int length;
@@ -117,5 +118,6 @@ TEST(MapTest, MapDeserializationTest){
         str[4] = (char) length % 10 ;
         map = Map::deserialize(str);
         EXPECT_THROW(map->getRoute(p,p), out_of_range);
+        delete p;
     }
 };

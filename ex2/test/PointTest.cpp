@@ -1,7 +1,3 @@
-//
-// Created by adi on 06/12/16.
-//
-
 #ifndef EX2_POINTTEST_H
 #define EX2_POINTTEST_H
 
@@ -73,10 +69,8 @@ TEST(PointTest, PointDeserializationTest){
         str[4] =  48 + y % 10 ;
         p = Point::deserialize(str);
         EXPECT_EQ(*p, Point(x,y));
+        delete p;
     }
 }
-
-
-
 
 #endif //EX2_POINTTEST_H

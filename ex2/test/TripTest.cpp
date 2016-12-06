@@ -1,6 +1,12 @@
 #include "gtest/gtest.h"
 #include "../Driver.h"
+/******************************************************************************
+* TripTest: source file that test the Trip class.
+******************************************************************************/
 
+/******************************************************************************
+* The Test Operation: check the next point in the trip
+******************************************************************************/
 TEST(Trip, getNextPointTest){
     vector<Point*> route;
     vector <Passenger> pass;
@@ -11,6 +17,9 @@ TEST(Trip, getNextPointTest){
     EXPECT_EQ(trip.getNextPoint(), Point(2,2));
 }
 
+/******************************************************************************
+* The Test Operation: create a trip with price 5 and compare to getPrice
+******************************************************************************/
 TEST(Trip, getPriceTest){
     vector<Point*> route;
     vector <Passenger> pass;
@@ -19,6 +28,9 @@ TEST(Trip, getPriceTest){
     EXPECT_FLOAT_EQ(5, trip.getPrice());
 }
 
+/******************************************************************************
+* The Test Operation: set a random price and check if it equal to the get
+******************************************************************************/
 TEST(Trip, setPriceTest){
     vector<Point*> route;
     vector <Passenger> pass;
