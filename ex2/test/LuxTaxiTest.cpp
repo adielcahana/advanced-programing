@@ -1,6 +1,12 @@
 #include "gtest/gtest.h"
 #include "../LuxTaxi.h"
+/******************************************************************************
+* PassengerTest: source file that test the LuxTaxi class.
+******************************************************************************/
 
+/******************************************************************************
+* The Test Operation: set random tariff and compare to getTariff
+******************************************************************************/
 TEST(LuxTaxi, setTariffTest) {
     float tariff = 0;
     LuxTaxi luxTaxi(1, HONDA, RED, tariff, Point(0,0));
@@ -11,6 +17,10 @@ TEST(LuxTaxi, setTariffTest) {
     }
 }
 
+/******************************************************************************
+* The Test Operation: check the taxi's movmenet of one or two cells
+* expected exception when try to move more than 2 cells
+******************************************************************************/
 TEST(LuxTaxi, moveOneStepTest){
     LuxTaxi luxTaxi(1, HONDA, RED, 1, Point(0,0));
     Point location = luxTaxi.getLocation();
