@@ -5,6 +5,9 @@ using namespace std;
 * neihgbors of a given point
 ******************************************************************************/
 queue<Node*>* Map::getAdjacent(const Node *point) {
+    if (!isInMap((Point*) point)) {
+        throw out_of_range("getAdjacent args are out of bounds!");
+    }
 	queue<Node*>* adjacents = new queue<Node*>();
 	int x = ((Point*) point)->getX();
 	int y = ((Point*) point)->getY();
@@ -21,7 +24,7 @@ queue<Node*>* Map::getAdjacent(const Node *point) {
 ******************************************************************************/
 vector<Point*>* Map::getRoute(Point *start, Point *end){
     if (!isInMap(start) || !isInMap(end)) {
-        throw "getRoute args are out of bounds!";
+        throw out_of_range("getRoute args are out of bounds!");
     }
 	//create max point availble in the grid, which has the highest hash value
     Node* maxPoint= new Point(width, length);
@@ -90,6 +93,7 @@ bool Point::operator!=(const Point &other) const {
 Point* Point::deserialize(char* s){
     char* x = strtok(s,"_");
     char* y = strtok(NULL, "_");
+    printf("%s %s %s\n", s, x, y);
     return new Point(atoi(x), atoi(y));
 }
 /******************************************************************************

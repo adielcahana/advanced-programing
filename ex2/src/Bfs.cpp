@@ -39,6 +39,12 @@ Bfs::Bfs(Node* maxNode){
     visited.resize(maxNode->hash());
 }
 
+void Bfs::resetVisited(){
+    unsigned long size = visited.size();
+    visited.resize(0);
+    visited.resize(size);
+}
+
 /******************************************************************************
 * The Function Operation: get a graph and start node and end node
 * and find the shortest way between them by using a node compertor.
@@ -47,6 +53,7 @@ Bfs::Bfs(Node* maxNode){
 ******************************************************************************/
 vector <Node*>* Bfs::find_shortest_route(Graph* graph, Node* start, Node* end,
                                          NodeComparator* comparator){
+    resetVisited();
     vector <Node*> garbage;
     Node* current = start;
     queue <Node*> nodes;

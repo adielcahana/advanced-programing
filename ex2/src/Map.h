@@ -20,8 +20,9 @@ class Point: public Node{
 		int x;
 		int y;
 	public:
-		Point(int x, int y): x(x), y(y) {};	
-		int getX();
+		Point(int x, int y): x(x), y(y) {};
+        Point(): x(0), y(0) {};
+	    int getX();
 		int getY();
 		int hash();
         bool operator==(const Point &rhs) const;

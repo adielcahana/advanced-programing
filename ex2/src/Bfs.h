@@ -57,6 +57,7 @@ class Bfs {
 private:
     std::vector<bool> visited;
     vector<Node*>* createRoute(Node* end ,Node* start, NodeComparator* comparator);
+    void resetVisited();
 public:
     Bfs(Node* maxNode);
     vector<Node*>* find_shortest_route(Graph* graph, Node* start, Node* end, NodeComparator* comparator);
