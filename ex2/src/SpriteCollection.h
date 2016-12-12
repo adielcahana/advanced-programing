@@ -10,7 +10,7 @@ class SpriteCollection {
 private:
     vector <Sprite*> collection;
 public:
-    SpriteCollection():collection(collection){};
+    SpriteCollection(){};
     void addSprite(Sprite* sprite);
     void removeSprite(Sprite* sprite);
     void notifyAllTimePassed();

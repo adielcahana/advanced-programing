@@ -28,7 +28,7 @@ vector<Point*>* Map::getRoute(Point *start, Point *end){
         throw out_of_range("getRoute args are out of bounds!");
     }
 	//create max point availble in the grid, which has the highest hash value
-    Node* maxPoint= new Point(width, length);
+    Node* maxPoint = new Point(width, length);
 	//send max point to bfs, in order to allocate a large enough hash table
 	Bfs bfs(maxPoint);
     delete maxPoint;
@@ -43,7 +43,7 @@ bool Map::isInMap(Point *p){
     int x = p->getX();
     int y = p->getY();
 	//verify that x and y are between valid values of the map
-    return x >= 0 && x < width && y >= 0 && y < length;
+    return (x >= 0 && x < width && y >= 0 && y < length);
 }
 /******************************************************************************
 * The Function Operation: deserialize a Map object from text width_length
