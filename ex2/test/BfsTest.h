@@ -6,8 +6,8 @@
 #define EX2_BFSTEST_H
 
 #include <gtest/gtest.h>
-#include "../Bfs.h"
-#include "../Map.h"
+#include "../src/Bfs.h"
+#include "../src/Map.h"
 /******************************************************************************
 * BfsTest: Test class to test Bfs logic and private functions
 ******************************************************************************/

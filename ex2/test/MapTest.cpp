@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../Map.h"
+#include "../src/Map.h"
 using namespace std;
 //
 // Created by adi on 04/12/16.
@@ -107,6 +107,7 @@ TEST(MapTest, MapRouteTest){
         //test isInMap function
         outOfBound = new Point(width + 1, length + 1);
         EXPECT_THROW(map->getRoute(outOfBound,outOfBound), out_of_range);
+        delete map;
         delete outOfBound;
         //verify the route start at src
         temp = route->at(0);
@@ -126,9 +127,9 @@ TEST(MapTest, MapRouteTest){
         }
         route->clear();
         delete route;
-        delete map;
     }
 };
+
 /******************************************************************************
 * The Test Operation: create a random map and a point outside its boundry.
 * if exception is thrown from getRoute, then the Map boundries
@@ -152,5 +153,6 @@ TEST(MapTest, MapDeserializationTest){
         str[4] = asciiOfZero + length % 10 ;
         map = Map::deserialize(str);
         EXPECT_THROW(map->getRoute(p,p), out_of_range);
+        delete p;
     }
 };

@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "../Passenger.h"
-#include "../Driver.h"
+#include "../src/Passenger.h"
+#include "../src/Driver.h"
 /******************************************************************************
 * PassengerTest: source file that test the Passenger class.
 ******************************************************************************/

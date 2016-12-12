@@ -1,5 +1,5 @@
-#include "../SpriteCollection.h"
-#include "../TaxiCenter.h"
+#include "../src/SpriteCollection.h"
+#include "../src/TaxiCenter.h"
 #include "gtest/gtest.h"
 /******************************************************************************
 * PassengerTest: source file that test the SpriteCollection class.
@@ -40,28 +40,29 @@ TEST(SpriteCollectionTest, notifyAllTimePassedTest) {
     SpriteCollection sp;
     vector <Passenger> pass;
     Map *map = new Map(10, 10);
-    vector<Point *> route;
-    for (int i = 0; i < 2; i++) {
-        route.push_back(new Point(0, i));
-    }
-    Trip trip = Trip(1, Point(0, 0), Point(2, 2), 4, route, pass, 0);
+    Point* src = new Point(1,1);
+    Point* dest = new Point(9,9);
+    vector<Point *>* route = map->getRoute(src,dest);
+    Trip trip = Trip(1, *src, *dest, 4, *route, pass, 0);
     // create the driver and trip
     Taxi taxi = Taxi(1, HONDA, RED, 1, Point(0, 0));
-    Driver *driver = new Driver(5, 20, SINGLE, 5, taxi, Map(10, 10));
+    Driver *driver = new Driver(5, 20, SINGLE, 5, taxi, *map);
     driver->newTrip(trip);
     // add the driver to the spriteCollection
     sp.addSprite(driver);
-    EXPECT_EQ(driver->getLocation(), Point(0,0));
-    for (int i = 0; i < 2; i++) {
+    EXPECT_EQ(driver->getLocation(), Point(1,1));
+    for (int i = 0; i < route->size(); i++) {
         // check if the driver move when notify time passed
         EXPECT_FALSE(driver->isAvaliable());
         sp.notifyAllTimePassed();
         EXPECT_EQ(driver->getLocation(), Point(0,i));
     }
     EXPECT_TRUE(driver->isAvaliable());
-    for (int i = 0; i < 2; i++) {
-        delete route.at(i);
+    for (int i = 0; i < route->size(); i++) {
+        delete route->at(i);
     }
+    delete dest;
+    delete route;
     delete map;
     delete driver;
 }

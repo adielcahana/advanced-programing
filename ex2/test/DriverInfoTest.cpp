@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../DriverInfo.h"
+#include "../src/DriverInfo.h"
 /******************************************************************************
 * TripTest: source file that test the DriverInfo class.
 ******************************************************************************/

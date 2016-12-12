@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../Driver.h"
+#include "../src/Driver.h"
 /******************************************************************************
 * TripTest: source file that test the Trip class.
 ******************************************************************************/
@@ -37,7 +37,7 @@ TEST(Trip, setPriceTest){
     float price;
     Trip trip = Trip(1, Point(0, 0), Point(5, 5), 4, route, pass, 0);
     for(int i = 0; i < 10; i++) {
-        price = (rand() / RAND_MAX) + (rand() % 100);
+        price = (rand() / RAND_MAX);
         trip.setPrice(price);
         EXPECT_FLOAT_EQ(trip.getPrice(), price);
     }

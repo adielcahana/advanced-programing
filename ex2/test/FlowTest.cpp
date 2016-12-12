@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "../Flow.h"
-#include "../DriverInfo.h"
+#include "../src/Flow.h"
+#include "../src/DriverInfo.h"
 /******************************************************************************
 * PassengerTest: source file that test the Flow class.
 ******************************************************************************/

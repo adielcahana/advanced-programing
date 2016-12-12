@@ -46,7 +46,6 @@ TEST_F(BfsTest, ShortestRouteTest){
         delete shortestRoute->at(i);
         delete route->at(i);
     }
-    delete src;
     delete dest;
     delete route;
 
@@ -65,7 +64,6 @@ TEST_F(BfsTest, ShortestRouteTest){
         delete shortestRoute->at(i);
         delete route->at(i);
     }
-    delete src;
     delete dest;
     delete route;
 
@@ -84,7 +82,6 @@ TEST_F(BfsTest, ShortestRouteTest){
         delete shortestRoute->at(i);
         delete route->at(i);
     }
-    delete src;
     delete dest;
     delete route;
 
@@ -103,7 +100,6 @@ TEST_F(BfsTest, ShortestRouteTest){
         delete shortestRoute->at(i);
         delete route->at(i);
     }
-    delete src;
     delete dest;
     delete route;
     delete cmp;

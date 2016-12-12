@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../Driver.h"
+#include "../src/Driver.h"
 
 /******************************************************************************
 * TripTest: source file that test the Driver class.
@@ -137,11 +137,10 @@ TEST(Driver, moveOneStepTest) {
     // move after the trip over
     EXPECT_TRUE(driver.isAvaliable());
     EXPECT_THROW(driver.moveOneStep(), exception);
-    for(int i = 0; i < 19; i++){
+    for(int i = 0; i < route->size(); i++){
         delete route->at(i);
     }
     delete map;
-    delete src;
     delete dest;
     route->clear();
     delete route;
@@ -164,15 +163,15 @@ TEST(Driver, getSatisfacation){
     Point *dest = new Point(0,1);
     route = map->getRoute(src, dest);
     Trip trip = Trip(1, Point(0, 0), Point(0, 1), 1, *route, pass, 0);
-    Driver driver = Driver(5, 25, SINGLE, 5, taxi, *Map(10, 10));
+    Driver driver = Driver(5, 25, SINGLE, 5, taxi, *map);
     // finish the trip
     driver.moveOneStep();
     // check the satisfacatin
     EXPECT_EQ(driver.getSatisfacation(), passenger.satisfacation());
-    delete route->at(0);
-    delete route->at(1);
+    for(int i = 0; i < route->size(); i++){
+        delete route->at(i);
+    }
     delete map;
-    delete src;
     delete dest;
     route->clear();
     delete route;

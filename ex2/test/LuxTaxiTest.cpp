@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../LuxTaxi.h"
+#include "../src/LuxTaxi.h"
 /******************************************************************************
 * PassengerTest: source file that test the LuxTaxi class.
 ******************************************************************************/

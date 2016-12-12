@@ -6,7 +6,7 @@
 #define EX2_POINTTEST_H
 
 #include <gtest/gtest.h>
-#include "../Map.h"
+#include "../src/Map.h"
 /******************************************************************************
 * The Function Operation: allocte random point and test its getters
 ******************************************************************************/
@@ -25,27 +25,28 @@ TEST(PointTest, getterTest){
 * The Function Operation: test the output of point hash function
 ******************************************************************************/
 TEST(PointTest, hashTest){
-    Point arr[10];
-    arr[0] = Point(83,86);
-    arr[1] = Point(77,15);
-    arr[2] = Point(93,35);
-    arr[3] = Point(86,92);
-    arr[4] = Point(49,21);
-    arr[5] = Point(62,27);
-    arr[6] = Point(90,59);
-    arr[7] = Point(63,26);
-    arr[8] = Point(40,26);
-    arr[9] = Point(72,36);
-    EXPECT_EQ(arr[0].hash(), 14448);
-    EXPECT_EQ(arr[1].hash(), 4355);
-    EXPECT_EQ(arr[2].hash(), 8349);
-    EXPECT_EQ(arr[3].hash(), 16017);
-    EXPECT_EQ(arr[4].hash(), 2534);
-    EXPECT_EQ(arr[5].hash(), 4067);
-    EXPECT_EQ(arr[6].hash(), 11265);
-    EXPECT_EQ(arr[7].hash(), 4068);
-    EXPECT_EQ(arr[8].hash(), 2251);
-    EXPECT_EQ(arr[9].hash(), 5958);
+    Point p0 = Point(72,36);
+    Point p1 = Point(83,86);
+    Point p2 = Point(77,15);
+    Point p3 = Point(93,35);
+    Point p4 = Point(86,92);
+    Point p5 = Point(49,21);
+    Point p6 = Point(62,27);
+    Point p7 = Point(90,59);
+    Point p8 = Point(63,26);
+    Point p9 = Point(40,26);
+
+    EXPECT_EQ(p0.hash(), 5958);
+    EXPECT_EQ(p1.hash(), 14448);
+    EXPECT_EQ(p2.hash(), 4355);
+    EXPECT_EQ(p3.hash(), 8349);
+    EXPECT_EQ(p4.hash(), 16017);
+    EXPECT_EQ(p5.hash(), 2534);
+    EXPECT_EQ(p6.hash(), 4067);
+    EXPECT_EQ(p7.hash(), 11265);
+    EXPECT_EQ(p8.hash(), 4068);
+    EXPECT_EQ(p9.hash(), 2251);
+
 }
 /******************************************************************************
 * The Function Operation: test the equal and not equal operator
