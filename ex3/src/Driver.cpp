@@ -1,34 +1,62 @@
-
 #include "Driver.h"
 
-void Driver::calcAvg(int average){}
+void Driver::calcAvg(){
+    int avrage = (avgSatisfaction * passCount) + trip->sumOfSatisfaction();
+    addPassCount(trip->getNumPassengers());
+    avgSatisfaction = avrage / passCount;
+}
 
-void Driver::addPassCount(int passengers){}
+void Driver::addPassCount(int passengers){
+    passCount += this->trip->getNumPassengers();
+}
 
-void Driver::setTaxi(Taxi taxi){}
+void Driver::setAge(int age){
+    this->age = age;
+}
 
-void Driver::setAge(int age){}
-
-void Driver::setStatus(Status status){}
+void Driver::setStatus(Status status){
+    this->maritalStat = status;
+}
 
 Status Driver::getStatus(){
-    return SINGLE;
+    return maritalStat;
 }
 
-void Driver::setExp(int exp){}
+void Driver::setExp(int exp){
+    this->exp = exp;
+}
 
-void Driver::newTrip(Trip trip){}
+void Driver::newTrip(Trip* trip){
+    this->trip = trip;
+}
 
-void Driver::timePassed(){}
+void Driver::timePassed(){
+    if(this->isAvaliable()){
+        return;
+    }
+    moveOneStep();
+}
 
 float Driver::getSatisfacation(){
-    return 0;
+    return this->avgSatisfaction;
+}
+//todo fix
+void Driver::moveOneStep(){
+    Point* nextPoint = this->trip->getNextPoint();
+    if(nextPoint == NULL){
+        this->calcAvg();
+        delete trip;
+        this->trip = NULL;
+        delete nextPoint;
+        return;
+    }
+    this->location = nextPoint;
+    this->getTaxi()->moveOneStep(nextPoint);
+    delete nextPoint;
 }
 
-void Driver::moveOneStep(){}
-
-Point Driver::getLocation(){
-    Point(0,0);
+Point* Driver::getLocation(){
+    return this->location;
 }
 
 float Driver::getPayment(){
@@ -36,13 +64,21 @@ float Driver::getPayment(){
 }
 
 bool Driver::isAvaliable(){
-    return true;
+    return (this->trip == NULL);
 }
 
 int Driver::getAge() {
-    return 0;
+    this->age;
 }
 
-Taxi Driver::getTaxi() {
+int Driver::getTaxiId(){
+    return this->taxiId;
+}
+
+Taxi* Driver::getTaxi() {
     return this->taxi;
+}
+
+void Driver::setTaxi(Taxi* taxi){
+    this->taxi = taxi;
 }

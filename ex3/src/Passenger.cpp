@@ -5,5 +5,6 @@
 #include "Passenger.h"
 
 int Passenger::satisfacation(){
-    return 0;
+    srand (time(NULL));
+    return rand() % 5 + 1;
 }

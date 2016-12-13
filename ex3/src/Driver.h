@@ -7,32 +7,36 @@
 
 enum Status {SINGLE, MARRIED, DIVORCED, WIDOWED};
 
-class Driver: public Sprite {
+class Driver{
 private:
     int id;
     int age;
     Status maritalStat;
     int exp;
+    Taxi* taxi;
+    int taxiId;
+    Trip* trip;
     float avgSatisfaction;
     int passCount;
-    Taxi taxi;
-    Map map;
-    Trip* trip;
-    void calcAvg(int average);
+    Point* location;
+
+    void calcAvg();
     void addPassCount(int passengers);
-    void setTaxi(Taxi taxi);
 public:
-    Driver(int id, int age, Status status, int exp, Taxi taxi, Map map):
-            id(id), age(0),maritalStat(status), exp(exp), taxi(taxi), map(map), trip(NULL){};
+    Driver(int id, int age, Status status, int exp, int taxiId):
+            id(id), age(0),maritalStat(status), exp(exp), taxi(taxi),
+            trip(NULL), location(new Point(0,0)){};
     void setAge(int age);
-    Point getLocation();
+    Point* getLocation();
     float getSatisfacation();
     int getAge();
-    Taxi getTaxi();
+    void setTaxi(Taxi* taxi);
+    int getTaxiId();
+    Taxi* getTaxi();
     void setStatus(Status status);
     Status getStatus();
     void setExp(int exp);
-    void newTrip(Trip trip);
+    void newTrip(Trip* trip);
     void timePassed();
     void moveOneStep();
     float getPayment();

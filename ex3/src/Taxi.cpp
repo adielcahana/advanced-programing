@@ -1,24 +1,35 @@
 
 #include "Taxi.h"
 
-void Taxi::addKm(float km){}
-
-void Taxi::setTariff(float tariff){}
-
-float Taxi::getTariff(){
-    return 0;
+int Taxi::getId(){
+    this->id;
 }
 
-void Taxi::moveOneStep(Point next){}
+void Taxi::addKm(float km){
+    this->totalKm += km;
+}
 
-void Taxi::updateLocation(Point location){}
+void Taxi::setTariff(float tariff){
+    this->tariff = tariff;
+}
 
-Point Taxi::getLocation(){
-    return Point(0,0);
+float Taxi::getTariff(){
+    return this->tariff;
+}
+//todo
+void Taxi::moveOneStep(Point* next){}
+
+void Taxi::updateLocation(Point* location){
+    delete this->location;
+    this->location = location;
+}
+
+Point* Taxi::getLocation(){
+    return this->location;
 }
 
 float Taxi::getKm(){
-    return 0;
+    return this->totalKm;
 }
 
 bool Taxi::operator==(const Taxi &rhs) const {

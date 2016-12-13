@@ -1,7 +1,3 @@
-//
-// Created by ori on 28/11/16.
-//
-
 #ifndef ASS2_LUXTAXI_H
 #define ASS2_LUXTAXI_H
 
@@ -9,9 +5,10 @@
 
 class LuxTaxi: public Taxi {
 public:
-    LuxTaxi(int id, Type type, Color color, float tariff, Point location): Taxi(id,type,color,tariff,location){}
+    LuxTaxi(int id, Manufacturer type, Color color, float tariff, Point location):
+            Taxi(id,type,color,location){}
     void setTariff(float tariff);
-    void moveOneStep(Point location);
+    void moveOneStep();
 };
 
 

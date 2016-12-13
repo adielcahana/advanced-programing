@@ -1,31 +1,54 @@
 #include "TaxiCenter.h"
 
-DriverInfo TaxiCenter::findClosestDriver(){
-    vector <Point*> route;
-    vector <Passenger> pass;
-    Trip trip = Trip(5, Point(0, 0), Point(1, 1), 3, route, pass, 0);
-    Taxi taxi = Taxi(1, HONDA, RED, 1, Point(0,0));
-    Driver driver = Driver(5, 20, SINGLE, 5, taxi, Map(10,10));
-    DriverInfo driverInfo = DriverInfo(driver, taxi, Point(0,0), trip);
-    return driverInfo;
+TaxiCenter::TaxiCenter(Map* map) {
+    this->map = map;
 }
 
-void TaxiCenter::answerCalls(){}
+//Driver TaxiCenter::findClosestDriver(Point point){}
 
-void TaxiCenter::notifyNewTrip(Trip trip){}
-
-Trip TaxiCenter::createNewTrip(){
-    vector <Point*> route;
-    vector <Passenger> pass;
-    Trip trip = Trip(5, Point(0, 0), Point(1, 1), 3, route, pass, 0);
-    return trip;
+Driver* TaxiCenter::addDriver(Driver* driver){
+    this->drivers->push_back(driver);
 }
 
-void TaxiCenter::start(){}
+Taxi* TaxiCenter::addAvaliableTaxi(Taxi *taxi){
+    this->avaliableCabs->push_back(taxi);
+}
 
+void TaxiCenter::searchTaxiById(Driver* driver){
+    for(int i = 0; i < this->avaliableCabs->size(); i++){
+        if(this->avaliableCabs->at(i)->getId() == driver->getTaxiId()){
+            Taxi* taxi = new Taxi(*this->avaliableCabs->at(i));
+            delete this->avaliableCabs->at(i);
+            this->avaliableCabs->erase(this->avaliableCabs->begin() + 1);
+            driver->setTaxi(this->avaliableCabs->at(i));
+            return;
+        }
+    }
+}
+
+void TaxiCenter::notifyNewTrip(Trip* trip){
+    Driver *driver = NULL;
+    for(int i = 0; i < this->drivers->size(); i++){
+        driver = this->drivers->at(i);
+        if(trip->start == *driver->getLocation());
+    }
+}
+
+void TaxiCenter::addTrip(Trip* trip){
+    trip->route = map->getRoute(new Point(trip->start), new Point(trip->end));
+    notifyNewTrip(trip);
+}
+
+//todo
 void TaxiCenter::timePassed(){}
 
-TaxiCenter::TaxiCenter(Map* map, vector<DriverInfo> employees) {
-    this->map = map;
-    this->employees = employees;
+bool TaxiCenter::shouldStop(){
+    Driver *driver = NULL;
+    for(int i = 0; i < this->drivers->size(); i++){
+        driver = this->drivers->at(i);
+        if(!driver->isAvaliable()) {
+            return false;
+        }
+    }
+    return true;
 }

@@ -4,18 +4,22 @@
 #include "DriverInfo.h"
 #include "Trip.h"
 
-class TaxiCenter: public Sprite {
+class TaxiCenter{
 private:
-    vector <DriverInfo> employees;
+    vector <Driver*>* drivers;
+    vector <Taxi*>* avaliableCabs;
     Map* map;
-    DriverInfo findClosestDriver();
-    void answerCalls();
-    void notifyNewTrip(Trip trip);
-    Trip createNewTrip();
+    //Driver findClosestDriver(Point point);
+    void notifyNewTrip(Trip* trip);
+    void addTrip(Trip* trip);
 public:
-    TaxiCenter(Map* map, vector <DriverInfo> employees);
-    void start();
+    TaxiCenter(Map* map);
+    Driver* addDriver(Driver* driver);
+    Taxi* addAvaliableTaxi(Taxi *taxi);
+    void searchTaxiById(Driver* driver);
     void timePassed();
+    Point getLocation(int id);
+    bool shouldStop();
 };
 
 
