@@ -17,7 +17,9 @@ private:
     vector <Passenger*>* passengers;
     void addMeter();
 public:
-    Trip(int id, Point start, Point end, int numOfPass, float price);
+    Trip(int id, Point start, Point end, int numOfPass, float price):
+        id(id), start(start), end(end), numOfPass(numOfPass), price(price),
+        totalMeterPassed(0){};
     Point* getNextPoint();
     void setPrice(float price);
     float getPrice();

@@ -69,4 +69,5 @@ Point TaxiCenter::getLocation(int id){
             return point;
         }
     }
+    return point;
 }

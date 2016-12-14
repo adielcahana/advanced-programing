@@ -8,7 +8,7 @@ enum Manufacturer {HONDA, SUBARO, TESLA, FIAT};
 enum Color {RED, BLUE, GREEN, PINK, WHITE};
 
 class Taxi{
-private:
+protected:
     int id;
     float totalKm;
     Manufacturer manufacturer;
@@ -19,8 +19,8 @@ private:
     void addKm(float km);
 public:
     Taxi(int id, Manufacturer type, Color color):
-            id(id), manufacturer(type), color(color){};
-    Taxi(Taxi other);
+            id(id), manufacturer(type), color(color), tariff(1), velocity(1){};
+    Taxi(Taxi &other);
     int getId();
     virtual void setTariff(float tariff);
     float getKm();

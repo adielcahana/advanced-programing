@@ -42,11 +42,11 @@ float Driver::getSatisfacation(){
 }
 
 //todo fix
-void Driver::moveOneStep(){
-    Point* nextPoint = NULL;
-    for(int i = 0; i < this->getTaxi()->getTariff(); i++){
+void Driver::moveOneStep() {
+    Point *nextPoint = NULL;
+    for (int i = 0; i < this->getTaxi()->getTariff(); i++) {
         nextPoint = this->trip->getNextPoint();
-        if(nextPoint == NULL){
+        if (nextPoint == NULL) {
             this->calcAvg();
             delete trip;
             this->trip = NULL;
@@ -56,7 +56,6 @@ void Driver::moveOneStep(){
         this->location = nextPoint;
         this->getTaxi()->moveOneStep(nextPoint);
         delete nextPoint;
-        }
     }
 }
 

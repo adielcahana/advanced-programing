@@ -4,11 +4,12 @@
 #include "Driver.h"
 
 class LuxTaxi: public Taxi {
+private:
+    float tariff;
+    int velocity;
 public:
     LuxTaxi(int id, Manufacturer type, Color color):
-            Taxi(id,type,color){}
-
-    void moveOneStep(Point* point);
+            Taxi(id, type, color), tariff(2), velocity(2){};
 };
 
 

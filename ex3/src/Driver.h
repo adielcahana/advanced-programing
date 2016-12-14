@@ -1,7 +1,6 @@
 #ifndef ASS2_DRIVER_H
 #define ASS2_DRIVER_H
 
-#include "Sprite.h"
 #include "Taxi.h"
 #include "Trip.h"
 
@@ -24,7 +23,7 @@ private:
     void addPassCount(int passengers);
 public:
     Driver(int id, int age, Status status, int exp, int taxiId):
-            id(id), age(0),maritalStat(status), exp(exp), taxi(taxi),
+            id(id), age(age),maritalStat(status), exp(exp), taxiId(taxiId),
             trip(NULL), location(new Point(0,0)){};
     void setAge(int age);
     Point* getLocation();

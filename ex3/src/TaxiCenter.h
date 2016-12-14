@@ -13,7 +13,7 @@ private:
     void notifyNewTrip(Trip* trip);
     void addTrip(Trip* trip);
 public:
-    TaxiCenter(Map* map);
+    TaxiCenter(Map* map): drivers(NULL), avaliableCabs(NULL), map(map){};
     Driver* addDriver(Driver* driver);
     Taxi* addAvaliableTaxi(Taxi *taxi);
     void searchTaxiById(Driver* driver);

@@ -21,7 +21,7 @@ class Point: public Node{
 		int y;
 	public:
 		Point(int x, int y): x(x), y(y) {};
-		Point(Point p);
+		Point(Point &p);
 	    int getX();
 		int getY();
 		int hash();
