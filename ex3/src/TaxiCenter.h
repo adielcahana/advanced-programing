@@ -11,12 +11,12 @@ private:
     Map* map;
     //Driver findClosestDriver(Point point);
     void notifyNewTrip(Trip* trip);
-    void addTrip(Trip* trip);
 public:
     TaxiCenter(Map* map): drivers(NULL), avaliableCabs(NULL), map(map){};
     Driver* addDriver(Driver* driver);
     Taxi* addAvaliableTaxi(Taxi *taxi);
     void searchTaxiById(Driver* driver);
+    void addTrip(Trip* trip);
     void timePassed();
     Point getLocation(int id);
     bool shouldStop();

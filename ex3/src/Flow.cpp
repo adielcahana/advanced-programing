@@ -25,11 +25,11 @@ void Flow::initilize(){
                 center->addTrip(parser.readTrip());
                 break;
             case 3:
-                center->addTaxi(parser.readTaxi());
+                center->addAvaliableTaxi(parser.readTaxi());
                 break;
             case 4:
                 cin >> id;
-                Point p = center->getLocation(parser.readTaxi(id));
+                Point p = center->getLocation(id);
                 cout << p << endl;
                 break;
             case 6:
