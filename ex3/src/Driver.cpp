@@ -40,19 +40,24 @@ void Driver::timePassed(){
 float Driver::getSatisfacation(){
     return this->avgSatisfaction;
 }
+
 //todo fix
 void Driver::moveOneStep(){
-    Point* nextPoint = this->trip->getNextPoint();
-    if(nextPoint == NULL){
-        this->calcAvg();
-        delete trip;
-        this->trip = NULL;
+    Point* nextPoint = NULL;
+    for(int i = 0; i < this->getTaxi()->getTariff(); i++){
+        nextPoint = this->trip->getNextPoint();
+        if(nextPoint == NULL){
+            this->calcAvg();
+            delete trip;
+            this->trip = NULL;
+            delete nextPoint;
+            return;
+        }
+        this->location = nextPoint;
+        this->getTaxi()->moveOneStep(nextPoint);
         delete nextPoint;
-        return;
+        }
     }
-    this->location = nextPoint;
-    this->getTaxi()->moveOneStep(nextPoint);
-    delete nextPoint;
 }
 
 Point* Driver::getLocation(){

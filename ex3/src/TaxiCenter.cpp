@@ -30,7 +30,10 @@ void TaxiCenter::notifyNewTrip(Trip* trip){
     Driver *driver = NULL;
     for(int i = 0; i < this->drivers->size(); i++){
         driver = this->drivers->at(i);
-        if(trip->start == *driver->getLocation());
+        if(trip->start == *driver->getLocation()){
+            driver->newTrip(trip);
+            return;
+        }
     }
 }
 
@@ -39,8 +42,11 @@ void TaxiCenter::addTrip(Trip* trip){
     notifyNewTrip(trip);
 }
 
-//todo
-void TaxiCenter::timePassed(){}
+void TaxiCenter::timePassed(){
+    for(int i = 0; i < drivers->size(); i++){
+        drivers->at(i)->timePassed();
+    }
+}
 
 bool TaxiCenter::shouldStop(){
     Driver *driver = NULL;
@@ -51,4 +57,16 @@ bool TaxiCenter::shouldStop(){
         }
     }
     return true;
+}
+
+Point TaxiCenter::getLocation(int id){
+    Point point = Point(0,0);
+    Driver *driver = NULL;
+    for(int i = 0; i < this->drivers->size(); i++){
+        driver = this->drivers->at(i);
+        if(driver->getTaxiId() == id){
+            point = *driver->getLocation();
+            return point;
+        }
+    }
 }

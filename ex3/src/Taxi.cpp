@@ -1,4 +1,3 @@
-
 #include "Taxi.h"
 
 int Taxi::getId(){
@@ -17,7 +16,10 @@ float Taxi::getTariff(){
     return this->tariff;
 }
 //todo
-void Taxi::moveOneStep(Point* next){}
+void Taxi::moveOneStep(Point* point){
+    this->updateLocation(point);
+    this->addKm(0.001);
+}
 
 void Taxi::updateLocation(Point* location){
     delete this->location;

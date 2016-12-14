@@ -1,9 +1,4 @@
-//
-// Created by adi on 12/12/16.
-//
-
 #include "Parser.h"
-#include "LuxTaxi.h"
 
 Map* Parser::readMap(){
     getline(cin, buffer);

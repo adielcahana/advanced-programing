@@ -2,6 +2,7 @@
 #define ASS2_TAXI_H
 
 #include "Map.h"
+#include "Trip.h"
 
 enum Manufacturer {HONDA, SUBARO, TESLA, FIAT};
 enum Color {RED, BLUE, GREEN, PINK, WHITE};
@@ -17,14 +18,14 @@ private:
     int velocity;
     void addKm(float km);
 public:
-    Taxi(int id, Manufacturer type, Color color, Point location):
-            id(id), manufacturer(type), color(color), location(location){};
+    Taxi(int id, Manufacturer type, Color color):
+            id(id), manufacturer(type), color(color){};
     Taxi(Taxi other);
     int getId();
     virtual void setTariff(float tariff);
     float getKm();
     float getTariff();
-    virtual void moveOneStep(Point* next);
+    virtual void moveOneStep(Point* point);
     void updateLocation(Point* location);
     Point* getLocation();
     bool operator==(const Taxi &rhs) const;

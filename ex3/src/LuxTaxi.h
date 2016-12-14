@@ -1,14 +1,14 @@
 #ifndef ASS2_LUXTAXI_H
 #define ASS2_LUXTAXI_H
 
-#include "Taxi.h"
+#include "Driver.h"
 
 class LuxTaxi: public Taxi {
 public:
-    LuxTaxi(int id, Manufacturer type, Color color, float tariff, Point location):
-            Taxi(id,type,color,location){}
-    void setTariff(float tariff);
-    void moveOneStep();
+    LuxTaxi(int id, Manufacturer type, Color color):
+            Taxi(id,type,color){}
+
+    void moveOneStep(Point* point);
 };
 
 

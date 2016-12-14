@@ -12,7 +12,7 @@ Flow::Flow(){
 void Flow::initilize(){
     int option;
     char dummy;
-    bool shouldStop = False;
+    bool shouldStop = false;
     int id;
     while(!shouldStop){
         cin >> option;

@@ -4,6 +4,7 @@
 
 #include "LuxTaxi.h"
 
-void LuxTaxi::setTariff(float tariff){}
-//todo
-void LuxTaxi::moveOneStep(){}
+//todo caculate km
+void LuxTaxi::moveOneStep(Point* point) {
+    this->updateLocation(point);
+}
