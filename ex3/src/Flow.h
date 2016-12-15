@@ -14,6 +14,7 @@ private:
     TaxiCenter* center;
 public:
     Flow();
+    ~Flow();
     void initialize();
     void run();
 };

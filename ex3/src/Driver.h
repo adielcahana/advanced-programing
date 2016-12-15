@@ -35,10 +35,11 @@ public:
     void newTrip(Trip* trip);
     void timePassed();
     void moveOneStep();
-    bool isAvaliable();
+//    bool isAvaliable();
     void addAvaliableListener(AvaliableListener* hl);
     void removeAvaliableListener(AvaliableListener* hl);
     void notifyAvaliable();
+    void notifyUnavaliable();
 };
 
 #endif //ASS2_DRIVER_H

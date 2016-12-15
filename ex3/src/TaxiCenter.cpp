@@ -3,15 +3,22 @@
 //Driver TaxiCenter::findClosestDriver(Point point){}
 TaxiCenter::TaxiCenter(Map* map){
     drivers = new vector <Driver*>;
+    avaliableDrivers = new vector <Driver*>;
     avaliableCabs = new vector <Taxi*>();
+    avaliableDriversListener = new NoTripListener(avaliableDrivers);
     this->map = map;
 }
 
 TaxiCenter::~TaxiCenter() {
-    drivers->clear();
+    for(int i = 0; i < drivers->size(); i++){
+        delete drivers->at(i)->getTaxi();
+        delete drivers->at(i);
+    }
     delete drivers;
+    delete avaliableDrivers;
     avaliableCabs->clear();
     delete avaliableCabs;
+    delete avaliableDriversListener;
     delete map;
 }
 
@@ -19,6 +26,8 @@ void TaxiCenter::addDriver(Driver *driver){
     this->drivers->push_back(driver);
     Taxi* taxi = searchTaxiById(driver->getTaxiId());
     driver->setTaxi(taxi);
+    driver->addAvaliableListener(avaliableDriversListener);
+    avaliableDrivers->push_back(driver);
 }
 
 void TaxiCenter::addAvaliableTaxi(Taxi *taxi){
@@ -30,7 +39,7 @@ Taxi* TaxiCenter::searchTaxiById(int id){
     for(int i = 0; i < this->avaliableCabs->size(); i++){
         taxi = this->avaliableCabs->at(i);
         if(taxi->getId() == id){
-            taxi = new Taxi(*this->avaliableCabs->at(i));
+            taxi = this->avaliableCabs->at(i);
             this->avaliableCabs->erase(this->avaliableCabs->begin() + i);
             return taxi;
         }
@@ -40,18 +49,25 @@ Taxi* TaxiCenter::searchTaxiById(int id){
 
 void TaxiCenter::notifyNewTrip(Trip* trip){
     Driver *driver = NULL;
+    Point* location = NULL;
     for(int i = 0; i < this->drivers->size(); i++){
         driver = this->drivers->at(i);
-        if(trip->start == *driver->getLocation()){
+        location = driver->getLocation();
+        if(trip->start == *location){
             driver->newTrip(trip);
+            delete location;
             return;
         }
+        delete location;
     }
 }
 
 void TaxiCenter::addTrip(Trip* trip){
-    trip->route = map->getRoute(new Point(trip->start), new Point(trip->end));
+    Point* start = new Point(trip->start);
+    Point* end = new Point(trip->end);
+    trip->route = map->getRoute(start, end);
     notifyNewTrip(trip);
+    delete end;
 }
 
 void TaxiCenter::timePassed(){
@@ -61,14 +77,7 @@ void TaxiCenter::timePassed(){
 }
 
 bool TaxiCenter::shouldStop(){
-    Driver *driver = NULL;
-    for(int i = 0; i < this->drivers->size(); i++){
-        driver = this->drivers->at(i);
-        if(!driver->isAvaliable()) {
-            return false;
-        }
-    }
-    return true;
+    return (avaliableDrivers->size() == drivers->size());
 }
 
 Point * TaxiCenter::getLocation(int id){

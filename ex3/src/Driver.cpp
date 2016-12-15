@@ -10,7 +10,7 @@ Driver::~Driver(){
     if (trip != NULL) {
         delete trip;
     }
-    if (trip != NULL) {
+    if (location != NULL) {
         delete location;
     }
 }
@@ -19,13 +19,13 @@ void Driver::addPassCount(int passengers){
     passCount += this->trip->getNumPassengers();
 }
 
-
 void Driver::newTrip(Trip* trip){
+    notifyUnavaliable();
     this->trip = trip;
 }
 
 void Driver::timePassed(){
-    if(this->isAvaliable()){
+    if(trip == NULL){
         return;
     }
     moveOneStep();
@@ -33,15 +33,17 @@ void Driver::timePassed(){
 
 void Driver::moveOneStep() {
     Point *nextPoint = NULL;
-    for (int i = 0; i < this->getTaxi()->getTariff(); i++) {
+    for (int i = 0; i < this->getTaxi()->getVelocity(); i++) {
         nextPoint = this->trip->getNextPoint();
         if (nextPoint == NULL) {
             this->calcAvg();
             delete trip;
             this->trip = NULL;
+            notifyAvaliable();
             delete nextPoint;
             return;
         }
+        delete this->location;
         this->location = nextPoint;
         this->getTaxi()->moveOneStep(nextPoint);
     }
@@ -49,10 +51,6 @@ void Driver::moveOneStep() {
 
 Point * Driver::getLocation(){
     return new Point(*this->location);
-}
-
-bool Driver::isAvaliable(){
-    return (this->trip == NULL);
 }
 
 int Driver::getTaxiId(){
@@ -74,6 +72,7 @@ int Driver::getId() {
 void Driver::addAvaliableListener(AvaliableListener* al){
     this->avaliableListeners.push_back(al);
 }
+
 void Driver::removeAvaliableListener(AvaliableListener* al){
     for(int i = 0; i< avaliableListeners.size(); i++){
         if(avaliableListeners.at(i) == al){
@@ -81,10 +80,16 @@ void Driver::removeAvaliableListener(AvaliableListener* al){
             avaliableListeners.erase(avaliableListeners.begin() + i);
         }
     }
-};
+}
 
 void Driver::notifyAvaliable(){
     for(int i = 0; i< avaliableListeners.size(); i++){
         avaliableListeners[i]->avaliableEvent(this);
     }
-};
+}
+
+void Driver::notifyUnavaliable(){
+    for(int i = 0; i< avaliableListeners.size(); i++){
+        avaliableListeners[i]->unavaliableEvent(this);
+    }
+}

@@ -12,8 +12,8 @@ Trip::~Trip() {
         for (int i = 0; i < route->size(); i++){
             delete route->at(i);
         }
-        route->clear();
     }
+    delete route;
     for(int j = 0; j < passengers.size(); j++){
         delete passengers.at(j);
     }
@@ -25,21 +25,16 @@ void Trip::addMeter(){
 }
 
 Point* Trip::getNextPoint(){
-    Point* nextPoint = this->route->front();
-    if (nextPoint != NULL){
+    if (route->size() != 0) {
+        Point* nextPoint = this->route->front();
         //safe copy
         nextPoint = new Point(*nextPoint);
         this->addMeter();
-        if (route->size() != 0) {
-            this->route->erase(route->begin());
-            return nextPoint;
-        }
-        if (route->size() == 0) {
-            this->route->clear();
-            nextPoint = NULL;
-        }
+        delete route->front();
+        this->route->erase(route->begin());
+        return nextPoint;
     }
-    return nextPoint;
+    return NULL;
 }
 
 double Trip::getPrice() {

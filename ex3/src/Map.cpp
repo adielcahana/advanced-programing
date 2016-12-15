@@ -9,6 +9,7 @@ Map::Map(int width, int length, vector<Point*>* obstacles){
     if (obstacles != NULL) {
         for (int i = 0; i < obstacles->size(); i++) {
             this->obstacles[obstacles->at(i)->hash()] = 1;
+            delete obstacles->at(i);
         }
         obstacles->clear();
         delete obstacles;
@@ -29,21 +30,37 @@ queue<Node*>* Map::getAdjacent(const Node *point) {
 	int y = ((Point*) point)->getY();
 	//verify which are Point's neighbors, check if there is obstacle in their place
     //and add them to adjacents
-    temp = new Point(x - 1, y);
-    if ((x - 1 >= 0) && obstacles.at((unsigned int) temp->hash()) != 1) {
-        adjacents->push(temp);
+    if (x - 1 >= 0) {
+        temp = new Point(x - 1, y);
+        if (obstacles.at((unsigned int) temp->hash()) != 1) {
+            adjacents->push(temp);
+        } else {
+            delete temp;
+        }
     }
-    temp = new Point(x , y + 1);
-    if ((y + 1 < length) && obstacles.at((unsigned int) temp->hash()) != 1) {
-        adjacents->push(temp);
+    if (y + 1 < length) {
+        temp = new Point(x , y + 1);
+        if (obstacles.at((unsigned int) temp->hash()) != 1){
+            adjacents->push(temp);
+        } else {
+            delete temp;
+        }
     }
-    temp = new Point(x + 1, y);
-    if ((x + 1 < width) && obstacles.at((unsigned int) temp->hash()) != 1) {
-        adjacents->push(temp);
+    if (x + 1 < width) {
+        temp = new Point(x + 1, y);
+        if(obstacles.at((unsigned int) temp->hash()) != 1){
+            adjacents->push(temp);
+        } else {
+            delete temp;
+        }
     }
-    temp = new Point(x , y - 1);
-    if ((y - 1 >= 0) && obstacles.at((unsigned int) temp->hash()) != 1) {
-        adjacents->push(temp);
+    if (y - 1 >= 0) {
+        temp = new Point(x , y - 1);
+        if(obstacles.at((unsigned int) temp->hash()) != 1) {
+            adjacents->push(temp);
+        } else {
+        delete temp;
+        }
     }
 	return adjacents;
 }
