@@ -1,13 +1,15 @@
 #ifndef ASS2_TAXICENTER_H
 #define ASS2_TAXICENTER_H
 
-#include "Driver.h"
 #include "Trip.h"
+#include "NoTripListener.h"
 
 class TaxiCenter{
 private:
     vector <Driver*>* drivers;
+    vector <Driver*>* avaliableDrivers;
     vector <Taxi*>* avaliableCabs;
+    NoTripListener* avaliableDriverslistener;
     Map* map;
     //Driver findClosestDriver(Point point);
     void notifyNewTrip(Trip* trip);

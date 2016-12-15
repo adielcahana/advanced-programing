@@ -6,25 +6,19 @@ void Driver::calcAvg(){
     avgSatisfaction = avrage / passCount;
 }
 
+Driver::~Driver(){
+    if (trip != NULL) {
+        delete trip;
+    }
+    if (trip != NULL) {
+        delete location;
+    }
+}
+
 void Driver::addPassCount(int passengers){
     passCount += this->trip->getNumPassengers();
 }
 
-void Driver::setAge(int age){
-    this->age = age;
-}
-
-void Driver::setStatus(Status status){
-    this->maritalStat = status;
-}
-
-Status Driver::getStatus(){
-    return maritalStat;
-}
-
-void Driver::setExp(int exp){
-    this->exp = exp;
-}
 
 void Driver::newTrip(Trip* trip){
     this->trip = trip;
@@ -35,10 +29,6 @@ void Driver::timePassed(){
         return;
     }
     moveOneStep();
-}
-
-float Driver::getSatisfacation(){
-    return this->avgSatisfaction;
 }
 
 void Driver::moveOneStep() {
@@ -61,16 +51,8 @@ Point * Driver::getLocation(){
     return new Point(*this->location);
 }
 
-float Driver::getPayment(){
-    return 0;
-}
-
 bool Driver::isAvaliable(){
     return (this->trip == NULL);
-}
-
-int Driver::getAge() {
-    this->age;
 }
 
 int Driver::getTaxiId(){
@@ -88,3 +70,21 @@ void Driver::setTaxi(Taxi* taxi){
 int Driver::getId() {
     return this->id;
 }
+
+void Driver::addAvaliableListener(AvaliableListener* al){
+    this->avaliableListeners.push_back(al);
+}
+void Driver::removeAvaliableListener(AvaliableListener* al){
+    for(int i = 0; i< avaliableListeners.size(); i++){
+        if(avaliableListeners.at(i) == al){
+            avaliableListeners[i] = NULL;
+            avaliableListeners.erase(avaliableListeners.begin() + i);
+        }
+    }
+};
+
+void Driver::notifyAvaliable(){
+    for(int i = 0; i< avaliableListeners.size(); i++){
+        avaliableListeners[i]->avaliableEvent(this);
+    }
+};

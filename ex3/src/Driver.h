@@ -3,10 +3,11 @@
 
 #include "Taxi.h"
 #include "Trip.h"
+#include "AvaliableNotifier.h"
 
 enum Status {SINGLE, MARRIED, DIVORCED, WIDOWED};
 
-class Driver{
+class Driver: public AvaliableNotifier{
 private:
     int id;
     int age;
@@ -25,22 +26,19 @@ public:
     Driver(int id, int age, Status status, int exp, int taxiId):
             id(id), age(age),maritalStat(status), exp(exp), taxiId(taxiId),
             trip(NULL), location(new Point(0,0)){};
-    void setAge(int age);
+    ~Driver();
     int getId();
-    Point * getLocation();
-    float getSatisfacation();
-    int getAge();
+    Point* getLocation();
     void setTaxi(Taxi* taxi);
     int getTaxiId();
     Taxi* getTaxi();
-    void setStatus(Status status);
-    Status getStatus();
-    void setExp(int exp);
     void newTrip(Trip* trip);
     void timePassed();
     void moveOneStep();
-    float getPayment();
     bool isAvaliable();
+    void addAvaliableListener(AvaliableListener* hl);
+    void removeAvaliableListener(AvaliableListener* hl);
+    void notifyAvaliable();
 };
 
 #endif //ASS2_DRIVER_H
