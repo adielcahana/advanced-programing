@@ -29,6 +29,7 @@ TEST(Taxi, getLocationTest) {
         taxi->updateLocation(location);
         EXPECT_EQ(*location, *taxi->getLocation());
         delete location;
+        delete taxi;
     }
 }
 
@@ -44,6 +45,7 @@ TEST(Taxi, updateLocationTest) {
         ASSERT_EQ(*location, *taxi->getLocation());
         delete location;
     }
+    delete taxi;
 }
 
 /******************************************************************************

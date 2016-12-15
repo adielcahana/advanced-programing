@@ -10,10 +10,11 @@ TEST(TaxiCenter, addDriverTest){
     Driver* driver = new Driver(0, 40, SINGLE, 6, 0);
     TaxiCenter* taxiCenter = new TaxiCenter(map);
     taxiCenter->addDriver(driver);
-    EXPECT_EQ(Point(0,0), *taxiCenter->getLocation(0));
+    Point* point = taxiCenter->getLocation(0);
+    EXPECT_EQ(Point(0,0), *point);
+    delete point;
     delete taxiCenter;
 }
-
 
 TEST(TaxiCenter, searchTaxiByIdTest){
     Map* map = new Map(3,3);
@@ -22,6 +23,7 @@ TEST(TaxiCenter, searchTaxiByIdTest){
     Taxi* taxi = new Taxi(0, HONDA, RED);
     taxiCenter->addAvaliableTaxi(taxi);
     EXPECT_EQ(*taxi, *taxiCenter->searchTaxiById(0));
+    delete taxi;
     delete taxiCenter;
 }
 
@@ -31,6 +33,7 @@ TEST(TaxiCenter, addAvaliableTaxiTest){
     TaxiCenter* taxiCenter = new TaxiCenter(map);
     taxiCenter->addAvaliableTaxi(taxi);
     EXPECT_EQ(*taxi, *taxiCenter->searchTaxiById(0));
+    delete taxi;
     delete taxiCenter;
 }
 
@@ -46,7 +49,10 @@ TEST(TaxiCenter, addTripTest){
     Point end(2,2);
     Trip* trip = new Trip(0,start, end, 2, 1);
     taxiCenter->addTrip(trip);
-    EXPECT_TRUE(trip->getNextPoint() != NULL);
+    Point* point = trip->getNextPoint();
+    EXPECT_TRUE(point != NULL);
+    delete point;
+    delete taxiCenter;
 }
 
 TEST(TaxiCenter, getLocationByIdTest) {
@@ -54,7 +60,9 @@ TEST(TaxiCenter, getLocationByIdTest) {
     Driver* driver = new Driver(0, 40, SINGLE, 6, 0);
     TaxiCenter* taxiCenter = new TaxiCenter(map);
     taxiCenter->addDriver(driver);
-    EXPECT_EQ(Point(0,0), *taxiCenter->getLocation(0));
+    Point* point = taxiCenter->getLocation(0);
+    EXPECT_EQ(Point(0,0), *point);
+    delete point;
     delete taxiCenter;
 }
 
@@ -69,9 +77,12 @@ TEST(TaxiCenter, timePassedTest) {
     Point end(0, 2);
     Trip* trip = new Trip(0, start, end, 2, 1);
     taxiCenter->addTrip(trip);
+    Point* point = NULL;
     for (int i = 0; i < 2; i++) {
         taxiCenter->timePassed();
-        EXPECT_EQ(Point(0,i), *taxiCenter->getLocation(0));
+        point = taxiCenter->getLocation(0);
+        EXPECT_EQ(Point(0,i), *point);
+        delete point;
     }
     delete taxiCenter;
 }

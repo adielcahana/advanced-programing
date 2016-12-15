@@ -85,6 +85,7 @@ TEST(PointTest, PointDeserializationTest){
         str[4] = asciiOfZero + y % 10 ;
         p = Point::deserialize(str);
         EXPECT_EQ(*p, Point(x,y));
+        delete p;
     }
 }
 
@@ -103,6 +104,9 @@ TEST(PointTest, PointComparatorTest){
         //assgin the random coordinate as a string
         EXPECT_TRUE(cmp.equals((Node*) p1, (Node*) p2));
         EXPECT_FALSE(cmp.equals((Node*) p1, (Node*) p3));
+        delete p1;
+        delete p2;
+        delete p3;
     }
 }
 #endif //EX2_POINTTEST_H

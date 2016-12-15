@@ -6,6 +6,7 @@
 #define EX2_BFSTEST_H
 
 #include <gtest/gtest.h>
+#include <vector>
 #include "../src/Bfs.h"
 #include "../src/Map.h"
 /******************************************************************************

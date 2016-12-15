@@ -11,6 +11,7 @@
 ******************************************************************************/
 TEST(Trip, getNextPointTest){
     Map* map = new Map(3,3);
+    Point* point = NULL;
     TaxiCenter* taxiCenter = new TaxiCenter(map);
     Taxi* taxi = new Taxi(0, HONDA, RED);
     Driver* driver = new Driver(5, 40, SINGLE, 6, 0);
@@ -21,10 +22,14 @@ TEST(Trip, getNextPointTest){
     Trip* trip = new Trip(0, start, end, 2, 1);
     taxiCenter->addTrip(trip);
     for(int i = 0; i <= 2; i++){
-        EXPECT_EQ(Point(0,i), *trip->getNextPoint());
+        point = trip->getNextPoint();
+        EXPECT_EQ(Point(0,i), *point);
+        delete point;
     }
     for(int j = 1; j <= 2; j++){
-        EXPECT_EQ( Point(j,2), *trip->getNextPoint());
+        point = trip->getNextPoint();
+        EXPECT_EQ( Point(j,2), *point);
+        delete point;
     }
     delete taxiCenter;
 }
@@ -38,6 +43,7 @@ TEST(Trip, getPriceTest){
     Point end(0, 2);
     Trip* trip = new Trip(0, start, end, 2, price);
     EXPECT_FLOAT_EQ(5, trip->getPrice());
+    delete trip;
 }
 
 TEST(Trip, getNumPassengersTest){
@@ -46,6 +52,7 @@ TEST(Trip, getNumPassengersTest){
     Point end(0, 2);
     Trip* trip = new Trip(0, start, end, passengers, 1);
     EXPECT_EQ(2, trip->getNumPassengers());
+    delete trip;
 }
 
 TEST(Trip, sumOfSatisfactionTest){
@@ -55,4 +62,5 @@ TEST(Trip, sumOfSatisfactionTest){
     Trip* trip = new Trip(0, start, end, passengers, 1);
     EXPECT_LE(2, trip->sumOfSatisfaction());
     EXPECT_GE(10, trip->sumOfSatisfaction());
+    delete trip;
 }

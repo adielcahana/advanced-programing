@@ -88,7 +88,10 @@ TEST(MapTest, MapRouteTest){
     int width;
     int length;
     vector<Point*>* route = NULL;
-    Point *src, *dest, *temp, *outOfBound;
+    Point *src =NULL;
+    Point *dest = NULL;
+    Point *temp = NULL;
+    Point *outOfBound = NULL;
     Map* map = NULL;
     for(int i = 0; i < 10; i++){
         //create random map
@@ -106,6 +109,9 @@ TEST(MapTest, MapRouteTest){
         if(src->getX() >= width || dest->getX() >= width
            || src->getY() >= length || dest->getY() >= length){
             EXPECT_THROW(route = map->getRoute(src,dest), exception);
+            delete map;
+            delete src;
+            delete dest;
             continue;
         }
         route = map->getRoute(src,dest);
@@ -144,7 +150,7 @@ TEST(MapTest, MapDeserializationTest){
     const int asciiOfZero = 48;
     int width;
     int length;
-    Point* p;
+    Point* p = NULL;
     Map* map = NULL;
     char str[] = "00,00";
     for(int i =0 ; i < 10; i++) {
@@ -159,5 +165,6 @@ TEST(MapTest, MapDeserializationTest){
         map = Map::deserialize(str);
         EXPECT_THROW(map->getRoute(p,p), out_of_range);
         delete p;
+        delete map;
     }
 };

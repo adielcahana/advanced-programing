@@ -51,7 +51,6 @@ TEST_F(BfsTest, ShortestRouteTest){
     }
     delete dest;
     delete route;
-    route->clear();
     shortestRoute->clear();
     // route from (9,9) to (0,0)
     src = new Point(9,9);
@@ -70,7 +69,6 @@ TEST_F(BfsTest, ShortestRouteTest){
     }
     delete dest;
     delete route;
-    route->clear();
     shortestRoute->clear();
 
     // route from (0,9) to (9,0)
@@ -90,7 +88,6 @@ TEST_F(BfsTest, ShortestRouteTest){
     }
     delete dest;
     delete route;
-    route->clear();
     shortestRoute->clear();
 
     // route from (0,9) to (9,0)
@@ -108,7 +105,6 @@ TEST_F(BfsTest, ShortestRouteTest){
         delete shortestRoute->at(i);
         delete route->at(i);
     }
-    route->clear();
     shortestRoute->clear();
     delete dest;
     delete route;
