@@ -5,22 +5,9 @@
 ******************************************************************************/
 
 /******************************************************************************
-* The Test Operation: set random tariff and compare to getTariff
-******************************************************************************/
-TEST(LuxTaxi, setTariffTest) {
-    float tariff = 0;
-    LuxTaxi luxTaxi(1, HONDA, RED, tariff, Point(0,0));
-    for (int i = 0; i < 10; i++) {
-        tariff = (rand() / RAND_MAX) + (rand() % 100);
-        luxTaxi.setTariff(tariff);
-        ASSERT_EQ(tariff, luxTaxi.getTariff());
-    }
-}
-
-/******************************************************************************
 * The Test Operation: check the taxi's movmenet of one or two cells
 * expected exception when try to move more than 2 cells
-******************************************************************************/
+******************************************************************************//*
 TEST(LuxTaxi, moveOneStepTest){
     LuxTaxi luxTaxi(1, HONDA, RED, 1, Point(0,0));
     Point location = luxTaxi.getLocation();
@@ -38,4 +25,10 @@ TEST(LuxTaxi, moveOneStepTest){
     nextLocation = Point(location.getX() + 2, location.getY() + 2);
     EXPECT_THROW(luxTaxi.moveOneStep(nextLocation), exception);
     //tests for out of map next location in driver tests
+}
+*/
+
+TEST(LuxTaxi, getVelocityTest){
+    LuxTaxi lx = LuxTaxi(0, HONDA, RED);
+    EXPECT_EQ(2, lx.getVelocity());
 }
