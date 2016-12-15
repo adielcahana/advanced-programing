@@ -103,6 +103,11 @@ TEST(MapTest, MapRouteTest){
         x = rand() % 100;
         y= rand() % 100;
         dest = new Point(x, y);
+        if(src->getX() >= width || dest->getX() >= width
+           || src->getY() >= length || dest->getY() >= length){
+            EXPECT_THROW(route = map->getRoute(src,dest), exception);
+            continue;
+        }
         route = map->getRoute(src,dest);
         //test isInMap function
         outOfBound = new Point(width + 1, length + 1);
@@ -141,8 +146,8 @@ TEST(MapTest, MapDeserializationTest){
     int length;
     Point* p;
     Map* map = NULL;
-    char str[] = "00_00";
-    for(int i =0 ; i<10; i++) {
+    char str[] = "00,00";
+    for(int i =0 ; i < 10; i++) {
         width = rand() % 100;
         length = rand() % 100;
         p = new Point(width + 1, length + 1);

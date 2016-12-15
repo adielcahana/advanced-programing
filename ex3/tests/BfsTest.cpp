@@ -1,4 +1,5 @@
 #include "BfsTest.h"
+
 /******************************************************************************
 * The Test Operation: realese BfsTest allocation
 ******************************************************************************/
@@ -6,6 +7,7 @@ void BfsTest::TearDown() {
     delete map;
     delete bfs;
 }
+
 /******************************************************************************
 * The Test Operation: BfsTest ctor
 ******************************************************************************/
@@ -18,6 +20,7 @@ BfsTest::BfsTest() {
     //no need for the actual point object for bfs. see Bfs ctor
     delete maxPoint;
 }
+
 /******************************************************************************
 * The Test Operation: create some routes and verify that are indeed the
 * shortest route. this test will not pass if private Test Bfs::createRoute
@@ -48,15 +51,16 @@ TEST_F(BfsTest, ShortestRouteTest){
     }
     delete dest;
     delete route;
-
+    route->clear();
+    shortestRoute->clear();
     // route from (9,9) to (0,0)
     src = new Point(9,9);
     dest = new Point(0,0);
     route = bfs->find_shortest_route(map, src, dest, cmp);
-    for(int i= 9; i >= 0; i--){
+    for(int i = 9; i >= 0; i--){
         shortestRoute->push_back(new Point(i,9));
     }
-    for(int i= 8; i >= 0; i--){
+    for(int i = 8; i >= 0; i--){
         shortestRoute->push_back(new Point(0,i));
     }
     for(int i = 0; i < shortestRoute->size(); i++){
@@ -66,6 +70,8 @@ TEST_F(BfsTest, ShortestRouteTest){
     }
     delete dest;
     delete route;
+    route->clear();
+    shortestRoute->clear();
 
     // route from (0,9) to (9,0)
     src = new Point(0,9);
@@ -84,6 +90,8 @@ TEST_F(BfsTest, ShortestRouteTest){
     }
     delete dest;
     delete route;
+    route->clear();
+    shortestRoute->clear();
 
     // route from (0,9) to (9,0)
     src = new Point(9,0);
@@ -100,6 +108,8 @@ TEST_F(BfsTest, ShortestRouteTest){
         delete shortestRoute->at(i);
         delete route->at(i);
     }
+    route->clear();
+    shortestRoute->clear();
     delete dest;
     delete route;
     delete cmp;

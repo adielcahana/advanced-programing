@@ -10,23 +10,22 @@
 * The Test Operation: check the next point in the trip
 ******************************************************************************/
 TEST(Trip, getNextPointTest){
-    Map* map = new Map(2, 2, NULL);
+    Map* map = new Map(3,3);
     TaxiCenter* taxiCenter = new TaxiCenter(map);
     Taxi* taxi = new Taxi(0, HONDA, RED);
     Driver* driver = new Driver(5, 40, SINGLE, 6, 0);
     taxiCenter->addAvaliableTaxi(taxi);
     taxiCenter->addDriver(driver);
     Point start(0, 0);
-    Point end(0, 2);
+    Point end(2, 2);
     Trip* trip = new Trip(0, start, end, 2, 1);
     taxiCenter->addTrip(trip);
-    for(int i = 0; i < 2; i++){
+    for(int i = 0; i <= 2; i++){
         EXPECT_EQ(Point(0,i), *trip->getNextPoint());
     }
-    for(int j = 0; j < 2; j++){
+    for(int j = 1; j <= 2; j++){
         EXPECT_EQ( Point(j,2), *trip->getNextPoint());
     }
-    delete map;
     delete taxiCenter;
 }
 

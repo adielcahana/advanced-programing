@@ -6,7 +6,7 @@
 ******************************************************************************/
 
 TEST(TaxiCenter, addDriverTest){
-    Map* map = new Map(3,3,NULL);
+    Map* map = new Map(3,3);
     Driver* driver = new Driver(0, 40, SINGLE, 6, 0);
     TaxiCenter* taxiCenter = new TaxiCenter(map);
     taxiCenter->addDriver(driver);
@@ -16,7 +16,7 @@ TEST(TaxiCenter, addDriverTest){
 
 
 TEST(TaxiCenter, searchTaxiByIdTest){
-    Map* map = new Map(3,3,NULL);
+    Map* map = new Map(3,3);
     TaxiCenter* taxiCenter = new TaxiCenter(map);
     EXPECT_TRUE(taxiCenter->searchTaxiById(0) == NULL);
     Taxi* taxi = new Taxi(0, HONDA, RED);
@@ -26,7 +26,7 @@ TEST(TaxiCenter, searchTaxiByIdTest){
 }
 
 TEST(TaxiCenter, addAvaliableTaxiTest){
-    Map* map = new Map(3,3,NULL);
+    Map* map = new Map(3,3);
     Taxi* taxi = new Taxi(0, HONDA, RED);
     TaxiCenter* taxiCenter = new TaxiCenter(map);
     taxiCenter->addAvaliableTaxi(taxi);
@@ -36,7 +36,7 @@ TEST(TaxiCenter, addAvaliableTaxiTest){
 
 
 TEST(TaxiCenter, addTripTest){
-    Map* map = new Map(2, 2, NULL);
+    Map* map = new Map(3,3);
     TaxiCenter* taxiCenter = new TaxiCenter(map);
     Taxi* taxi = new Taxi(0, HONDA, RED);
     Driver* driver = new Driver(0, 40, SINGLE, 6, 0);
@@ -50,19 +50,19 @@ TEST(TaxiCenter, addTripTest){
 }
 
 TEST(TaxiCenter, getLocationByIdTest) {
-    Map* map = new Map(3,3,NULL);
+    Map* map = new Map(3,3);
     Driver* driver = new Driver(0, 40, SINGLE, 6, 0);
     TaxiCenter* taxiCenter = new TaxiCenter(map);
     taxiCenter->addDriver(driver);
-    EXPECT_EQ(Point(0,0), *taxiCenter->getLocation(5));
+    EXPECT_EQ(Point(0,0), *taxiCenter->getLocation(0));
     delete taxiCenter;
 }
 
 TEST(TaxiCenter, timePassedTest) {
-    Map *map = new Map(2, 2, NULL);
+    Map *map = new Map(3,3);
     TaxiCenter *taxiCenter = new TaxiCenter(map);
     Taxi *taxi = new Taxi(0, HONDA, RED);
-    Driver *driver = new Driver(5, 40, SINGLE, 6, 0);
+    Driver *driver = new Driver(0, 40, SINGLE, 6, 0);
     taxiCenter->addAvaliableTaxi(taxi);
     taxiCenter->addDriver(driver);
     Point start(0, 0);
@@ -77,7 +77,7 @@ TEST(TaxiCenter, timePassedTest) {
 }
 
 TEST(TaxiCenter, shouldStopTest) {
-    Map* map = new Map(2, 2, NULL);
+    Map* map = new Map(3,3);
     TaxiCenter *taxiCenter = new TaxiCenter(map);
     Taxi* taxi = new Taxi(0, HONDA, RED);
     Driver* driver = new Driver(5, 40, SINGLE, 6, 0);

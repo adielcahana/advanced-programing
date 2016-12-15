@@ -6,7 +6,7 @@
 ******************************************************************************/
 
 TEST(Driver, getTaxiTest){
-    Map *map = new Map(2, 2, NULL);
+    Map *map = new Map(3,3);
     TaxiCenter *taxiCenter = new TaxiCenter(map);
     Taxi *taxi = new Taxi(0, HONDA, RED);
     Driver *driver = new Driver(5, 40, SINGLE, 6, 0);
@@ -56,7 +56,7 @@ TEST(Driver, newTripTest){
 * The Test Operation: set trip to the driver and check if he is avaliable
 ******************************************************************************/
 TEST(Driver, isAvaliableTest){
-    Map *map = new Map(2, 2, NULL);
+    Map *map = new Map(3,3);
     TaxiCenter *taxiCenter = new TaxiCenter(map);
     Taxi *taxi = new Taxi(0, HONDA, RED);
     Driver *driver = new Driver(0, 40, SINGLE, 6, 0);
@@ -68,26 +68,24 @@ TEST(Driver, isAvaliableTest){
     Trip *trip = new Trip(0, start, end, 2, 1);
     taxiCenter->addTrip(trip);
     EXPECT_FALSE(driver->isAvaliable());
-    delete map;
     delete taxiCenter;
 }
 
 TEST(Driver, timePassedTest) {
-    Map *map = new Map(2, 2, NULL);
+    Map *map = new Map(3,3);
     TaxiCenter *taxiCenter = new TaxiCenter(map);
     Taxi *taxi = new Taxi(0, HONDA, RED);
-    Driver *driver = new Driver(5, 40, SINGLE, 6, 0);
+    Driver *driver = new Driver(0, 40, SINGLE, 6, 0);
     taxiCenter->addAvaliableTaxi(taxi);
     taxiCenter->addDriver(driver);
     Point start(0, 0);
     Point end(0, 2);
     Trip *trip = new Trip(0, start, end, 2, 1);
     taxiCenter->addTrip(trip);
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i <= 2; i++) {
         driver->timePassed();
         EXPECT_EQ(Point(0,i), *driver->getLocation());
     }
-    delete map;
     delete taxiCenter;
 }
 
@@ -96,7 +94,7 @@ TEST(Driver, timePassedTest) {
 * move one step
 ******************************************************************************/
 TEST(Driver, moveOneStepTest) {
-    Map *map = new Map(2, 2, NULL);
+    Map *map = new Map(3,3);
     TaxiCenter *taxiCenter = new TaxiCenter(map);
     Taxi *taxi = new Taxi(0, HONDA, RED);
     Driver *driver = new Driver(5, 40, SINGLE, 6, 0);
@@ -106,10 +104,9 @@ TEST(Driver, moveOneStepTest) {
     Point end(0, 2);
     Trip *trip = new Trip(0, start, end, 2, 1);
     taxiCenter->addTrip(trip);
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i <= 2; i++) {
         driver->moveOneStep();
         EXPECT_EQ(Point(0,i), *driver->getLocation());
     }
-    delete map;
     delete taxiCenter;
 }
