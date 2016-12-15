@@ -36,7 +36,7 @@ void Taxi::moveOneStep(Point* point){
 
 void Taxi::updateLocation(Point* location){
     delete this->location;
-    this->location = location;
+    this->location = new Point(*location);
 }
 
 Point* Taxi::getLocation(){
