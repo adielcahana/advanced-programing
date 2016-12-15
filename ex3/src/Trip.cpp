@@ -1,7 +1,7 @@
 #include "Trip.h"
 
 Trip::Trip(int id, Point start, Point end, int numOfPass, double price):
-        id(id), start(start), end(end), numOfPass(numOfPass), price(price) {
+        id(id), start(start), end(end), numOfPass(numOfPass), price(price), route(NULL) {
     for (int i = 0; i < this->numOfPass; i++) {
         passengers.push_back(new Passenger());
     }
@@ -9,11 +9,13 @@ Trip::Trip(int id, Point start, Point end, int numOfPass, double price):
 
 Trip::~Trip() {
     if(this->route != NULL){
+        cout<<route->size()<<endl;
         for (int i = 0; i < route->size(); i++){
             delete route->at(i);
         }
+        route->clear();
+        delete route;
     }
-    delete route;
     for(int j = 0; j < passengers.size(); j++){
         delete passengers.at(j);
     }
