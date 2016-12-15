@@ -7,6 +7,19 @@ Trip::Trip(int id, Point start, Point end, int numOfPass, double price):
     }
 }
 
+Trip::~Trip() {
+    if(this->route != NULL){
+        for (int i = 0; i < route->size(); i++){
+            delete route->at(i);
+        }
+        route->clear();
+    }
+    for(int j = 0; j < passengers.size(); j++){
+        delete passengers.at(j);
+    }
+    passengers.clear();
+}
+
 void Trip::addMeter(){
     this->totalMeterPassed += 1;
 }
@@ -27,10 +40,6 @@ Point* Trip::getNextPoint(){
         }
     }
     return nextPoint;
-}
-
-void Trip::setPrice(float price){
-    this->price = price;
 }
 
 double Trip::getPrice() {

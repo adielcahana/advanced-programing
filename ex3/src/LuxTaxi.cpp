@@ -4,7 +4,6 @@
 
 #include "LuxTaxi.h"
 
-//todo caculate km
-void LuxTaxi::moveOneStep(Point* point) {
-    this->updateLocation(point);
+int LuxTaxi::getVelocity() {
+    return 2;
 }

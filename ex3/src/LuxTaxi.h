@@ -5,13 +5,10 @@
 
 class LuxTaxi: public Taxi {
 private:
-    float tariff;
-    int velocity;
 public:
     LuxTaxi(int id, Manufacturer type, Color color):
-            Taxi(id, type, color), tariff(2), velocity(2){};
-    void moveOneStep(Point* point);
+            Taxi(id, type, color, 2){};
+    int getVelocity();
 };
-
 
 #endif //ASS2_LUXTAXI_H

@@ -7,25 +7,28 @@ Taxi::Taxi(Taxi& other){
     color = other.color;
     tariff = other.tariff;
     location = new Point(*other.location);
-    velocity = other.velocity;
+}
+
+Taxi::~Taxi() {
+    delete this->location;
 }
 
 int Taxi::getId(){
     return this->id;
 }
 
-void Taxi::addKm(float km){
-    this->totalKm += km;
+int Taxi::getVelocity(){
+    return 1;
 }
 
-void Taxi::setTariff(float tariff){
-    this->tariff = tariff;
+void Taxi::addKm(float km){
+    this->totalKm += km;
 }
 
 float Taxi::getTariff(){
     return this->tariff;
 }
-//todo
+
 void Taxi::moveOneStep(Point* point){
     this->updateLocation(point);
     this->addKm(0.001);
@@ -51,6 +54,7 @@ bool Taxi::operator==(const Taxi &rhs) const {
 bool Taxi::operator!=(const Taxi &rhs) const {
     return !(rhs == *this);
 }
+
 
 
 

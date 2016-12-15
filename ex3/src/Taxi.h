@@ -15,25 +15,25 @@ protected:
     Color color;
     float tariff;
     Point* location;
-    int velocity;
     void addKm(float km);
 public:
-    Taxi(int id, Manufacturer type, Color color):
-            id(id), manufacturer(type), color(color), tariff(1), velocity(1){location = new Point(0,0);};
+    Taxi(int id, Manufacturer type, Color color, float tariff = 1):
+            id(id), manufacturer(type), color(color),totalKm(0) {location = new Point(0,0);};
     Taxi(int id, Manufacturer type, Color color, Point* location):
-            id(id), manufacturer(type), color(color), tariff(1), velocity(1), location(location){};
+            id(id), manufacturer(type), color(color),totalKm(0),
+            location(location){};
     Taxi(Taxi &other);
-
+    ~Taxi();
     int getId();
-    virtual void setTariff(float tariff);
     float getKm();
     float getTariff();
+    //todo change in driver
+    virtual int getVelocity();
     virtual void moveOneStep(Point* point);
     void updateLocation(Point* location);
     Point* getLocation();
     bool operator==(const Taxi &rhs) const;
     bool operator!=(const Taxi &rhs) const;
 };
-
 
 #endif //ASS2_TAXI_H

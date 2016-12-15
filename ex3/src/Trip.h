@@ -17,8 +17,8 @@ private:
     void addMeter();
 public:
     Trip(int id, Point start, Point end, int numOfPass, double price);
+    ~Trip();
     Point* getNextPoint();
-    void setPrice(float price);
     double getPrice();
     int getNumPassengers();
     int sumOfSatisfaction();

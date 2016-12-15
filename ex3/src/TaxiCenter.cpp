@@ -3,9 +3,7 @@
 //Driver TaxiCenter::findClosestDriver(Point point){}
 TaxiCenter::TaxiCenter(Map* map){
     drivers = new vector <Driver*>;
-    avaliableDrivers = new vector <Driver*>();
     avaliableCabs = new vector <Taxi*>();
-    avaliableDriverslistener = new NoTripListener(avaliableDrivers);
     this->map = map;
 }
 
@@ -21,8 +19,6 @@ void TaxiCenter::addDriver(Driver *driver){
     this->drivers->push_back(driver);
     Taxi* taxi = searchTaxiById(driver->getTaxiId());
     driver->setTaxi(taxi);
-    this->avaliableDrivers->push_back(driver);
-    driver->addAvaliableListener(this->avaliableDriverslistener);
 }
 
 void TaxiCenter::addAvaliableTaxi(Taxi *taxi){
@@ -30,21 +26,22 @@ void TaxiCenter::addAvaliableTaxi(Taxi *taxi){
 }
 
 Taxi* TaxiCenter::searchTaxiById(int id){
-    Taxi* temp = NULL;
+    Taxi* taxi = NULL;
     for(int i = 0; i < this->avaliableCabs->size(); i++){
-        temp = this->avaliableCabs->at(i);
-        if(temp->getId() == id){
-            temp = new Taxi(*this->avaliableCabs->at(i));
+        taxi = this->avaliableCabs->at(i);
+        if(taxi->getId() == id){
+            taxi = new Taxi(*this->avaliableCabs->at(i));
             this->avaliableCabs->erase(this->avaliableCabs->begin() + i);
-            return temp;
+            return taxi;
         }
     }
+    return NULL;
 }
 
 void TaxiCenter::notifyNewTrip(Trip* trip){
     Driver *driver = NULL;
-    for(int i = 0; i < this->avaliableDrivers->size(); i++){
-        driver = this->avaliableDrivers->at(i);
+    for(int i = 0; i < this->drivers->size(); i++){
+        driver = this->drivers->at(i);
         if(trip->start == *driver->getLocation()){
             driver->newTrip(trip);
             return;
