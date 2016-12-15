@@ -41,7 +41,6 @@ float Driver::getSatisfacation(){
     return this->avgSatisfaction;
 }
 
-//todo fix
 void Driver::moveOneStep() {
     Point *nextPoint = NULL;
     for (int i = 0; i < this->getTaxi()->getTariff(); i++) {

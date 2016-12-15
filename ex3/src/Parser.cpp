@@ -45,8 +45,12 @@ Trip* Parser::readTrip(){
     char *c = new char[buffer.length() + 1];
     strcpy(c, buffer.c_str());
     int id = atoi(strtok(c, ","));
-    Point start(atoi(strtok(NULL, ",")),atoi(strtok(NULL, ",")));
-    Point end(atoi(strtok(NULL, ",")),atoi(strtok(NULL, ",")));
+    char *x = strtok(NULL, ",");
+    char *y = strtok(NULL, ",");
+    Point start(atoi(x),atoi(y));
+    x = strtok(NULL, ",");
+    y = strtok(NULL, ",");
+    Point end(atoi(x),atoi(y));
     int numOfPassengers = atoi(strtok(NULL, ","));
     double taarif = strtod(strtok(NULL, ","), NULL);
     delete c;
@@ -115,4 +119,5 @@ vector<Point*>* Parser::readObstacles(){
         getline(cin, buffer);
         obstacles->push_back(Point::deserialize(buffer));
     }
+    return obstacles;
 }

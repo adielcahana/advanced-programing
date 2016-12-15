@@ -19,6 +19,11 @@ Point* Trip::getNextPoint(){
         this->addMeter();
         if (route->size() != 0) {
             this->route->erase(route->begin());
+            return nextPoint;
+        }
+        if (route->size() == 0) {
+            this->route->clear();
+            nextPoint = NULL;
         }
     }
     return nextPoint;

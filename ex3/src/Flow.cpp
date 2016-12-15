@@ -8,7 +8,6 @@ Flow::Flow(){
     this->center = new TaxiCenter(map);
 }
 
-//todo: seperate initialize and run
 void Flow::initialize(){
     int option;
     char dummy;
@@ -30,8 +29,15 @@ void Flow::initialize(){
                 break;
             case 4:
                 cin >> id;
+                cin >> noskipws >> dummy;
                 p = center->getLocation(id);
-                cout << p << endl;
+                if(p != NULL){
+                    cout<< *p << endl;
+                }
+                else {
+                    cout << "driver id doesn't exist" << endl;
+                }
+                delete p;
                 break;
             case 6:
                 this->run();
@@ -40,9 +46,12 @@ void Flow::initialize(){
                 delete center;
                 shouldStop = true;
                 break;
+            default:
+                break;
         }
     }
 }
+
 void Flow::run(){
     while(!center->shouldStop()){
         center->timePassed();
