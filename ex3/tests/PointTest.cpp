@@ -25,16 +25,16 @@ TEST(PointTest, getterTest){
 * The Function Operation: test the output of point hash function
 ******************************************************************************/
 TEST(PointTest, hashTest){
-    Point p0 = Point(72,36);
-    Point p1 = Point(83,86);
-    Point p2 = Point(77,15);
-    Point p3 = Point(93,35);
-    Point p4 = Point(86,92);
-    Point p5 = Point(49,21);
-    Point p6 = Point(62,27);
-    Point p7 = Point(90,59);
-    Point p8 = Point(63,26);
-    Point p9 = Point(40,26);
+    Point p0(72,36);
+    Point p1(83,86);
+    Point p2(77,15);
+    Point p3(93,35);
+    Point p4(86,92);
+    Point p5(49,21);
+    Point p6(62,27);
+    Point p7(90,59);
+    Point p8(63,26);
+    Point p9(40,26);
 
     EXPECT_EQ(p0.hash(), 5958);
     EXPECT_EQ(p1.hash(), 14448);

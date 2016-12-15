@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "../src/Taxi.h"
 /******************************************************************************
-* TripTest: source file that test the Taxi class.
+* TaxiTest: source file that test the Taxi class.
 ******************************************************************************/
 
 TEST(Taxi, getIdTest){
@@ -14,12 +14,8 @@ TEST(Taxi, getIdTest){
 * The Test Operation: create taxi with random tariff and compare to getTariff
 ******************************************************************************/
 TEST(Taxi, getTariffTest){
-    float tariff;
-    for (int i = 0; i < 10; i++) {
-        tariff = (rand() / RAND_MAX) + (rand() % 100);
         Taxi taxi(1, HONDA, RED);
-        EXPECT_EQ(tariff, taxi.getTariff());
-    }
+        EXPECT_FLOAT_EQ(1, taxi.getTariff());
 }
 
 /******************************************************************************
@@ -29,9 +25,9 @@ TEST(Taxi, getTariffTest){
 TEST(Taxi, getLocationTest) {
     for (int i = 0; i < 10; i++) {
         Point* location = new Point((rand() % 3), (rand() % 3));
-        Taxi taxi(1, HONDA, RED);
-        taxi.updateLocation(location);
-        EXPECT_EQ(location, taxi.getLocation());
+        Taxi* taxi = new Taxi(1, HONDA, RED);
+        taxi->updateLocation(location);
+        EXPECT_EQ(*location, *taxi->getLocation());
         delete location;
     }
 }
@@ -41,11 +37,11 @@ TEST(Taxi, getLocationTest) {
 ******************************************************************************/
 TEST(Taxi, updateLocationTest) {
     Point* location =NULL;
-    Taxi taxi(1, HONDA, RED);
+    Taxi* taxi = new Taxi(1, HONDA, RED);
     for (int i = 0; i < 10; i++) {
         location = new Point((rand() % 3), (rand() % 3));
-        taxi.updateLocation(location);
-        ASSERT_EQ(location, taxi.getLocation());
+        taxi->updateLocation(location);
+        ASSERT_EQ(*location, *taxi->getLocation());
         delete location;
     }
 }
@@ -68,8 +64,7 @@ TEST(Taxi, moveOneStepTest){
     taxi.moveOneStep(nextLocation);
     // check the taxi's km (private method)
     EXPECT_FLOAT_EQ(taxi.getKm(), 0.001);
-    EXPECT_EQ(taxi.getLocation(), nextLocation);
-    delete location;
+    EXPECT_EQ(*taxi.getLocation(), *nextLocation);
     delete nextLocation;
 }
 

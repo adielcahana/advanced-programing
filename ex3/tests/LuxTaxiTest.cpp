@@ -29,6 +29,6 @@ TEST(LuxTaxi, moveOneStepTest){
 */
 
 TEST(LuxTaxi, getVelocityTest){
-    LuxTaxi lx = LuxTaxi(0, HONDA, RED);
+    LuxTaxi lx(0, HONDA, RED);
     EXPECT_EQ(2, lx.getVelocity());
 }

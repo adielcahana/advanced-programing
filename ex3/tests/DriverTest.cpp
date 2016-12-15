@@ -12,8 +12,7 @@ TEST(Driver, getTaxiTest){
     Driver *driver = new Driver(5, 40, SINGLE, 6, 0);
     taxiCenter->addAvaliableTaxi(taxi);
     taxiCenter->addDriver(driver);
-    EXPECT_EQ(taxi, driver->getTaxi());
-    delete map;
+    EXPECT_EQ(*taxi, *driver->getTaxi());
     delete taxiCenter;
 }
 
@@ -32,13 +31,13 @@ TEST(Driver, getTaxiIdTest) {
 }
 
 TEST(Driver, getIdTest) {
-    Driver* driver = new Driver(5, 30, SINGLE, 6, 0);
+    Driver* driver = new Driver(0, 30, SINGLE, 6, 0);
     EXPECT_EQ(0, driver->getId());
 }
 
 TEST(Driver, getLocationTest) {
     Driver* driver = new Driver(5, 30, SINGLE, 6, 0);
-    EXPECT_EQ(Point(0,0), driver->getLocation());
+    EXPECT_EQ(Point(0,0), *driver->getLocation());
 }
 
 /******************************************************************************
@@ -46,7 +45,9 @@ TEST(Driver, getLocationTest) {
 ******************************************************************************/
 TEST(Driver, newTripTest){
     Driver* driver = new Driver(5, 30, SINGLE, 6, 0);
-    Trip* trip = new Trip(0, Point(0,0), Point(2,2), 2, 1);
+    Point start(0, 0);
+    Point end(0, 2);
+    Trip* trip = new Trip(0, start, end, 2, 1);
     driver->newTrip(trip);
     EXPECT_FALSE(driver->isAvaliable());
 }
@@ -58,12 +59,12 @@ TEST(Driver, isAvaliableTest){
     Map *map = new Map(2, 2, NULL);
     TaxiCenter *taxiCenter = new TaxiCenter(map);
     Taxi *taxi = new Taxi(0, HONDA, RED);
-    Driver *driver = new Driver(5, 40, SINGLE, 6, 0);
+    Driver *driver = new Driver(0, 40, SINGLE, 6, 0);
     EXPECT_TRUE(driver->isAvaliable());
     taxiCenter->addAvaliableTaxi(taxi);
     taxiCenter->addDriver(driver);
-    Point start = Point(0, 0);
-    Point end = Point(0, 2);
+    Point start(0, 0);
+    Point end(0, 2);
     Trip *trip = new Trip(0, start, end, 2, 1);
     taxiCenter->addTrip(trip);
     EXPECT_FALSE(driver->isAvaliable());
@@ -78,13 +79,13 @@ TEST(Driver, timePassedTest) {
     Driver *driver = new Driver(5, 40, SINGLE, 6, 0);
     taxiCenter->addAvaliableTaxi(taxi);
     taxiCenter->addDriver(driver);
-    Point start = Point(0, 0);
-    Point end = Point(0, 2);
+    Point start(0, 0);
+    Point end(0, 2);
     Trip *trip = new Trip(0, start, end, 2, 1);
     taxiCenter->addTrip(trip);
     for (int i = 0; i < 2; i++) {
         driver->timePassed();
-        EXPECT_EQ(Point(0,i), driver->getLocation());
+        EXPECT_EQ(Point(0,i), *driver->getLocation());
     }
     delete map;
     delete taxiCenter;
@@ -101,13 +102,13 @@ TEST(Driver, moveOneStepTest) {
     Driver *driver = new Driver(5, 40, SINGLE, 6, 0);
     taxiCenter->addAvaliableTaxi(taxi);
     taxiCenter->addDriver(driver);
-    Point start = Point(0, 0);
-    Point end = Point(0, 2);
+    Point start(0, 0);
+    Point end(0, 2);
     Trip *trip = new Trip(0, start, end, 2, 1);
     taxiCenter->addTrip(trip);
     for (int i = 0; i < 2; i++) {
         driver->moveOneStep();
-        EXPECT_EQ(Point(0,i), driver->getLocation());
+        EXPECT_EQ(Point(0,i), *driver->getLocation());
     }
     delete map;
     delete taxiCenter;
