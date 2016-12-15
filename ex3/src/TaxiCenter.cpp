@@ -1,27 +1,38 @@
 #include "TaxiCenter.h"
 
-TaxiCenter::TaxiCenter(Map* map) {
+//Driver TaxiCenter::findClosestDriver(Point point){}
+TaxiCenter::TaxiCenter(Map* map){
+    drivers = new vector <Driver*>;
+    avaliableCabs = new vector <Taxi*>();
     this->map = map;
 }
 
-//Driver TaxiCenter::findClosestDriver(Point point){}
-
-Driver* TaxiCenter::addDriver(Driver* driver){
-    this->drivers->push_back(driver);
+TaxiCenter::~TaxiCenter() {
+    drivers->clear();
+    delete drivers;
+    avaliableCabs->clear();
+    delete avaliableCabs;
+    delete map;
 }
 
-Taxi* TaxiCenter::addAvaliableTaxi(Taxi *taxi){
+void TaxiCenter::addDriver(Driver *driver){
+    this->drivers->push_back(driver);
+    Taxi* taxi = searchTaxiById(driver->getTaxiId());
+    driver->setTaxi(taxi);
+}
+
+void TaxiCenter::addAvaliableTaxi(Taxi *taxi){
     this->avaliableCabs->push_back(taxi);
 }
 
-void TaxiCenter::searchTaxiById(Driver* driver){
+Taxi* TaxiCenter::searchTaxiById(int id){
+    Taxi* temp = NULL;
     for(int i = 0; i < this->avaliableCabs->size(); i++){
-        if(this->avaliableCabs->at(i)->getId() == driver->getTaxiId()){
-            Taxi* taxi = new Taxi(*this->avaliableCabs->at(i));
-            delete this->avaliableCabs->at(i);
-            this->avaliableCabs->erase(this->avaliableCabs->begin() + 1);
-            driver->setTaxi(this->avaliableCabs->at(i));
-            return;
+        temp = this->avaliableCabs->at(i);
+        if(temp->getId() == id){
+            temp = new Taxi(*this->avaliableCabs->at(i));
+            this->avaliableCabs->erase(this->avaliableCabs->begin() + i);
+            return temp;
         }
     }
 }
@@ -59,13 +70,13 @@ bool TaxiCenter::shouldStop(){
     return true;
 }
 
-Point TaxiCenter::getLocation(int id){
-    Point point = Point(0,0);
+Point * TaxiCenter::getLocation(int id){
+    Point* point = NULL;
     Driver *driver = NULL;
     for(int i = 0; i < this->drivers->size(); i++){
         driver = this->drivers->at(i);
-        if(driver->getTaxiId() == id){
-            point = *driver->getLocation();
+        if(driver->getId() == id){
+            point = driver->getLocation();
             return point;
         }
     }

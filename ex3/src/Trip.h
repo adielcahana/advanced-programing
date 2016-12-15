@@ -2,7 +2,6 @@
 #define ASS2_TRIP_H
 
 #include "Passenger.h"
-#include "TaxiCenter.h"
 
 class Trip {
 private:
@@ -13,16 +12,14 @@ private:
     Point end;
     int numOfPass;
     vector <Point*>* route;
-    float price;
-    vector <Passenger*>* passengers;
+    double price;
+    vector <Passenger*> passengers;
     void addMeter();
 public:
-    Trip(int id, Point start, Point end, int numOfPass, float price):
-        id(id), start(start), end(end), numOfPass(numOfPass), price(price),
-        totalMeterPassed(0){};
+    Trip(int id, Point start, Point end, int numOfPass, double price);
     Point* getNextPoint();
     void setPrice(float price);
-    float getPrice();
+    double getPrice();
     int getNumPassengers();
     int sumOfSatisfaction();
 };

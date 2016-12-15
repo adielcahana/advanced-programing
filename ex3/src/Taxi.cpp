@@ -1,7 +1,17 @@
 #include "Taxi.h"
 
+Taxi::Taxi(Taxi& other){
+    id = other.id;
+    totalKm = other.totalKm;
+    manufacturer = other.manufacturer;
+    color = other.color;
+    tariff = other.tariff;
+    location = new Point(*other.location);
+    velocity = other.velocity;
+}
+
 int Taxi::getId(){
-    this->id;
+    return this->id;
 }
 
 void Taxi::addKm(float km){
@@ -41,3 +51,6 @@ bool Taxi::operator==(const Taxi &rhs) const {
 bool Taxi::operator!=(const Taxi &rhs) const {
     return !(rhs == *this);
 }
+
+
+

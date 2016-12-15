@@ -26,7 +26,8 @@ public:
             id(id), age(age),maritalStat(status), exp(exp), taxiId(taxiId),
             trip(NULL), location(new Point(0,0)){};
     void setAge(int age);
-    Point* getLocation();
+    int getId();
+    Point * getLocation();
     float getSatisfacation();
     int getAge();
     void setTaxi(Taxi* taxi);

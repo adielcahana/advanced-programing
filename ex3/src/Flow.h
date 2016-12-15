@@ -5,7 +5,6 @@
 #ifndef ASS2_FLOW_H
 #define ASS2_FLOW_H
 
-#include "Driver.h"
 #include "TaxiCenter.h"
 #include "Parser.h"
 
@@ -15,7 +14,7 @@ private:
     TaxiCenter* center;
 public:
     Flow();
-    void initilize();
+    void initialize();
     void run();
 };
 

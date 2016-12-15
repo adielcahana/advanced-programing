@@ -1,7 +1,7 @@
 #include "Driver.h"
 
 void Driver::calcAvg(){
-    int avrage = (avgSatisfaction * passCount) + trip->sumOfSatisfaction();
+    float avrage = (avgSatisfaction * passCount) + trip->sumOfSatisfaction();
     addPassCount(trip->getNumPassengers());
     avgSatisfaction = avrage / passCount;
 }
@@ -55,12 +55,11 @@ void Driver::moveOneStep() {
         }
         this->location = nextPoint;
         this->getTaxi()->moveOneStep(nextPoint);
-        delete nextPoint;
     }
 }
 
-Point* Driver::getLocation(){
-    return this->location;
+Point * Driver::getLocation(){
+    return new Point(*this->location);
 }
 
 float Driver::getPayment(){
@@ -85,4 +84,8 @@ Taxi* Driver::getTaxi() {
 
 void Driver::setTaxi(Taxi* taxi){
     this->taxi = taxi;
+}
+
+int Driver::getId() {
+    return this->id;
 }

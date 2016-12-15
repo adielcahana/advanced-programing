@@ -2,15 +2,20 @@
 
 Map* Parser::readMap(){
     getline(cin, buffer);
-    int width = atoi(strtok(buffer, " "));
+    char *c = new char[buffer.length() + 1];
+    strcpy(c, buffer.c_str());
+    int width = atoi(strtok(c, " "));
     int length = atoi(strtok(NULL, " "));
     vector<Point*>* obstacles = this->readObstacles();
+    delete c;
     return new Map(width, length, obstacles);
 }
 
 Driver* Parser::readDriver(){
     getline(cin, buffer);
-    int id = atoi(strtok(buffer, ","));
+    char *c = new char[buffer.length() + 1];
+    strcpy(c, buffer.c_str());
+    int id = atoi(strtok(c, ","));
     int age = atoi(strtok(NULL, ","));
     Status stat;
     switch(strtok(NULL, ",")[0]){
@@ -31,22 +36,28 @@ Driver* Parser::readDriver(){
     }
     int exp = atoi(strtok(NULL, ","));
     int vehicle_id = atoi(strtok(NULL, ","));
+    delete c;
     return new Driver(id,age,stat,exp,vehicle_id);
 }
 
 Trip* Parser::readTrip(){
     getline(cin, buffer);
-    int id = atoi(strtok(buffer, ","));
+    char *c = new char[buffer.length() + 1];
+    strcpy(c, buffer.c_str());
+    int id = atoi(strtok(c, ","));
     Point start(atoi(strtok(NULL, ",")),atoi(strtok(NULL, ",")));
     Point end(atoi(strtok(NULL, ",")),atoi(strtok(NULL, ",")));
     int numOfPassengers = atoi(strtok(NULL, ","));
     double taarif = strtod(strtok(NULL, ","), NULL);
+    delete c;
     return new Trip(id, start, end, numOfPassengers, taarif);
 }
 
 Taxi* Parser::readTaxi(){
     getline(cin, buffer);
-    int id = atoi(strtok(buffer, ","));
+    char *c = new char[buffer.length() + 1];
+    strcpy(c, buffer.c_str());
+    int id = atoi(strtok(c, ","));
     int taxiType =  atoi(strtok(NULL, ","));
     Manufacturer manufacturer;
     switch(strtok(NULL, ",")[0]) {
@@ -85,6 +96,7 @@ Taxi* Parser::readTaxi(){
         default:
             throw "bad argument for taxi color";
     }
+    delete c;
     if (taxiType == 1) {
         return new Taxi(id, manufacturer, color);
     } else {
@@ -95,7 +107,10 @@ Taxi* Parser::readTaxi(){
 vector<Point*>* Parser::readObstacles(){
     vector<Point*>* obstacles = new vector<Point*>();
     getline(cin, buffer);
-    int numOfObsatcles = atoi(buffer);
+    char *c = new char[buffer.length() + 1];
+    strcpy(c, buffer.c_str());
+    int numOfObsatcles = atoi(c);
+    delete c;
     for(int i = 0; i < numOfObsatcles; i++){
         getline(cin, buffer);
         obstacles->push_back(Point::deserialize(buffer));

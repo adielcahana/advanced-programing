@@ -12,15 +12,15 @@ private:
     //Driver findClosestDriver(Point point);
     void notifyNewTrip(Trip* trip);
 public:
-    TaxiCenter(Map* map): drivers(NULL), avaliableCabs(NULL), map(map){};
-    Driver* addDriver(Driver* driver);
-    Taxi* addAvaliableTaxi(Taxi *taxi);
-    void searchTaxiById(Driver* driver);
+    TaxiCenter(Map* map);
+    ~TaxiCenter();
+    void addDriver(Driver *driver);
+    void addAvaliableTaxi(Taxi *taxi);
+    Taxi * searchTaxiById(int id);
     void addTrip(Trip* trip);
     void timePassed();
-    Point getLocation(int id);
+    Point * getLocation(int id);
     bool shouldStop();
 };
-
 
 #endif //ASS2_TAXICENTER_H

@@ -9,14 +9,15 @@ Flow::Flow(){
 }
 
 //todo: seperate initialize and run
-void Flow::initilize(){
+void Flow::initialize(){
     int option;
     char dummy;
+    Point* p = NULL;
     bool shouldStop = false;
     int id;
     while(!shouldStop){
         cin >> option;
-        cin >> dummy;
+        cin >> noskipws >> dummy;
         switch(option){
             case 1:
                 center->addDriver(parser.readDriver());
@@ -29,7 +30,7 @@ void Flow::initilize(){
                 break;
             case 4:
                 cin >> id;
-                Point p = center->getLocation(id);
+                p = center->getLocation(id);
                 cout << p << endl;
                 break;
             case 6:

@@ -10,6 +10,7 @@ private:
 public:
     LuxTaxi(int id, Manufacturer type, Color color):
             Taxi(id, type, color), tariff(2), velocity(2){};
+    void moveOneStep(Point* point);
 };
 
 

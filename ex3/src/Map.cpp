@@ -5,12 +5,14 @@ using namespace std;
 Map::Map(int width, int length, vector<Point*>* obstacles){
     this->width = width;
     this->length = length;
-    this->obstacles.resize((unsigned int) Point(width,length).hash());
-    for(int i = 0; i < obstacles->size(); i++) {
-        this->obstacles[obstacles->at(i)->hash()] = 1;
+    this->obstacles.resize((unsigned int) Point(width, length).hash());
+    if (obstacles != NULL) {
+        for (int i = 0; i < obstacles->size(); i++) {
+            this->obstacles[obstacles->at(i)->hash()] = 1;
+        }
+        obstacles->clear();
+        delete obstacles;
     }
-    obstacles->clear();
-    delete obstacles;
 }
 
 /******************************************************************************
@@ -28,19 +30,19 @@ queue<Node*>* Map::getAdjacent(const Node *point) {
 	//verify which are Point's neighbors, check if there is obstacle in their place
     //and add them to adjacents
     temp = new Point(x - 1, y);
-    if (obstacles.at((unsigned int) temp->hash()) != 1 && (x - 1 >= 0)) {
+    if ((x - 1 >= 0) && obstacles.at((unsigned int) temp->hash()) != 1) {
         adjacents->push(temp);
     }
     temp = new Point(x , y + 1);
-    if (obstacles.at((unsigned int) temp->hash()) != 1 && (y + 1 < length)) {
+    if ((y + 1 < length) && obstacles.at((unsigned int) temp->hash()) != 1) {
         adjacents->push(temp);
     }
     temp = new Point(x + 1, y);
-    if (obstacles.at((unsigned int) temp->hash()) != 1 && (x + 1 < width)) {
+    if ((x + 1 < width) && obstacles.at((unsigned int) temp->hash()) != 1) {
         adjacents->push(temp);
     }
     temp = new Point(x , y - 1);
-    if (obstacles.at((unsigned int) temp->hash()) != 1 && (y - 1 >= 0)) {
+    if ((y - 1 >= 0) && obstacles.at((unsigned int) temp->hash()) != 1) {
         adjacents->push(temp);
     }
 	return adjacents;
@@ -81,7 +83,7 @@ Map* Map::deserialize(string s){
     return g;
 }
 
-Point::Point(Point p){
+Point::Point(Point& p){
     this->x = p.getX();
     this->y = p.getY();
 }
@@ -123,9 +125,13 @@ bool Point::operator!=(const Point &other) const {
 * The Function Operation: deserialize a Point object from text x_y
 ******************************************************************************/
 Point* Point::deserialize(string s){
-    char* x = strtok(s,",");
+    char *c = new char[s.length() + 1];
+    strcpy(c, s.c_str());
+    char* x = strtok(c,",");
     char* y = strtok(NULL, ",");
-    return new Point(atoi(x), atoi(y));
+    Point* p = new Point(atoi(x), atoi(y));
+    delete c;
+    return p;
 }
 /******************************************************************************
 * The Function Operation: evaluate if 2 points are equal by their == operator

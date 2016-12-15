@@ -19,8 +19,11 @@ protected:
     void addKm(float km);
 public:
     Taxi(int id, Manufacturer type, Color color):
-            id(id), manufacturer(type), color(color), tariff(1), velocity(1){};
+            id(id), manufacturer(type), color(color), tariff(1), velocity(1){location = new Point(0,0);};
+    Taxi(int id, Manufacturer type, Color color, Point* location):
+            id(id), manufacturer(type), color(color), tariff(1), velocity(1), location(location){};
     Taxi(Taxi &other);
+
     int getId();
     virtual void setTariff(float tariff);
     float getKm();
