@@ -14,6 +14,9 @@ TaxiCenter::~TaxiCenter() {
         delete drivers->at(i)->getTaxi();
         delete drivers->at(i);
     }
+    for(int i = 0; i < avaliableCabs->size(); i++){
+        delete avaliableCabs->at(i);
+    }
     delete drivers;
     delete avaliableDrivers;
     avaliableCabs->clear();
@@ -50,8 +53,8 @@ Taxi* TaxiCenter::searchTaxiById(int id){
 void TaxiCenter::notifyNewTrip(Trip* trip){
     Driver *driver = NULL;
     Point* location = NULL;
-    for(int i = 0; i < this->drivers->size(); i++){
-        driver = this->drivers->at(i);
+    for(int i = 0; i < this->avaliableDrivers->size(); i++){
+        driver = this->avaliableDrivers->at(i);
         location = driver->getLocation();
         if(trip->start == *location){
             driver->newTrip(trip);

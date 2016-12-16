@@ -7,6 +7,7 @@ Trip::Trip(int id, Point start, Point end, int numOfPass, double price):
     }
 }
 
+
 Trip::~Trip() {
     if(this->route != NULL){
         cout<<route->size()<<endl;

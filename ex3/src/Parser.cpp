@@ -7,7 +7,7 @@ Map* Parser::readMap(){
     int width = atoi(strtok(c, " "));
     int length = atoi(strtok(NULL, " "));
     vector<Point*>* obstacles = this->readObstacles();
-    delete c;
+    delete[](c);
     return new Map(width, length, obstacles);
 }
 
@@ -36,7 +36,7 @@ Driver* Parser::readDriver(){
     }
     int exp = atoi(strtok(NULL, ","));
     int vehicle_id = atoi(strtok(NULL, ","));
-    delete c;
+    delete[](c);
     return new Driver(id,age,stat,exp,vehicle_id);
 }
 
@@ -53,7 +53,7 @@ Trip* Parser::readTrip(){
     Point end(atoi(x),atoi(y));
     int numOfPassengers = atoi(strtok(NULL, ","));
     double taarif = strtod(strtok(NULL, ","), NULL);
-    delete c;
+    delete[] (c);
     return new Trip(id, start, end, numOfPassengers, taarif);
 }
 
@@ -100,7 +100,7 @@ Taxi* Parser::readTaxi(){
         default:
             throw "bad argument for taxi color";
     }
-    delete c;
+    delete[](c);
     if (taxiType == 1) {
         return new Taxi(id, manufacturer, color);
     } else {
@@ -114,7 +114,7 @@ vector<Point*>* Parser::readObstacles(){
     char *c = new char[buffer.length() + 1];
     strcpy(c, buffer.c_str());
     int numOfObsatcles = atoi(c);
-    delete c;
+    delete[](c);
     for(int i = 0; i < numOfObsatcles; i++){
         getline(cin, buffer);
         obstacles->push_back(Point::deserialize(buffer));

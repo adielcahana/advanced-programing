@@ -147,7 +147,7 @@ Point* Point::deserialize(string s){
     char* x = strtok(c,",");
     char* y = strtok(NULL, ",");
     Point* p = new Point(atoi(x), atoi(y));
-    delete c;
+    delete[] (c);
     return p;
 }
 /******************************************************************************
