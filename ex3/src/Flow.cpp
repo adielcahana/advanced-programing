@@ -34,7 +34,7 @@ void Flow::initialize(){
             case 4:
                 cin >> id;
                 cin >> noskipws >> dummy;
-                p = center->getLocation(id);
+                p = center->getDriverLocation(id);
                 if(p != NULL){
                     cout<< *p << endl;
                     delete p;

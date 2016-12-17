@@ -5,8 +5,14 @@
 #include "Trip.h"
 #include "AvaliableNotifier.h"
 
+/******************************************************************************
+* Status: enum for the driver mariatal status
+******************************************************************************/
 enum Status {SINGLE, MARRIED, DIVORCED, WIDOWED};
 
+/******************************************************************************
+* Driver:
+******************************************************************************/
 class Driver: public AvaliableNotifier{
 private:
     int id;
@@ -35,7 +41,6 @@ public:
     void newTrip(Trip* trip);
     void timePassed();
     void moveOneStep();
-//    bool isAvaliable();
     void addAvaliableListener(AvaliableListener* hl);
     void removeAvaliableListener(AvaliableListener* hl);
     void notifyAvaliable();

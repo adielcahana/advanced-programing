@@ -21,7 +21,7 @@ public:
     Taxi* searchTaxiById(int id);
     void addTrip(Trip* trip);
     void timePassed();
-    Point * getLocation(int id);
+    Point * getDriverLocation(int id);
     bool shouldStop();
 };
 
