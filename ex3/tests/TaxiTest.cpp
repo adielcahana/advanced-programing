@@ -4,6 +4,9 @@
 * TaxiTest: source file that test the Taxi class.
 ******************************************************************************/
 
+/******************************************************************************
+* The Test Operation: create taxi with id 0 and check it's id
+******************************************************************************/
 TEST(Taxi, getIdTest){
     int id = 0;
         Taxi taxi(id, HONDA, RED);
@@ -11,7 +14,7 @@ TEST(Taxi, getIdTest){
 }
 
 /******************************************************************************
-* The Test Operation: create taxi with random tariff and compare to getTariff
+* The Test Operation: create taxi wnd check it's tariff (expect to 1)
 ******************************************************************************/
 TEST(Taxi, getTariffTest){
         Taxi taxi(1, HONDA, RED);
@@ -19,7 +22,7 @@ TEST(Taxi, getTariffTest){
 }
 
 /******************************************************************************
-* The Test Operation: create taxi with random location
+* The Test Operation: create taxi with random location set to taxi
 * and compare to getLocation
 ******************************************************************************/
 TEST(Taxi, getLocationTest) {
@@ -49,7 +52,7 @@ TEST(Taxi, updateLocationTest) {
 }
 
 /******************************************************************************
-* The Test Operation: create taxi (with 0 km) and compare to 0
+* The Test Operation: create taxi (with default 0 km) and compare to 0
 ******************************************************************************/
 TEST(Taxi, getKmTest){
     Taxi taxi(1, HONDA, RED);
@@ -70,7 +73,21 @@ TEST(Taxi, moveOneStepTest){
     delete nextLocation;
 }
 
-TEST(Taxi, getTaxiType){
+/******************************************************************************
+* The Test Operation: expect to get reguler taxi velocity = 1
+******************************************************************************/
+TEST(Taxi, getVelocityTest){
     Taxi taxi(1, HONDA, RED);
     EXPECT_EQ(1, taxi.getVelocity());
+}
+
+/******************************************************************************
+* The Function Operation: test the equal and not equal operator
+******************************************************************************/
+TEST(Taxi, equalityOperatorsTest) {
+    Taxi taxi1(0, HONDA, RED);
+    Taxi taxi2(1, HONDA, RED);
+    Taxi taxi3(0, HONDA, RED);
+    EXPECT_EQ(taxi1, taxi3);
+    EXPECT_NE(taxi1, taxi2);
 }

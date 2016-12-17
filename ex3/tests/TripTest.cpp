@@ -20,7 +20,9 @@ TEST(Trip, getNextPointTest){
     Point start(0, 0);
     Point end(2, 2);
     Trip* trip = new Trip(0, start, end, 2, 1);
+    // create the trip's route
     taxiCenter->addTrip(trip);
+    // check the trip's advanced
     for(int i = 0; i <= 2; i++){
         point = trip->getNextPoint();
         EXPECT_EQ(Point(0,i), *point);
@@ -46,6 +48,10 @@ TEST(Trip, getPriceTest){
     delete trip;
 }
 
+/******************************************************************************
+* The Test Operation: create a trip with 2 passengers and compare to
+* getNumPassengers
+******************************************************************************/
 TEST(Trip, getNumPassengersTest){
     int passengers = 2;
     Point start(0, 0);
@@ -55,6 +61,10 @@ TEST(Trip, getNumPassengersTest){
     delete trip;
 }
 
+/******************************************************************************
+* The Test Operation: create a trip with 2 passengers and check is it's between
+* 2 to 10 (every passenger give grade between 1 to 5)
+******************************************************************************/
 TEST(Trip, sumOfSatisfactionTest){
     int passengers = 2;
     Point start(0, 0);
