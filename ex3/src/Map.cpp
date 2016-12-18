@@ -1,7 +1,9 @@
 #include <stdexcept>
 #include "Map.h"
 using namespace std;
-
+/******************************************************************************
+* The Function Operation: map ctor, create hash table for obstacles
+******************************************************************************/
 Map::Map(int width, int length, vector<Point*>* obstacles){
     this->width = width;
     this->length = length;
@@ -99,7 +101,9 @@ Map* Map::deserialize(string s){
     delete maxPoint;
     return g;
 }
-
+/******************************************************************************
+* The Function Operation: copy ctor
+******************************************************************************/
 Point::Point(Point& p){
     this->x = p.getX();
     this->y = p.getY();
@@ -144,8 +148,16 @@ bool Point::operator!=(const Point &other) const {
 Point* Point::deserialize(string s){
     char *c = new char[s.length() + 1];
     strcpy(c, s.c_str());
-    char* x = strtok(c,",");
-    char* y = strtok(NULL, ",");
+    char *x,*y;
+    //verify x and y are only digits
+    if ((x = strtok(c, ",")) == NULL) throw runtime_error("bad arguments for point");
+    for (int i = 0; x[i] != 0; i++) {
+        if (!isdigit(x[i])) throw runtime_error("bad arguments for point");
+    }
+    if ((y = strtok(NULL, ",")) == NULL) throw runtime_error("bad arguments for point");
+    for (int i = 0; y[i] != 0; i++) {
+        if (!isdigit(y[i])) throw runtime_error("bad arguments for point");
+    }
     Point* p = new Point(atoi(x), atoi(y));
     delete[] (c);
     return p;

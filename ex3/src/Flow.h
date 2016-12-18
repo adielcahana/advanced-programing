@@ -13,6 +13,7 @@ private:
     Parser parser;
     TaxiCenter* center;
 public:
+    bool shouldStop;
     Flow();
     ~Flow();
     void initialize();

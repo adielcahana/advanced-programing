@@ -6,6 +6,7 @@
 Flow::Flow(){
     Map* map = parser.readMap();
     this->center = new TaxiCenter(map);
+    this->shouldStop = false;
 }
 
 Flow::~Flow(){
@@ -34,9 +35,9 @@ void Flow::initialize(){
             case 4:
                 cin >> id;
                 cin >> noskipws >> dummy;
-                p = center->getDriverLocation(id);
+                p = center->getLocation(id);
                 if(p != NULL){
-                    cout<< *p << endl;
+                    cout << *p << endl;
                     delete p;
                 }
                 else {
@@ -44,11 +45,11 @@ void Flow::initialize(){
                 }
                 break;
             case 6:
-                this->run();
-                break;
-            case 7:
                 shouldStop = true;
                 break;
+            case 7:
+                this->shouldStop = true;
+                shouldStop = true;
             default:
                 break;
         }

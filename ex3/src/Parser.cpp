@@ -1,22 +1,105 @@
 #include "Parser.h"
+bool Parser::isValidTripInput(){
+    bool readComma = true;
+    bool readDot = false;
+    int commaCounter = 0;
+    for(int i=0; i<buffer.size() && commaCounter <= 6; i++){
+        if(readComma){
+            if(!isdigit(buffer[i])){
+                return false;
+            }
+            readComma = false;
+        } else {
+            if(buffer[i] == ',') {
+                readComma = true;
+                commaCounter++;
+                continue;
+            }else if(commaCounter == 6 && buffer[i] == '.' && !readDot) {
+                readDot = true;
+                continue;
+            } else if(!isdigit(buffer[i])){
+                return false;
+            }
+        }
+    }
+    return commaCounter == 6;
+}
 
-Map* Parser::readMap(){
+bool Parser::isValidTaxiInput(){
+    int commaCounter = 0;
+    for(int i=0; i<buffer.size() && commaCounter <= 3; i++){
+        if(commaCounter < 2){
+            if(buffer[i] == ','){
+                commaCounter++;
+                continue;
+            } else if(!isdigit(buffer[i])){
+                return false;
+            }
+        } else {
+            if(buffer[i] == ','){
+                commaCounter++;
+                continue;
+            } else if(!isalpha(buffer[i])){
+                return false;
+            }
+        }
+    }
+    return commaCounter == 3;
+}
+
+bool Parser::isValidDriverInput() {
+    int commaCounter = 0;
+    bool readAlpha = false;
+    for(int i=0; i<buffer.size() && commaCounter <= 4; i++){
+        if(commaCounter == 2 && !readAlpha){
+            if(!isalpha(buffer[i])) {
+                return false;
+            }
+            readAlpha = true;
+            continue;
+        } else {
+            if(buffer[i] == ','){
+                commaCounter++;
+                continue;
+            } else if(!isdigit(buffer[i])){
+                return false;
+            }
+        }
+    }
+    return commaCounter == 4;
+}
+
+Map* Parser::readMap() {
     getline(cin, buffer);
     char *c = new char[buffer.length() + 1];
     strcpy(c, buffer.c_str());
-    int width = atoi(strtok(c, " "));
-    int length = atoi(strtok(NULL, " "));
-    vector<Point*>* obstacles = this->readObstacles();
+    int width, length;
+    char *x, *y;
+    vector<Point *> *obstacles;
+    //verify that x and y are digits
+    if ((x = strtok(c, " ")) == NULL) throw runtime_error("bad arguments for map");
+    for (int i = 0; x[i] != 0; i++) {
+        if (!isdigit(x[i])) throw runtime_error("bad arguments for map");
+    }
+    if ((y = strtok(NULL, " ")) == NULL) throw runtime_error("bad arguments for map");
+    for (int i = 0; y[i] != 0; i++) {
+        if (!isdigit(y[i])) throw runtime_error("bad arguments for map");
+    }
+    width = atoi(x);
+    length = atoi(y);
+    obstacles = this->readObstacles();
     delete[](c);
     return new Map(width, length, obstacles);
 }
 
 Driver* Parser::readDriver(){
     getline(cin, buffer);
+    if(!isValidDriverInput()) throw runtime_error("bad argument for new driver");
     char *c = new char[buffer.length() + 1];
     strcpy(c, buffer.c_str());
-    int id = atoi(strtok(c, ","));
-    int age = atoi(strtok(NULL, ","));
+    int id, age, exp, vehicle_id;
+    id = atoi(strtok(c, ","));
+    age = atoi(strtok(NULL, ","));
     Status stat;
     switch(strtok(NULL, ",")[0]){
         case 'S':
@@ -32,16 +115,17 @@ Driver* Parser::readDriver(){
             stat = WIDOWED;
             break;
         default:
-            throw "bad argument for new driver";
+            throw runtime_error("bad argument for new driver");
     }
-    int exp = atoi(strtok(NULL, ","));
-    int vehicle_id = atoi(strtok(NULL, ","));
+    exp = atoi(strtok(NULL, ","));
+    vehicle_id = atoi(strtok(NULL, ","));
     delete[](c);
     return new Driver(id,age,stat,exp,vehicle_id);
 }
 
 Trip* Parser::readTrip(){
     getline(cin, buffer);
+    if (!isValidTripInput()) throw runtime_error("bad argument for new Trip");
     char *c = new char[buffer.length() + 1];
     strcpy(c, buffer.c_str());
     int id = atoi(strtok(c, ","));
@@ -59,10 +143,12 @@ Trip* Parser::readTrip(){
 
 Taxi* Parser::readTaxi(){
     getline(cin, buffer);
+    if (!isValidTaxiInput()) throw runtime_error("bad argument for new taxi");
     char *c = new char[buffer.length() + 1];
     strcpy(c, buffer.c_str());
-    int id = atoi(strtok(c, ","));
-    int taxiType =  atoi(strtok(NULL, ","));
+    int id, taxiType;
+    id = atoi(strtok(c, ","));
+    taxiType =  atoi(strtok(NULL, ","));
     Manufacturer manufacturer;
     switch(strtok(NULL, ",")[0]) {
         case 'H':
@@ -78,7 +164,7 @@ Taxi* Parser::readTaxi(){
             manufacturer = FIAT;
             break;
         default:
-            throw "bad argument for taxi manufacturer";
+            throw runtime_error("bad argument for taxi manufacturer");
     }
     Color color;
     switch(strtok(NULL, ",")[0]) {
@@ -98,7 +184,7 @@ Taxi* Parser::readTaxi(){
             color = WHITE;
             break;
         default:
-            throw "bad argument for taxi color";
+            throw runtime_error("bad argument for taxi color");
     }
     delete[](c);
     if (taxiType == 1) {
@@ -110,10 +196,15 @@ Taxi* Parser::readTaxi(){
 
 vector<Point*>* Parser::readObstacles(){
     vector<Point*>* obstacles = new vector<Point*>();
+    //get number of obstacles
     getline(cin, buffer);
     char *c = new char[buffer.length() + 1];
     strcpy(c, buffer.c_str());
-    int numOfObsatcles = atoi(c);
+    //verify that c is digits
+    for (int i = 0; c[i] != 0; i++) {
+        if (!isdigit(c[i])) throw runtime_error("bad arguments for obstacles");
+    }
+    int numOfObsatcles = atoi(c);;
     delete[](c);
     for(int i = 0; i < numOfObsatcles; i++){
         getline(cin, buffer);

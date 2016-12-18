@@ -17,6 +17,9 @@ public:
     Trip* readTrip();
     Taxi* readTaxi();
 private:
+    bool isValidDriverInput();
+    bool isValidTaxiInput();
+    bool isValidTripInput();
     vector<Point*>* readObstacles();
 };
 
