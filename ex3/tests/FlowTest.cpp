@@ -1,15 +1,14 @@
 #include <fstream>
 #include "gtest/gtest.h"
 #include "../src/Flow.h"
-#include "../src/Driver.h"
 
 TEST(FlowTest, initializeAndRunTest){
-    const int NUM_OF_LINES_IN_CORRECT_OUTPUT = 9;
     string buffer;
-    ifstream in("testsFiles/flow.txt");
-    ofstream out("testsFiles/output.txt");
+    const int NUM_OF_LINES_IN_CORRECT_OUTPUT = 9;
+    ifstream in("../testsFiles/flow.txt");
+    ofstream out("../testsFiles/output.txt");
     cin.rdbuf(in.rdbuf()); //redirect std::cin
-    cout.clear();
+    streambuf *coutbuf = cout.rdbuf(); //save old buf
     cout.rdbuf(out.rdbuf()); //redirect std::cout
     Flow flow;
     while (!flow.shouldStop) {
@@ -22,8 +21,8 @@ TEST(FlowTest, initializeAndRunTest){
     out.close();
     cin.clear();
     cout.clear();
-    ifstream correct("testsFiles/correct.txt");
-    ifstream test("testsFiles/output.txt");
+    ifstream correct("../testsFiles/correct.txt");
+    ifstream test("../testsFiles/output.txt");
     string fromCorrect;
     string fromTest;
     int numOfLines = 0;
@@ -36,4 +35,5 @@ TEST(FlowTest, initializeAndRunTest){
     EXPECT_EQ(numOfLines , NUM_OF_LINES_IN_CORRECT_OUTPUT);
     correct.close();
     test.close();
+    cout.rdbuf(coutbuf);
 }

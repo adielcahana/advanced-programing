@@ -11,4 +11,3 @@ TEST(TripListenerTest, EventsTest){
     tl.unavaliableEvent(&driver);
     EXPECT_EQ(avaliableDrivers.size(), 0);
 }
-

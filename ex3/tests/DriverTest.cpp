@@ -51,33 +51,21 @@ TEST(Driver, getLocationTest) {
 /******************************************************************************
 * The Test Operation: set new trip and check if he have trip
 ******************************************************************************/
-//TEST(Driver, newTripTest){
-//    Driver* driver = new Driver(5, 30, SINGLE, 6, 0);
-//    Point start(0, 0);
-//    Point end(0, 2);
-//    Trip* trip = new Trip(0, start, end, 2, 1);
-//    driver->newTrip(trip);
-//    EXPECT_FALSE(driver->isAvaliable());
-//}
-
-/******************************************************************************
-* The Test Operation: set trip to the driver and check if he is avaliable
-******************************************************************************/
-//TEST(Driver, isAvaliableTest){
-//    Map *map = new Map(3,3);
-//    TaxiCenter *taxiCenter = new TaxiCenter(map);
-//    Taxi *taxi = new Taxi(0, HONDA, RED);
-//    Driver *driver = new Driver(0, 40, SINGLE, 6, 0);
-//    EXPECT_TRUE(driver->isAvaliable());
-//    taxiCenter->addAvaliableTaxi(taxi);
-//    taxiCenter->addDriver(driver);
-//    Point start(0, 0);
-//    Point end(0, 2);
-//    Trip *trip = new Trip(0, start, end, 2, 1);
-//    taxiCenter->addTrip(trip);
-//    EXPECT_FALSE(driver->isAvaliable());
-//    delete taxiCenter;
-//}
+TEST(Driver, newTripTest){
+    vector<Driver *>* avaliableDrivers = new vector<Driver *>();
+    TripListener* tl = new TripListener(avaliableDrivers);
+    Driver* driver = new Driver(5, 30, SINGLE, 6, 0);
+    avaliableDrivers->push_back(driver);
+    Point start(0, 0);
+    Point end(0, 2);
+    driver->addAvaliableListener(tl);
+    Trip* trip = new Trip(0, start, end, 2, 1);
+    driver->newTrip(trip);
+    EXPECT_TRUE(avaliableDrivers->size() == 0);
+    delete avaliableDrivers;
+    delete driver;
+    delete tl;
+}
 
 TEST(Driver, timePassedTest) {
     Map *map = new Map(3,3);
@@ -124,6 +112,7 @@ TEST(Driver, moveOneStepTest) {
     }
     delete taxiCenter;
 }
+
 /******************************************************************************
 * The Test Operation: check that the add function causes
 * the drivers list to be updated when new trip is added.
@@ -145,6 +134,7 @@ TEST(Driver, addAvaliableListenerAndNotifyTest) {
     delete driver;
     delete tl;
 }
+
 /******************************************************************************
 * The Test Operation: check that the remove function causes
 * the drivers list to be outdated when new trip is added
@@ -168,5 +158,3 @@ TEST(Driver, RemoveAvaliableListenerTest){
     delete driver;
     delete tl;
 }
-
-
