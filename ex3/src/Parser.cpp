@@ -1,4 +1,5 @@
 #include "Parser.h"
+
 bool Parser::isValidTripInput(){
     bool readComma = true;
     bool readDot = false;

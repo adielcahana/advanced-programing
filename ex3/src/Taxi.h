@@ -47,4 +47,4 @@ public:
     bool operator!=(const Taxi &rhs) const;
 };
 
-#endif //ASS2_TAXI_H
+#endif

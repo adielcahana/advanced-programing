@@ -4,6 +4,10 @@
 #include "Trip.h"
 #include "TripListener.h"
 
+/******************************************************************************
+* TaxiCenter: have information about all the drivers the cabs and the trip.
+* know to connect between new trip to avaliable driver, also know the map.
+******************************************************************************/
 class TaxiCenter{
 private:
     vector <Driver*>* drivers;

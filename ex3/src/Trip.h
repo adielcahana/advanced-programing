@@ -3,6 +3,11 @@
 
 #include "Passenger.h"
 
+/******************************************************************************
+* Trip: the route of the driving have a start and end points and the number of
+* passengers int the trip, have a price for the trip, know how much meters
+ * passed in the trip
+******************************************************************************/
 class Trip {
 private:
     friend class TaxiCenter;
