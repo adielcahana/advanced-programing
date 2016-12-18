@@ -1,7 +1,10 @@
 #include <gtest/gtest.h>
 #include "../src/Driver.h"
 #include "../src/TripListener.h"
-
+/******************************************************************************
+* The Test Operation: test that the avaliableEvent and
+* UnavaliableEvent works correctly
+******************************************************************************/
 TEST(TripListenerTest, EventsTest){
     vector <Driver*> avaliableDrivers;
     Driver driver(0, 40, SINGLE, 6, 0);
