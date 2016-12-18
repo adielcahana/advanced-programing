@@ -1,9 +1,7 @@
 #include <gtest/gtest.h>
 #include "../src/Map.h"
 using namespace std;
-//
-// Created by adi on 04/12/16.
-//
+
 /******************************************************************************
 * The Function Operation: verify if two points are
 * adjacents according to the map rules
@@ -123,7 +121,6 @@ TEST(MapTest, MapRouteTest){
         //verify the route start at src
         temp = route->at(0);
         EXPECT_TRUE(cmp.equals((Node*) src, (Node*) temp));
-        delete src;
         //verify that the route is continuous
         for(int i = 1; i < route->size(); i++){
             temp = route->at(i);
@@ -133,7 +130,7 @@ TEST(MapTest, MapRouteTest){
         //verify the route ends at dest
         EXPECT_TRUE(cmp.equals((Node*) src, (Node*) dest));
         delete dest;
-        for(int i = 1; i < route->size(); i++){
+        for(int i = 0; i < route->size(); i++){
             delete route->at(i);
         }
         route->clear();

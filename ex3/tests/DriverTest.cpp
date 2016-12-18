@@ -5,6 +5,10 @@
 * DriverTest: source file that test the Driver class.
 ******************************************************************************/
 
+/******************************************************************************
+* The Test Operation: create driver give him a taxi and check if he got the
+* taxi
+******************************************************************************/
 TEST(Driver, getTaxiTest){
     Map *map = new Map(3,3);
     TaxiCenter *taxiCenter = new TaxiCenter(map);
@@ -16,6 +20,10 @@ TEST(Driver, getTaxiTest){
     delete taxiCenter;
 }
 
+/******************************************************************************
+* The Test Operation: create driver give him a taxi and check if he got the
+* taxi
+******************************************************************************/
 TEST(Driver, setTaxiTest) {
     Taxi* taxi = new Taxi(1, HONDA, RED);
     Driver* driver = new Driver(5, 30, SINGLE, 6, 0);
@@ -25,6 +33,10 @@ TEST(Driver, setTaxiTest) {
     delete driver;
 }
 
+/******************************************************************************
+* The Test Operation: create driver with taxi with id 0 and check if the id of
+* the taxi that belong to the driver is 0
+******************************************************************************/
 TEST(Driver, getTaxiIdTest) {
     Taxi* taxi = new Taxi(0, HONDA, RED);
     Driver* driver = new Driver(5, 30, SINGLE, 6, 0);
@@ -34,12 +46,18 @@ TEST(Driver, getTaxiIdTest) {
     delete driver;
 }
 
+/******************************************************************************
+* The Test Operation: create driver with id 0 and check if the id is 0
+******************************************************************************/
 TEST(Driver, getIdTest) {
     Driver* driver = new Driver(0, 30, SINGLE, 6, 0);
     EXPECT_EQ(0, driver->getId());
     delete driver;
 }
 
+/******************************************************************************
+* The Test Operation: check the driver location (expect to default (0,0))
+******************************************************************************/
 TEST(Driver, getLocationTest) {
     Driver* driver = new Driver(5, 30, SINGLE, 6, 0);
     Point* point = driver->getLocation();
@@ -49,7 +67,8 @@ TEST(Driver, getLocationTest) {
 }
 
 /******************************************************************************
-* The Test Operation: set new trip and check if he have trip
+* The Test Operation: set new trip and check if the driver with the trip is
+* avaliable
 ******************************************************************************/
 TEST(Driver, newTripTest){
     vector<Driver *>* avaliableDrivers = new vector<Driver *>();
@@ -67,6 +86,9 @@ TEST(Driver, newTripTest){
     delete tl;
 }
 
+/******************************************************************************
+* The Test Operation: check the driver movement when time passed
+******************************************************************************/
 TEST(Driver, timePassedTest) {
     Map *map = new Map(3,3);
     TaxiCenter *taxiCenter = new TaxiCenter(map);
