@@ -2,7 +2,7 @@
 #include "../src/TaxiCenter.h"
 
 /******************************************************************************
-* TripTest: source file that test the Driver class.
+* DriverTest: source file that test the Driver class.
 ******************************************************************************/
 
 TEST(Driver, getTaxiTest){
