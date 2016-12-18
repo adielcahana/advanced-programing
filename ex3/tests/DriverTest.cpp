@@ -124,3 +124,49 @@ TEST(Driver, moveOneStepTest) {
     }
     delete taxiCenter;
 }
+/******************************************************************************
+* The Test Operation: check that the add function causes
+* the drivers list to be updated when new trip is added.
+******************************************************************************/
+TEST(Driver, addAvaliableListenerAndNotifyTest) {
+    vector<Driver *>* avaliableDrivers = new vector<Driver *>();
+    Driver *driver = new Driver(0, 40, SINGLE, 6, 0);
+    TripListener* tl = new TripListener(avaliableDrivers);
+    Point start(0, 0);
+    Point end(0, 2);
+    Trip* trip = new Trip(0, start, end, 2, 1);
+
+    avaliableDrivers->push_back(driver);
+    driver->addAvaliableListener(tl);
+    driver->newTrip(trip);
+    //if the driver added the tl correctly and notifyed new trip event, the list should be empty
+    EXPECT_EQ(avaliableDrivers->size(), 0);
+    delete avaliableDrivers;
+    delete driver;
+    delete tl;
+}
+/******************************************************************************
+* The Test Operation: check that the remove function causes
+* the drivers list to be outdated when new trip is added
+******************************************************************************/
+TEST(Driver, RemoveAvaliableListenerTest){
+    vector<Driver *>* avaliableDrivers = new vector<Driver *>();
+    Driver *driver = new Driver(0, 40, SINGLE, 6, 0);
+    TripListener* tl = new TripListener(avaliableDrivers);
+    Point start(0, 0);
+    Point end(0, 2);
+    Trip* trip = new Trip(0, start, end, 2, 1);
+
+    avaliableDrivers->push_back(driver);
+    //we tested the add function in the last test, so it works
+    driver->addAvaliableListener(tl);
+    driver->removeAvaliableListener(tl);
+    driver->newTrip(trip);
+    //if the driver added the tl correctly and notifyed new trip event, the list size shouldn't change
+    EXPECT_EQ(avaliableDrivers->size(), 1);
+    delete avaliableDrivers;
+    delete driver;
+    delete tl;
+}
+
+
