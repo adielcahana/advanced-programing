@@ -6,7 +6,10 @@
 #define EX2_AVALIABLENOTIFIER_H
 
 #include "AvaliableListener.h"
-
+/******************************************************************************
+* AvaliableNotifier: an observee interface, fot object who wants to notify
+* about their Avaliablity to a 'controling' abject
+******************************************************************************/
 class AvaliableNotifier{
 public:
     vector <AvaliableListener*> avaliableListeners;

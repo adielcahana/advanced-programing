@@ -1,24 +1,31 @@
 #include "Flow.h"
-
+/******************************************************************************
+* The Function Operation: flow ctor
+******************************************************************************/
 Flow::Flow(){
     Map* map = parser.readMap();
     this->center = new TaxiCenter(map);
     this->shouldStop = false;
 }
-
+/******************************************************************************
+* The Function Operation: flow dtor
+******************************************************************************/
 Flow::~Flow(){
     delete center;
 }
-
+/******************************************************************************
+* The Function Operation: initialize the game while getting input and
+* parsing it
+******************************************************************************/
 void Flow::initialize(){
     int option;
-    char dummy;
+    char dummy; // variable for '\n'
     Point* p = NULL;
-    bool shouldStop = false;
+    bool shouldStop = false; // initialization stop flag
     int id;
     while(!shouldStop){
         cin >> option;
-        cin >> noskipws >> dummy;
+        cin >> noskipws >> dummy; //read '\n'
         switch(option){
             case 1:
                 center->addDriver(parser.readDriver());
@@ -41,10 +48,10 @@ void Flow::initialize(){
                     cout << "driver id doesn't exist" << endl;
                 }
                 break;
-            case 6:
+            case 6: // stop getting input, and exit the loop
                 shouldStop = true;
                 break;
-            case 7:
+            case 7: // update the flow stop flag, and exit the loop
                 this->shouldStop = true;
                 shouldStop = true;
             default:
@@ -52,7 +59,9 @@ void Flow::initialize(){
         }
     }
 }
-
+/******************************************************************************
+* The Function Operation: run the gmae step by step
+******************************************************************************/
 void Flow::run(){
     while(!center->shouldStop()){
         center->timePassed();

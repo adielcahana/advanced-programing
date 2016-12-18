@@ -6,7 +6,10 @@
 #define EX2_AVALIABLELISTENER_H
 
 class AvaliableNotifier;
-
+/******************************************************************************
+* AvaliableListener: an observer interface, fot object who wants to be notified
+* about other objects Avaliablity for use
+******************************************************************************/
 class AvaliableListener {
 public:
     virtual void avaliableEvent(AvaliableNotifier *avaliable) = 0;

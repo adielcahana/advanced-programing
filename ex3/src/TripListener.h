@@ -8,7 +8,10 @@
 
 #include "AvaliableListener.h"
 #include "Driver.h"
-
+/******************************************************************************
+* TripListener: implements the AvaliableListener interface,
+* and offers a specific capabilty of updating the avalibality of a driver
+******************************************************************************/
 class TripListener : public AvaliableListener {
     vector <Driver*>* avaliableDrivers;
 public:

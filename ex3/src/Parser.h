@@ -8,7 +8,10 @@
 
 #include "Driver.h"
 #include "LuxTaxi.h"
-
+/******************************************************************************
+* Parser: defines a parsing capability for the input.
+* the class can verify the input validity and create object accordingly
+******************************************************************************/
 class Parser {
     string buffer;
 public:

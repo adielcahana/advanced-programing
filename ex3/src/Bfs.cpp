@@ -36,6 +36,9 @@ Bfs::Bfs(Node* maxNode){
     visited.resize(maxNode->hash());
 }
 
+/******************************************************************************
+* The Function Operation: reset the hash table
+******************************************************************************/
 void Bfs::resetVisited(){
     unsigned long size = visited.size();
     visited.resize(0);

@@ -27,7 +27,6 @@ private:
     float avgSatisfaction;
     int passCount;
     Point* location;
-
     void calcAvg();
     void addPassCount(int passengers);
 public:
