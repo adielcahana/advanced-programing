@@ -7,7 +7,7 @@ TaxiCenter::TaxiCenter(Map* map){
     drivers = new vector <Driver*>;
     avaliableDrivers = new vector <Driver*>;
     avaliableCabs = new vector <Taxi*>();
-    avaliableDriversListener = new NoTripListener(avaliableDrivers);
+    avaliableDriversListener = new TripListener(avaliableDrivers);
     this->map = map;
 }
 
@@ -85,6 +85,7 @@ void TaxiCenter::notifyNewTrip(Trip* trip){
         }
         delete location;
     }
+    delete trip;
 }
 
 /******************************************************************************

@@ -2,7 +2,7 @@
 #define ASS2_TAXICENTER_H
 
 #include "Trip.h"
-#include "NoTripListener.h"
+#include "TripListener.h"
 
 class TaxiCenter{
 private:
@@ -10,7 +10,7 @@ private:
     vector <Driver*>* avaliableDrivers;
     vector <Taxi*>* avaliableCabs;
     Map* map;
-    NoTripListener* avaliableDriversListener;
+    TripListener* avaliableDriversListener;
     //Driver findClosestDriver(Point point);
     void notifyNewTrip(Trip* trip);
 public:

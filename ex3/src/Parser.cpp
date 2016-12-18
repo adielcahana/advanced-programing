@@ -76,18 +76,24 @@ Map* Parser::readMap() {
     int width, length;
     char *x, *y;
     vector<Point *> *obstacles;
-    //verify that x and y are digits
-    if ((x = strtok(c, " ")) == NULL) throw runtime_error("bad arguments for map");
-    for (int i = 0; x[i] != 0; i++) {
-        if (!isdigit(x[i])) throw runtime_error("bad arguments for map");
+    try {
+        //verify that x and y are digits
+        if ((x = strtok(c, " ")) == NULL) throw runtime_error("bad arguments for map");
+        for (int i = 0; x[i] != 0; i++) {
+            if (!isdigit(x[i])) throw runtime_error("bad arguments for map");
+        }
+        if ((y = strtok(NULL, " ")) == NULL) throw runtime_error("bad arguments for map");
+        for (int i = 0; y[i] != 0; i++) {
+            if (!isdigit(y[i])) throw runtime_error("bad arguments for map");
+        }
+        width = atoi(x);
+        length = atoi(y);
+        obstacles = this->readObstacles();
     }
-    if ((y = strtok(NULL, " ")) == NULL) throw runtime_error("bad arguments for map");
-    for (int i = 0; y[i] != 0; i++) {
-        if (!isdigit(y[i])) throw runtime_error("bad arguments for map");
+    catch (exception){
+        delete[](c);
+        throw runtime_error("bad arguments for map");
     }
-    width = atoi(x);
-    length = atoi(y);
-    obstacles = this->readObstacles();
     delete[](c);
     return new Map(width, length, obstacles);
 }
@@ -115,6 +121,7 @@ Driver* Parser::readDriver(){
             stat = WIDOWED;
             break;
         default:
+            delete[](c);
             throw runtime_error("bad argument for new driver");
     }
     exp = atoi(strtok(NULL, ","));
@@ -136,9 +143,9 @@ Trip* Parser::readTrip(){
     y = strtok(NULL, ",");
     Point end(atoi(x),atoi(y));
     int numOfPassengers = atoi(strtok(NULL, ","));
-    double taarif = strtod(strtok(NULL, ","), NULL);
+    double tariff = strtod(strtok(NULL, ","), NULL);
     delete[] (c);
-    return new Trip(id, start, end, numOfPassengers, taarif);
+    return new Trip(id, start, end, numOfPassengers, tariff);
 }
 
 Taxi* Parser::readTaxi(){
@@ -147,44 +154,51 @@ Taxi* Parser::readTaxi(){
     char *c = new char[buffer.length() + 1];
     strcpy(c, buffer.c_str());
     int id, taxiType;
-    id = atoi(strtok(c, ","));
-    taxiType =  atoi(strtok(NULL, ","));
     Manufacturer manufacturer;
-    switch(strtok(NULL, ",")[0]) {
-        case 'H':
-            manufacturer = HONDA;
-            break;
-        case 'S':
-            manufacturer = SUBARO;
-            break;
-        case 'T':
-            manufacturer = TESLA;
-            break;
-        case 'F':
-            manufacturer = FIAT;
-            break;
-        default:
-            throw runtime_error("bad argument for taxi manufacturer");
-    }
     Color color;
-    switch(strtok(NULL, ",")[0]) {
-        case 'R':
-            color = RED;
-            break;
-        case 'B':
-            color = BLUE;
-            break;
-        case 'G':
-            color = GREEN;
-            break;
-        case 'P':
-            color = PINK;
-            break;
-        case 'W':
-            color = WHITE;
-            break;
-        default:
-            throw runtime_error("bad argument for taxi color");
+    try {
+        id = atoi(strtok(c, ","));
+        taxiType = atoi(strtok(NULL, ","));
+
+        switch (strtok(NULL, ",")[0]) {
+            case 'H':
+                manufacturer = HONDA;
+                break;
+            case 'S':
+                manufacturer = SUBARO;
+                break;
+            case 'T':
+                manufacturer = TESLA;
+                break;
+            case 'F':
+                manufacturer = FIAT;
+                break;
+            default:
+                throw runtime_error("bad argument for taxi manufacturer");
+        }
+        switch (strtok(NULL, ",")[0]) {
+            case 'R':
+                color = RED;
+                break;
+            case 'B':
+                color = BLUE;
+                break;
+            case 'G':
+                color = GREEN;
+                break;
+            case 'P':
+                color = PINK;
+                break;
+            case 'W':
+                color = WHITE;
+                break;
+            default:
+                throw runtime_error("bad argument for taxi color");
+        }
+    }
+    catch (exception){
+        delete[](c);
+        throw runtime_error("bad argument for taxi color");
     }
     delete[](c);
     if (taxiType == 1) {
@@ -202,13 +216,24 @@ vector<Point*>* Parser::readObstacles(){
     strcpy(c, buffer.c_str());
     //verify that c is digits
     for (int i = 0; c[i] != 0; i++) {
-        if (!isdigit(c[i])) throw runtime_error("bad arguments for obstacles");
+        if (!isdigit(c[i])) {
+            throw runtime_error("bad arguments for obstacles");
+        }
     }
-    int numOfObsatcles = atoi(c);;
+    int numOfObsatcles = atoi(c);
     delete[](c);
-    for(int i = 0; i < numOfObsatcles; i++){
-        getline(cin, buffer);
-        obstacles->push_back(Point::deserialize(buffer));
+    for(int i = 0; i < numOfObsatcles; i++) {
+        try {
+            getline(cin, buffer);
+            obstacles->push_back(Point::deserialize(buffer));
+        }
+        catch (exception) {
+            for (int i = 0; i < obstacles->size(); i++) {
+                delete obstacles->at(i);
+            }
+            delete obstacles;
+            throw runtime_error("bad arguments for obstacles");
+        }
     }
     return obstacles;
 }

@@ -7,6 +7,10 @@
 
 #include "Map.h"
 
+/******************************************************************************
+* Passenger: the passengers of the trip, at the end ofthe trip give a
+* satisfication value
+******************************************************************************/
 class Passenger {
 public:
     Passenger(){};

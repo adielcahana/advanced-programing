@@ -1,8 +1,5 @@
-//
-// Created by ori on 28/11/16.
-//
-
 #include "Flow.h"
+
 Flow::Flow(){
     Map* map = parser.readMap();
     this->center = new TaxiCenter(map);
@@ -35,7 +32,7 @@ void Flow::initialize(){
             case 4:
                 cin >> id;
                 cin >> noskipws >> dummy;
-                p = center->getLocation(id);
+                p = center->getDriverLocation(id);
                 if(p != NULL){
                     cout << *p << endl;
                     delete p;

@@ -4,9 +4,21 @@
 #include "Map.h"
 #include "Trip.h"
 
+/******************************************************************************
+* Status: enum for Manufacturer
+******************************************************************************/
 enum Manufacturer {HONDA, SUBARO, TESLA, FIAT};
+
+/******************************************************************************
+* Status: enum for color
+******************************************************************************/
 enum Color {RED, BLUE, GREEN, PINK, WHITE};
 
+/******************************************************************************
+* Taxi: regular taxi, the driver's cab. have id and total Km passed, tariff
+* for a ride the manufacturer and a color. know his location. move one block
+* in a time
+******************************************************************************/
 class Taxi{
 protected:
     int id;
@@ -27,7 +39,6 @@ public:
     int getId();
     float getKm();
     float getTariff();
-    //todo change in driver
     virtual int getVelocity();
     virtual void moveOneStep(Point* point);
     void updateLocation(Point* location);

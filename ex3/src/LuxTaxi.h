@@ -3,6 +3,9 @@
 
 #include "Driver.h"
 
+/******************************************************************************
+* LuxTaxi: like regular taxi but move twice faster
+******************************************************************************/
 class LuxTaxi: public Taxi {
 private:
 public:
