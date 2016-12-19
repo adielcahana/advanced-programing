@@ -22,9 +22,9 @@ enum Color {RED, BLUE, GREEN, PINK, WHITE};
 class Taxi{
 protected:
     int id;
-    float totalKm;
     Manufacturer manufacturer;
     Color color;
+    float totalKm;
     float tariff;
     Point* location;
     void addKm(float km);

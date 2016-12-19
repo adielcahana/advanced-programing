@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include "Map.h"
+
 using namespace std;
 /******************************************************************************
 * The Function Operation: map ctor, create hash table for obstacles

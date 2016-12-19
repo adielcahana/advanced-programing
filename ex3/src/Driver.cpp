@@ -120,7 +120,7 @@ void Driver::addAvaliableListener(AvaliableListener* al){
 * The function Operation: remove the driver from the available vector
 ******************************************************************************/
 void Driver::removeAvaliableListener(AvaliableListener* al){
-    for(int i = 0; i< avaliableListeners.size(); i++){
+    for(unsigned int i = 0; i< avaliableListeners.size(); i++){
         if(avaliableListeners.at(i) == al){
             avaliableListeners[i] = NULL;
             avaliableListeners.erase(avaliableListeners.begin() + i);
@@ -132,7 +132,7 @@ void Driver::removeAvaliableListener(AvaliableListener* al){
 * The function Operation: notify that the driver is available
 ******************************************************************************/
 void Driver::notifyAvaliable(){
-    for(int i = 0; i< avaliableListeners.size(); i++){
+    for(unsigned int i = 0; i< avaliableListeners.size(); i++){
         avaliableListeners[i]->avaliableEvent(this);
     }
 }
@@ -141,7 +141,7 @@ void Driver::notifyAvaliable(){
 * The function Operation: notify that the driver is not available
 ******************************************************************************/
 void Driver::notifyUnavaliable(){
-    for(int i = 0; i< avaliableListeners.size(); i++){
+    for(unsigned int i = 0; i< avaliableListeners.size(); i++){
         avaliableListeners[i]->unavaliableEvent(this);
     }
 }
