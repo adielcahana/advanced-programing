@@ -122,7 +122,7 @@ TEST(MapTest, MapRouteTest){
         temp = route->at(0);
         EXPECT_TRUE(cmp.equals((Node*) src, (Node*) temp));
         //verify that the route is continuous
-        for(int i = 1; i < route->size(); i++){
+        for(unsigned int i = 1; i < route->size(); i++){
             temp = route->at(i);
             EXPECT_TRUE(isAdjacent(src,temp));
             src = temp;
@@ -130,7 +130,7 @@ TEST(MapTest, MapRouteTest){
         //verify the route ends at dest
         EXPECT_TRUE(cmp.equals((Node*) src, (Node*) dest));
         delete dest;
-        for(int i = 0; i < route->size(); i++){
+        for(unsigned int i = 0; i < route->size(); i++){
             delete route->at(i);
         }
         route->clear();

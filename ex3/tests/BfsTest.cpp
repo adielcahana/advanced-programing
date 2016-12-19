@@ -44,7 +44,7 @@ TEST_F(BfsTest, ShortestRouteTest){
         shortestRoute->push_back(new Point(i,9));
     }
     //compare each point, and realese allocated memory
-    for(int i = 0; i < shortestRoute->size(); i++){
+    for(unsigned int i = 0; i < shortestRoute->size(); i++){
         ASSERT_TRUE(cmp->equals(shortestRoute->at(i), route->at(i)));
         delete shortestRoute->at(i);
         delete route->at(i);
@@ -62,7 +62,7 @@ TEST_F(BfsTest, ShortestRouteTest){
     for(int i = 8; i >= 0; i--){
         shortestRoute->push_back(new Point(0,i));
     }
-    for(int i = 0; i < shortestRoute->size(); i++){
+    for(unsigned int i = 0; i < shortestRoute->size(); i++){
         ASSERT_TRUE(cmp->equals(shortestRoute->at(i), route->at(i)));
         delete shortestRoute->at(i);
         delete route->at(i);
@@ -81,7 +81,7 @@ TEST_F(BfsTest, ShortestRouteTest){
     for(int i= 8; i >= 0; i--){
         shortestRoute->push_back(new Point(9,i));
     }
-    for(int i = 0; i < shortestRoute->size(); i++){
+    for(unsigned int i = 0; i < shortestRoute->size(); i++){
         ASSERT_TRUE(cmp->equals(shortestRoute->at(i), route->at(i)));
         delete shortestRoute->at(i);
         delete route->at(i);
@@ -100,7 +100,7 @@ TEST_F(BfsTest, ShortestRouteTest){
     for(int i= 1; i < 10; i++){
         shortestRoute->push_back(new Point(0,i));
     }
-    for(int i = 0; i < shortestRoute->size(); i++){
+    for(unsigned int i = 0; i < shortestRoute->size(); i++){
         ASSERT_TRUE(cmp->equals(shortestRoute->at(i), route->at(i)));
         delete shortestRoute->at(i);
         delete route->at(i);

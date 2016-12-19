@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "../src/Driver.h"
 #include "../src/TripListener.h"
+
 /******************************************************************************
 * The Test Operation: test that the avaliableEvent and
 * UnavaliableEvent works correctly

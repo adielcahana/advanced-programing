@@ -8,8 +8,8 @@
 TEST(FlowTest, initializeAndRunTest){
     string buffer;
     const int NUM_OF_LINES_IN_CORRECT_OUTPUT = 9;
-    ifstream in("testsFiles/flow.txt");
-    ofstream out("testsFiles/output.txt");
+    ifstream in("../testsFiles/flow.txt");
+    ofstream out("../testsFiles/output.txt");
     cin.rdbuf(in.rdbuf()); //redirect std::cin
     streambuf *coutbuf = cout.rdbuf(); //save old buf
     cout.rdbuf(out.rdbuf()); //redirect std::cout
@@ -27,8 +27,8 @@ TEST(FlowTest, initializeAndRunTest){
     cin.clear();
     cout.clear();
     //verify that the output is correct according to correct.txt
-    ifstream correct("testsFiles/correct.txt");
-    ifstream test("testsFiles/output.txt");
+    ifstream correct("../testsFiles/correct.txt");
+    ifstream test("../testsFiles/output.txt");
     string fromCorrect;
     string fromTest;
     int numOfLines = 0;

@@ -109,4 +109,4 @@ TEST(PointTest, PointComparatorTest){
         delete p3;
     }
 }
-#endif //EX2_POINTTEST_H
+#endif
